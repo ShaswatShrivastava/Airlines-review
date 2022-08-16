@@ -1,0 +1,2030 @@
+  [1m[35m (188.0ms)[0m  [1m[35mCREATE DATABASE "flights_review_development" ENCODING = 'unicode'[0m
+  [1m[35m (49.3ms)[0m  [1m[35mCREATE DATABASE "flights_review_test" ENCODING = 'unicode'[0m
+  [1m[35m (216.7ms)[0m  [1m[35mCREATE TABLE "schema_migrations" ("version" character varying NOT NULL PRIMARY KEY)[0m
+  [1m[35m (4.6ms)[0m  [1m[35mCREATE TABLE "ar_internal_metadata" ("key" character varying NOT NULL PRIMARY KEY, "value" character varying, "created_at" timestamp(6) NOT NULL, "updated_at" timestamp(6) NOT NULL)[0m
+  [1m[35m (2.3ms)[0m  [1m[34mSELECT pg_try_advisory_lock(5243047918192264635)[0m
+  [1m[36mActiveRecord::SchemaMigration Pluck (0.7ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Migrating to CreateAirlines (20220816121154)
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (4.7ms)[0m  [1m[35mCREATE TABLE "airlines" ("id" bigserial primary key, "name" character varying, "image_url" character varying, "slug" character varying, "created_at" timestamp(6) NOT NULL, "updated_at" timestamp(6) NOT NULL)[0m
+  [1m[36mActiveRecord::SchemaMigration Create (1.0ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ($1) RETURNING "version"[0m  [["version", "20220816121154"]]
+  [1m[36mTRANSACTION (0.5ms)[0m  [1m[35mCOMMIT[0m
+Migrating to CreateReviews (20220816121301)
+  [1m[36mTRANSACTION (0.5ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (8.5ms)[0m  [1m[35mCREATE TABLE "reviews" ("id" bigserial primary key, "titile" character varying, "description" character varying, "score" integer, "airline_id" bigint NOT NULL, "created_at" timestamp(6) NOT NULL, "updated_at" timestamp(6) NOT NULL, CONSTRAINT "fk_rails_3a3d57cfdb"
+FOREIGN KEY ("airline_id")
+  REFERENCES "airlines" ("id")
+)[0m
+  [1m[35m (1.2ms)[0m  [1m[35mCREATE INDEX "index_reviews_on_airline_id" ON "reviews" ("airline_id")[0m
+  [1m[36mActiveRecord::SchemaMigration Create (0.3ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ($1) RETURNING "version"[0m  [["version", "20220816121301"]]
+  [1m[36mTRANSACTION (0.4ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mActiveRecord::InternalMetadata Load (0.3ms)[0m  [1m[34mSELECT "ar_internal_metadata".* FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = $1 LIMIT $2[0m  [["key", "environment"], ["LIMIT", 1]]
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mActiveRecord::InternalMetadata Create (1.1ms)[0m  [1m[32mINSERT INTO "ar_internal_metadata" ("key", "value", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "key"[0m  [["key", "environment"], ["value", "development"], ["created_at", "2022-08-16 12:14:15.275726"], ["updated_at", "2022-08-16 12:14:15.275726"]]
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.2ms)[0m  [1m[34mSELECT pg_advisory_unlock(5243047918192264635)[0m
+  [1m[36mActiveRecord::SchemaMigration Pluck (1.4ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[36mActiveRecord::SchemaMigration Pluck (0.7ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[36mActiveRecord::SchemaMigration Pluck (0.8ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[36mActiveRecord::SchemaMigration Pluck (0.7ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[36mActiveRecord::SchemaMigration Pluck (0.4ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[36mActiveRecord::SchemaMigration Pluck (0.5ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mAirline Create (4.7ms)[0m  [1m[32mINSERT INTO "airlines" ("name", "image_url", "slug", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["name", "United Airlines"], ["image_url", "https://open-flights.s3.amazonaws.com/United-Airlines.png"], ["slug", "united-airlines"], ["created_at", "2022-08-16 12:25:47.759127"], ["updated_at", "2022-08-16 12:25:47.759127"]]
+  [1m[36mTRANSACTION (0.4ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mAirline Create (0.2ms)[0m  [1m[32mINSERT INTO "airlines" ("name", "image_url", "slug", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["name", "Southwst"], ["image_url", "https://open-flights.s3.amazonaws.com/Southwest-Airlines.png"], ["slug", "southwst"], ["created_at", "2022-08-16 12:25:47.789817"], ["updated_at", "2022-08-16 12:25:47.789817"]]
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mAirline Create (0.1ms)[0m  [1m[32mINSERT INTO "airlines" ("name", "image_url", "slug", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["name", "Delta"], ["image_url", "https://open-flights.s3.amazonaws.com/Delta.png"], ["slug", "delta"], ["created_at", "2022-08-16 12:25:47.791138"], ["updated_at", "2022-08-16 12:25:47.791138"]]
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mAirline Create (0.2ms)[0m  [1m[32mINSERT INTO "airlines" ("name", "image_url", "slug", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["name", "Alaska Airlines"], ["image_url", "https://open-flights.s3.amazonaws.com/Alaska-Airlines.png"], ["slug", "alaska-airlines"], ["created_at", "2022-08-16 12:25:47.792391"], ["updated_at", "2022-08-16 12:25:47.792391"]]
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mAirline Create (0.2ms)[0m  [1m[32mINSERT INTO "airlines" ("name", "image_url", "slug", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["name", "JetBlue"], ["image_url", "https://open-flights.s3.amazonaws.com/JetBlue.png"], ["slug", "jetblue"], ["created_at", "2022-08-16 12:25:47.793751"], ["updated_at", "2022-08-16 12:25:47.793751"]]
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mAirline Create (0.2ms)[0m  [1m[32mINSERT INTO "airlines" ("name", "image_url", "slug", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["name", "American Airlines"], ["image_url", "https://open-flights.s3.amazonaws.com/American-Airlines.png"], ["slug", "american-airlines"], ["created_at", "2022-08-16 12:25:47.795150"], ["updated_at", "2022-08-16 12:25:47.795150"]]
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mActiveRecord::SchemaMigration Pluck (0.8ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mAirline Create (0.7ms)[0m  [1m[32mINSERT INTO "airlines" ("name", "image_url", "slug", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["name", "United Airlines"], ["image_url", "https://open-flights.s3.amazonaws.com/United-Airlines.png"], ["slug", "united-airlines"], ["created_at", "2022-08-16 12:26:22.763268"], ["updated_at", "2022-08-16 12:26:22.763268"]]
+  [1m[36mTRANSACTION (2.8ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mAirline Create (0.2ms)[0m  [1m[32mINSERT INTO "airlines" ("name", "image_url", "slug", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["name", "Southwst"], ["image_url", "https://open-flights.s3.amazonaws.com/Southwest-Airlines.png"], ["slug", "southwst"], ["created_at", "2022-08-16 12:26:22.782703"], ["updated_at", "2022-08-16 12:26:22.782703"]]
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mAirline Create (0.2ms)[0m  [1m[32mINSERT INTO "airlines" ("name", "image_url", "slug", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["name", "Delta"], ["image_url", "https://open-flights.s3.amazonaws.com/Delta.png"], ["slug", "delta"], ["created_at", "2022-08-16 12:26:22.784261"], ["updated_at", "2022-08-16 12:26:22.784261"]]
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mAirline Create (0.2ms)[0m  [1m[32mINSERT INTO "airlines" ("name", "image_url", "slug", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["name", "Alaska Airlines"], ["image_url", "https://open-flights.s3.amazonaws.com/Alaska-Airlines.png"], ["slug", "alaska-airlines"], ["created_at", "2022-08-16 12:26:22.785819"], ["updated_at", "2022-08-16 12:26:22.785819"]]
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mAirline Create (0.2ms)[0m  [1m[32mINSERT INTO "airlines" ("name", "image_url", "slug", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["name", "JetBlue"], ["image_url", "https://open-flights.s3.amazonaws.com/JetBlue.png"], ["slug", "jetblue"], ["created_at", "2022-08-16 12:26:22.787288"], ["updated_at", "2022-08-16 12:26:22.787288"]]
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mAirline Create (0.3ms)[0m  [1m[32mINSERT INTO "airlines" ("name", "image_url", "slug", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["name", "American Airlines"], ["image_url", "https://open-flights.s3.amazonaws.com/American-Airlines.png"], ["slug", "american-airlines"], ["created_at", "2022-08-16 12:26:22.788808"], ["updated_at", "2022-08-16 12:26:22.788808"]]
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mActiveRecord::SchemaMigration Pluck (0.5ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mAirline Create (0.6ms)[0m  [1m[32mINSERT INTO "airlines" ("name", "image_url", "slug", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["name", "United Airlines"], ["image_url", "https://open-flights.s3.amazonaws.com/United-Airlines.png"], ["slug", "united-airlines"], ["created_at", "2022-08-16 12:26:46.671451"], ["updated_at", "2022-08-16 12:26:46.671451"]]
+  [1m[36mTRANSACTION (4.0ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mAirline Create (0.2ms)[0m  [1m[32mINSERT INTO "airlines" ("name", "image_url", "slug", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["name", "Southwst"], ["image_url", "https://open-flights.s3.amazonaws.com/Southwest-Airlines.png"], ["slug", "southwst"], ["created_at", "2022-08-16 12:26:46.688111"], ["updated_at", "2022-08-16 12:26:46.688111"]]
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mAirline Create (0.3ms)[0m  [1m[32mINSERT INTO "airlines" ("name", "image_url", "slug", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["name", "Delta"], ["image_url", "https://open-flights.s3.amazonaws.com/Delta.png"], ["slug", "delta"], ["created_at", "2022-08-16 12:26:46.689824"], ["updated_at", "2022-08-16 12:26:46.689824"]]
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mAirline Create (0.2ms)[0m  [1m[32mINSERT INTO "airlines" ("name", "image_url", "slug", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["name", "Alaska Airlines"], ["image_url", "https://open-flights.s3.amazonaws.com/Alaska-Airlines.png"], ["slug", "alaska-airlines"], ["created_at", "2022-08-16 12:26:46.691355"], ["updated_at", "2022-08-16 12:26:46.691355"]]
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mAirline Create (0.2ms)[0m  [1m[32mINSERT INTO "airlines" ("name", "image_url", "slug", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["name", "JetBlue"], ["image_url", "https://open-flights.s3.amazonaws.com/JetBlue.png"], ["slug", "jetblue"], ["created_at", "2022-08-16 12:26:46.693002"], ["updated_at", "2022-08-16 12:26:46.693002"]]
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mAirline Create (0.2ms)[0m  [1m[32mINSERT INTO "airlines" ("name", "image_url", "slug", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["name", "American Airlines"], ["image_url", "https://open-flights.s3.amazonaws.com/American-Airlines.png"], ["slug", "american-airlines"], ["created_at", "2022-08-16 12:26:46.694630"], ["updated_at", "2022-08-16 12:26:46.694630"]]
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mActiveRecord::SchemaMigration Pluck (1.0ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mAirline Create (0.7ms)[0m  [1m[32mINSERT INTO "airlines" ("name", "image_url", "slug", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["name", "United Airlines"], ["image_url", "https://open-flights.s3.amazonaws.com/United-Airlines.png"], ["slug", "united-airlines"], ["created_at", "2022-08-16 12:27:15.946789"], ["updated_at", "2022-08-16 12:27:15.946789"]]
+  [1m[36mTRANSACTION (3.9ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mAirline Create (0.3ms)[0m  [1m[32mINSERT INTO "airlines" ("name", "image_url", "slug", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["name", "Southwst"], ["image_url", "https://open-flights.s3.amazonaws.com/Southwest-Airlines.png"], ["slug", "southwst"], ["created_at", "2022-08-16 12:27:15.963427"], ["updated_at", "2022-08-16 12:27:15.963427"]]
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mAirline Create (0.1ms)[0m  [1m[32mINSERT INTO "airlines" ("name", "image_url", "slug", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["name", "Delta"], ["image_url", "https://open-flights.s3.amazonaws.com/Delta.png"], ["slug", "delta"], ["created_at", "2022-08-16 12:27:15.965043"], ["updated_at", "2022-08-16 12:27:15.965043"]]
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mAirline Create (0.1ms)[0m  [1m[32mINSERT INTO "airlines" ("name", "image_url", "slug", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["name", "Alaska Airlines"], ["image_url", "https://open-flights.s3.amazonaws.com/Alaska-Airlines.png"], ["slug", "alaska-airlines"], ["created_at", "2022-08-16 12:27:15.966446"], ["updated_at", "2022-08-16 12:27:15.966446"]]
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mAirline Create (0.2ms)[0m  [1m[32mINSERT INTO "airlines" ("name", "image_url", "slug", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["name", "JetBlue"], ["image_url", "https://open-flights.s3.amazonaws.com/JetBlue.png"], ["slug", "jetblue"], ["created_at", "2022-08-16 12:27:15.967898"], ["updated_at", "2022-08-16 12:27:15.967898"]]
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mAirline Create (0.2ms)[0m  [1m[32mINSERT INTO "airlines" ("name", "image_url", "slug", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["name", "American Airlines"], ["image_url", "https://open-flights.s3.amazonaws.com/American-Airlines.png"], ["slug", "american-airlines"], ["created_at", "2022-08-16 12:27:15.969439"], ["updated_at", "2022-08-16 12:27:15.969439"]]
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mActiveRecord::SchemaMigration Pluck (0.9ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mAirline Create (0.4ms)[0m  [1m[32mINSERT INTO "airlines" ("name", "image_url", "slug", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["name", "United Airlines"], ["image_url", "https://open-flights.s3.amazonaws.com/United-Airlines.png"], ["slug", "united-airlines"], ["created_at", "2022-08-16 12:32:08.262451"], ["updated_at", "2022-08-16 12:32:08.262451"]]
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mAirline Create (0.2ms)[0m  [1m[32mINSERT INTO "airlines" ("name", "image_url", "slug", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["name", "Southwst"], ["image_url", "https://open-flights.s3.amazonaws.com/Southwest-Airlines.png"], ["slug", "southwst"], ["created_at", "2022-08-16 12:32:08.274623"], ["updated_at", "2022-08-16 12:32:08.274623"]]
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mAirline Create (0.2ms)[0m  [1m[32mINSERT INTO "airlines" ("name", "image_url", "slug", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["name", "Delta"], ["image_url", "https://open-flights.s3.amazonaws.com/Delta.png"], ["slug", "delta"], ["created_at", "2022-08-16 12:32:08.276133"], ["updated_at", "2022-08-16 12:32:08.276133"]]
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mAirline Create (0.1ms)[0m  [1m[32mINSERT INTO "airlines" ("name", "image_url", "slug", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["name", "Alaska Airlines"], ["image_url", "https://open-flights.s3.amazonaws.com/Alaska-Airlines.png"], ["slug", "alaska-airlines"], ["created_at", "2022-08-16 12:32:08.277641"], ["updated_at", "2022-08-16 12:32:08.277641"]]
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mAirline Create (0.1ms)[0m  [1m[32mINSERT INTO "airlines" ("name", "image_url", "slug", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["name", "JetBlue"], ["image_url", "https://open-flights.s3.amazonaws.com/JetBlue.png"], ["slug", "jetblue"], ["created_at", "2022-08-16 12:32:08.278977"], ["updated_at", "2022-08-16 12:32:08.278977"]]
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mAirline Create (0.2ms)[0m  [1m[32mINSERT INTO "airlines" ("name", "image_url", "slug", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["name", "American Airlines"], ["image_url", "https://open-flights.s3.amazonaws.com/American-Airlines.png"], ["slug", "american-airlines"], ["created_at", "2022-08-16 12:32:08.280289"], ["updated_at", "2022-08-16 12:32:08.280289"]]
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mActiveRecord::SchemaMigration Pluck (0.5ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mAirline Create (0.7ms)[0m  [1m[32mINSERT INTO "airlines" ("name", "image_url", "slug", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["name", "United Airlines"], ["image_url", "https://open-flights.s3.amazonaws.com/United-Airlines.png"], ["slug", "united-airlines"], ["created_at", "2022-08-16 12:32:19.867344"], ["updated_at", "2022-08-16 12:32:19.867344"]]
+  [1m[36mTRANSACTION (0.8ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mAirline Create (0.2ms)[0m  [1m[32mINSERT INTO "airlines" ("name", "image_url", "slug", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["name", "Southwst"], ["image_url", "https://open-flights.s3.amazonaws.com/Southwest-Airlines.png"], ["slug", "southwst"], ["created_at", "2022-08-16 12:32:19.879142"], ["updated_at", "2022-08-16 12:32:19.879142"]]
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mAirline Create (0.1ms)[0m  [1m[32mINSERT INTO "airlines" ("name", "image_url", "slug", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["name", "Delta"], ["image_url", "https://open-flights.s3.amazonaws.com/Delta.png"], ["slug", "delta"], ["created_at", "2022-08-16 12:32:19.880683"], ["updated_at", "2022-08-16 12:32:19.880683"]]
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mAirline Create (0.3ms)[0m  [1m[32mINSERT INTO "airlines" ("name", "image_url", "slug", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["name", "Alaska Airlines"], ["image_url", "https://open-flights.s3.amazonaws.com/Alaska-Airlines.png"], ["slug", "alaska-airlines"], ["created_at", "2022-08-16 12:32:19.882150"], ["updated_at", "2022-08-16 12:32:19.882150"]]
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mAirline Create (0.3ms)[0m  [1m[32mINSERT INTO "airlines" ("name", "image_url", "slug", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["name", "JetBlue"], ["image_url", "https://open-flights.s3.amazonaws.com/JetBlue.png"], ["slug", "jetblue"], ["created_at", "2022-08-16 12:32:19.883807"], ["updated_at", "2022-08-16 12:32:19.883807"]]
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mAirline Create (0.3ms)[0m  [1m[32mINSERT INTO "airlines" ("name", "image_url", "slug", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["name", "American Airlines"], ["image_url", "https://open-flights.s3.amazonaws.com/American-Airlines.png"], ["slug", "american-airlines"], ["created_at", "2022-08-16 12:32:19.885473"], ["updated_at", "2022-08-16 12:32:19.885473"]]
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mActiveRecord::SchemaMigration Pluck (0.4ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mAirline Create (0.5ms)[0m  [1m[32mINSERT INTO "airlines" ("name", "image_url", "slug", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["name", "United Airlines"], ["image_url", "https://open-flights.s3.amazonaws.com/United-Airlines.png"], ["slug", "united-airlines"], ["created_at", "2022-08-16 12:32:24.230844"], ["updated_at", "2022-08-16 12:32:24.230844"]]
+  [1m[36mTRANSACTION (0.4ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mAirline Create (0.1ms)[0m  [1m[32mINSERT INTO "airlines" ("name", "image_url", "slug", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["name", "Southwst"], ["image_url", "https://open-flights.s3.amazonaws.com/Southwest-Airlines.png"], ["slug", "southwst"], ["created_at", "2022-08-16 12:32:24.242752"], ["updated_at", "2022-08-16 12:32:24.242752"]]
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mAirline Create (0.5ms)[0m  [1m[32mINSERT INTO "airlines" ("name", "image_url", "slug", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["name", "Delta"], ["image_url", "https://open-flights.s3.amazonaws.com/Delta.png"], ["slug", "delta"], ["created_at", "2022-08-16 12:32:24.244362"], ["updated_at", "2022-08-16 12:32:24.244362"]]
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mAirline Create (0.2ms)[0m  [1m[32mINSERT INTO "airlines" ("name", "image_url", "slug", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["name", "Alaska Airlines"], ["image_url", "https://open-flights.s3.amazonaws.com/Alaska-Airlines.png"], ["slug", "alaska-airlines"], ["created_at", "2022-08-16 12:32:24.246142"], ["updated_at", "2022-08-16 12:32:24.246142"]]
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mAirline Create (0.3ms)[0m  [1m[32mINSERT INTO "airlines" ("name", "image_url", "slug", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["name", "JetBlue"], ["image_url", "https://open-flights.s3.amazonaws.com/JetBlue.png"], ["slug", "jetblue"], ["created_at", "2022-08-16 12:32:24.247755"], ["updated_at", "2022-08-16 12:32:24.247755"]]
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mAirline Create (0.2ms)[0m  [1m[32mINSERT INTO "airlines" ("name", "image_url", "slug", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["name", "American Airlines"], ["image_url", "https://open-flights.s3.amazonaws.com/American-Airlines.png"], ["slug", "american-airlines"], ["created_at", "2022-08-16 12:32:24.249316"], ["updated_at", "2022-08-16 12:32:24.249316"]]
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mCOMMIT[0m
+Started GET "/api/v1/airlines.json" for ::1 at 2022-08-16 18:31:48 +0530
+  [1m[36mActiveRecord::SchemaMigration Pluck (0.4ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  
+Zeitwerk::NameError (wrong constant name Airlines.controller inferred by Module from file
+
+  /Users/tnluser/Desktop/hackathon/Hackathon-app/flights-review/app/controllers/api/v1/airlines.controller.rb
+
+Possible ways to address this:
+
+  * Tell Zeitwerk to ignore this particular file.
+  * Tell Zeitwerk to ignore one of its parent directories.
+  * Rename the file to comply with the naming conventions.
+  * Modify the inflector to handle this case.
+):
+  
+zeitwerk (2.6.0) lib/zeitwerk/loader.rb:359:in `rescue in block in set_autoloads_in_dir'
+zeitwerk (2.6.0) lib/zeitwerk/loader.rb:335:in `block in set_autoloads_in_dir'
+zeitwerk (2.6.0) lib/zeitwerk/loader/helpers.rb:41:in `block in ls'
+zeitwerk (2.6.0) lib/zeitwerk/loader/helpers.rb:27:in `each'
+zeitwerk (2.6.0) lib/zeitwerk/loader/helpers.rb:27:in `ls'
+zeitwerk (2.6.0) lib/zeitwerk/loader.rb:334:in `set_autoloads_in_dir'
+zeitwerk (2.6.0) lib/zeitwerk/loader/callbacks.rb:76:in `block in on_namespace_loaded'
+zeitwerk (2.6.0) lib/zeitwerk/loader/callbacks.rb:75:in `each'
+zeitwerk (2.6.0) lib/zeitwerk/loader/callbacks.rb:75:in `on_namespace_loaded'
+zeitwerk (2.6.0) lib/zeitwerk/loader/callbacks.rb:60:in `block in on_dir_autoloaded'
+zeitwerk (2.6.0) lib/zeitwerk/loader/callbacks.rb:46:in `synchronize'
+zeitwerk (2.6.0) lib/zeitwerk/loader/callbacks.rb:46:in `on_dir_autoloaded'
+zeitwerk (2.6.0) lib/zeitwerk/kernel.rb:31:in `require'
+activesupport (7.0.3.1) lib/active_support/inflector/methods.rb:280:in `const_get'
+activesupport (7.0.3.1) lib/active_support/inflector/methods.rb:280:in `constantize'
+activesupport (7.0.3.1) lib/active_support/core_ext/string/inflections.rb:74:in `constantize'
+actionpack (7.0.3.1) lib/action_dispatch/http/request.rb:90:in `controller_class_for'
+actionpack (7.0.3.1) lib/action_dispatch/request/utils.rb:95:in `action_encoding_template'
+actionpack (7.0.3.1) lib/action_dispatch/request/utils.rb:83:in `encode'
+actionpack (7.0.3.1) lib/action_dispatch/request/utils.rb:45:in `set_binary_encoding'
+actionpack (7.0.3.1) lib/action_dispatch/http/parameters.rb:68:in `path_parameters='
+actionpack (7.0.3.1) lib/action_dispatch/journey/router.rb:48:in `block in serve'
+actionpack (7.0.3.1) lib/action_dispatch/journey/router.rb:32:in `each'
+actionpack (7.0.3.1) lib/action_dispatch/journey/router.rb:32:in `serve'
+actionpack (7.0.3.1) lib/action_dispatch/routing/route_set.rb:852:in `call'
+rack (2.2.4) lib/rack/tempfile_reaper.rb:15:in `call'
+rack (2.2.4) lib/rack/etag.rb:27:in `call'
+rack (2.2.4) lib/rack/conditional_get.rb:27:in `call'
+rack (2.2.4) lib/rack/head.rb:12:in `call'
+actionpack (7.0.3.1) lib/action_dispatch/http/permissions_policy.rb:38:in `call'
+actionpack (7.0.3.1) lib/action_dispatch/http/content_security_policy.rb:36:in `call'
+rack (2.2.4) lib/rack/session/abstract/id.rb:266:in `context'
+rack (2.2.4) lib/rack/session/abstract/id.rb:260:in `call'
+actionpack (7.0.3.1) lib/action_dispatch/middleware/cookies.rb:697:in `call'
+activerecord (7.0.3.1) lib/active_record/migration.rb:603:in `call'
+actionpack (7.0.3.1) lib/action_dispatch/middleware/callbacks.rb:27:in `block in call'
+activesupport (7.0.3.1) lib/active_support/callbacks.rb:99:in `run_callbacks'
+actionpack (7.0.3.1) lib/action_dispatch/middleware/callbacks.rb:26:in `call'
+actionpack (7.0.3.1) lib/action_dispatch/middleware/executor.rb:14:in `call'
+actionpack (7.0.3.1) lib/action_dispatch/middleware/actionable_exceptions.rb:17:in `call'
+actionpack (7.0.3.1) lib/action_dispatch/middleware/debug_exceptions.rb:28:in `call'
+web-console (4.2.0) lib/web_console/middleware.rb:132:in `call_app'
+web-console (4.2.0) lib/web_console/middleware.rb:28:in `block in call'
+web-console (4.2.0) lib/web_console/middleware.rb:17:in `catch'
+web-console (4.2.0) lib/web_console/middleware.rb:17:in `call'
+actionpack (7.0.3.1) lib/action_dispatch/middleware/show_exceptions.rb:26:in `call'
+railties (7.0.3.1) lib/rails/rack/logger.rb:40:in `call_app'
+railties (7.0.3.1) lib/rails/rack/logger.rb:25:in `block in call'
+activesupport (7.0.3.1) lib/active_support/tagged_logging.rb:114:in `block in tagged'
+activesupport (7.0.3.1) lib/active_support/tagged_logging.rb:38:in `tagged'
+activesupport (7.0.3.1) lib/active_support/tagged_logging.rb:114:in `tagged'
+railties (7.0.3.1) lib/rails/rack/logger.rb:25:in `call'
+sprockets-rails (3.4.2) lib/sprockets/rails/quiet_assets.rb:13:in `call'
+actionpack (7.0.3.1) lib/action_dispatch/middleware/remote_ip.rb:93:in `call'
+actionpack (7.0.3.1) lib/action_dispatch/middleware/request_id.rb:26:in `call'
+rack (2.2.4) lib/rack/method_override.rb:24:in `call'
+rack (2.2.4) lib/rack/runtime.rb:22:in `call'
+activesupport (7.0.3.1) lib/active_support/cache/strategy/local_cache_middleware.rb:29:in `call'
+actionpack (7.0.3.1) lib/action_dispatch/middleware/server_timing.rb:20:in `call'
+actionpack (7.0.3.1) lib/action_dispatch/middleware/executor.rb:14:in `call'
+actionpack (7.0.3.1) lib/action_dispatch/middleware/static.rb:23:in `call'
+rack (2.2.4) lib/rack/sendfile.rb:110:in `call'
+actionpack (7.0.3.1) lib/action_dispatch/middleware/host_authorization.rb:137:in `call'
+railties (7.0.3.1) lib/rails/engine.rb:530:in `call'
+puma (5.6.4) lib/puma/configuration.rb:252:in `call'
+puma (5.6.4) lib/puma/request.rb:77:in `block in handle_request'
+puma (5.6.4) lib/puma/thread_pool.rb:340:in `with_force_shutdown'
+puma (5.6.4) lib/puma/request.rb:76:in `handle_request'
+puma (5.6.4) lib/puma/server.rb:441:in `process_client'
+puma (5.6.4) lib/puma/thread_pool.rb:147:in `block in spawn_thread'
+Started GET "/" for 127.0.0.1 at 2022-08-16 18:34:12 +0530
+  [1m[36mActiveRecord::SchemaMigration Pluck (0.4ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Processing by PagesController#index as HTML
+Completed 406 Not Acceptable in 4ms (ActiveRecord: 0.0ms | Allocations: 3914)
+
+
+  
+ActionController::MissingExactTemplate (PagesController#index is missing a template for request formats: text/html):
+  
+actionpack (7.0.3.1) lib/action_controller/metal/implicit_render.rb:45:in `default_render'
+actionpack (7.0.3.1) lib/action_controller/metal/basic_implicit_render.rb:6:in `block in send_action'
+<internal:kernel>:90:in `tap'
+actionpack (7.0.3.1) lib/action_controller/metal/basic_implicit_render.rb:6:in `send_action'
+actionpack (7.0.3.1) lib/abstract_controller/base.rb:215:in `process_action'
+actionpack (7.0.3.1) lib/action_controller/metal/rendering.rb:53:in `process_action'
+actionpack (7.0.3.1) lib/abstract_controller/callbacks.rb:234:in `block in process_action'
+activesupport (7.0.3.1) lib/active_support/callbacks.rb:118:in `block in run_callbacks'
+actiontext (7.0.3.1) lib/action_text/rendering.rb:20:in `with_renderer'
+actiontext (7.0.3.1) lib/action_text/engine.rb:69:in `block (4 levels) in <class:Engine>'
+activesupport (7.0.3.1) lib/active_support/callbacks.rb:127:in `instance_exec'
+activesupport (7.0.3.1) lib/active_support/callbacks.rb:127:in `block in run_callbacks'
+activesupport (7.0.3.1) lib/active_support/callbacks.rb:138:in `run_callbacks'
+actionpack (7.0.3.1) lib/abstract_controller/callbacks.rb:233:in `process_action'
+actionpack (7.0.3.1) lib/action_controller/metal/rescue.rb:22:in `process_action'
+actionpack (7.0.3.1) lib/action_controller/metal/instrumentation.rb:67:in `block in process_action'
+activesupport (7.0.3.1) lib/active_support/notifications.rb:206:in `block in instrument'
+activesupport (7.0.3.1) lib/active_support/notifications/instrumenter.rb:24:in `instrument'
+activesupport (7.0.3.1) lib/active_support/notifications.rb:206:in `instrument'
+actionpack (7.0.3.1) lib/action_controller/metal/instrumentation.rb:66:in `process_action'
+actionpack (7.0.3.1) lib/action_controller/metal/params_wrapper.rb:259:in `process_action'
+activerecord (7.0.3.1) lib/active_record/railties/controller_runtime.rb:27:in `process_action'
+actionpack (7.0.3.1) lib/abstract_controller/base.rb:151:in `process'
+actionview (7.0.3.1) lib/action_view/rendering.rb:39:in `process'
+actionpack (7.0.3.1) lib/action_controller/metal.rb:188:in `dispatch'
+actionpack (7.0.3.1) lib/action_controller/metal.rb:251:in `dispatch'
+actionpack (7.0.3.1) lib/action_dispatch/routing/route_set.rb:49:in `dispatch'
+actionpack (7.0.3.1) lib/action_dispatch/routing/route_set.rb:32:in `serve'
+actionpack (7.0.3.1) lib/action_dispatch/journey/router.rb:50:in `block in serve'
+actionpack (7.0.3.1) lib/action_dispatch/journey/router.rb:32:in `each'
+actionpack (7.0.3.1) lib/action_dispatch/journey/router.rb:32:in `serve'
+actionpack (7.0.3.1) lib/action_dispatch/routing/route_set.rb:852:in `call'
+rack (2.2.4) lib/rack/tempfile_reaper.rb:15:in `call'
+rack (2.2.4) lib/rack/etag.rb:27:in `call'
+rack (2.2.4) lib/rack/conditional_get.rb:27:in `call'
+rack (2.2.4) lib/rack/head.rb:12:in `call'
+actionpack (7.0.3.1) lib/action_dispatch/http/permissions_policy.rb:38:in `call'
+actionpack (7.0.3.1) lib/action_dispatch/http/content_security_policy.rb:36:in `call'
+rack (2.2.4) lib/rack/session/abstract/id.rb:266:in `context'
+rack (2.2.4) lib/rack/session/abstract/id.rb:260:in `call'
+actionpack (7.0.3.1) lib/action_dispatch/middleware/cookies.rb:697:in `call'
+activerecord (7.0.3.1) lib/active_record/migration.rb:603:in `call'
+actionpack (7.0.3.1) lib/action_dispatch/middleware/callbacks.rb:27:in `block in call'
+activesupport (7.0.3.1) lib/active_support/callbacks.rb:99:in `run_callbacks'
+actionpack (7.0.3.1) lib/action_dispatch/middleware/callbacks.rb:26:in `call'
+actionpack (7.0.3.1) lib/action_dispatch/middleware/executor.rb:14:in `call'
+actionpack (7.0.3.1) lib/action_dispatch/middleware/actionable_exceptions.rb:17:in `call'
+actionpack (7.0.3.1) lib/action_dispatch/middleware/debug_exceptions.rb:28:in `call'
+web-console (4.2.0) lib/web_console/middleware.rb:132:in `call_app'
+web-console (4.2.0) lib/web_console/middleware.rb:28:in `block in call'
+web-console (4.2.0) lib/web_console/middleware.rb:17:in `catch'
+web-console (4.2.0) lib/web_console/middleware.rb:17:in `call'
+actionpack (7.0.3.1) lib/action_dispatch/middleware/show_exceptions.rb:26:in `call'
+railties (7.0.3.1) lib/rails/rack/logger.rb:40:in `call_app'
+railties (7.0.3.1) lib/rails/rack/logger.rb:25:in `block in call'
+activesupport (7.0.3.1) lib/active_support/tagged_logging.rb:114:in `block in tagged'
+activesupport (7.0.3.1) lib/active_support/tagged_logging.rb:38:in `tagged'
+activesupport (7.0.3.1) lib/active_support/tagged_logging.rb:114:in `tagged'
+railties (7.0.3.1) lib/rails/rack/logger.rb:25:in `call'
+sprockets-rails (3.4.2) lib/sprockets/rails/quiet_assets.rb:13:in `call'
+actionpack (7.0.3.1) lib/action_dispatch/middleware/remote_ip.rb:93:in `call'
+actionpack (7.0.3.1) lib/action_dispatch/middleware/request_id.rb:26:in `call'
+rack (2.2.4) lib/rack/method_override.rb:24:in `call'
+rack (2.2.4) lib/rack/runtime.rb:22:in `call'
+activesupport (7.0.3.1) lib/active_support/cache/strategy/local_cache_middleware.rb:29:in `call'
+actionpack (7.0.3.1) lib/action_dispatch/middleware/server_timing.rb:20:in `call'
+actionpack (7.0.3.1) lib/action_dispatch/middleware/executor.rb:14:in `call'
+actionpack (7.0.3.1) lib/action_dispatch/middleware/static.rb:23:in `call'
+rack (2.2.4) lib/rack/sendfile.rb:110:in `call'
+actionpack (7.0.3.1) lib/action_dispatch/middleware/host_authorization.rb:137:in `call'
+railties (7.0.3.1) lib/rails/engine.rb:530:in `call'
+puma (5.6.4) lib/puma/configuration.rb:252:in `call'
+puma (5.6.4) lib/puma/request.rb:77:in `block in handle_request'
+puma (5.6.4) lib/puma/thread_pool.rb:340:in `with_force_shutdown'
+puma (5.6.4) lib/puma/request.rb:76:in `handle_request'
+puma (5.6.4) lib/puma/server.rb:441:in `process_client'
+puma (5.6.4) lib/puma/thread_pool.rb:147:in `block in spawn_thread'
+Started GET "/api/v1/airlines.json" for ::1 at 2022-08-16 18:40:59 +0530
+  [1m[36mActiveRecord::SchemaMigration Pluck (0.7ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  
+Zeitwerk::NameError (wrong constant name Airlines.controller inferred by Module from file
+
+  /Users/tnluser/Desktop/hackathon/Hackathon-app/flights-review/app/controllers/api/v1/airlines.controller.rb
+
+Possible ways to address this:
+
+  * Tell Zeitwerk to ignore this particular file.
+  * Tell Zeitwerk to ignore one of its parent directories.
+  * Rename the file to comply with the naming conventions.
+  * Modify the inflector to handle this case.
+):
+  
+zeitwerk (2.6.0) lib/zeitwerk/loader.rb:359:in `rescue in block in set_autoloads_in_dir'
+zeitwerk (2.6.0) lib/zeitwerk/loader.rb:335:in `block in set_autoloads_in_dir'
+zeitwerk (2.6.0) lib/zeitwerk/loader/helpers.rb:41:in `block in ls'
+zeitwerk (2.6.0) lib/zeitwerk/loader/helpers.rb:27:in `each'
+zeitwerk (2.6.0) lib/zeitwerk/loader/helpers.rb:27:in `ls'
+zeitwerk (2.6.0) lib/zeitwerk/loader.rb:334:in `set_autoloads_in_dir'
+zeitwerk (2.6.0) lib/zeitwerk/loader/callbacks.rb:76:in `block in on_namespace_loaded'
+zeitwerk (2.6.0) lib/zeitwerk/loader/callbacks.rb:75:in `each'
+zeitwerk (2.6.0) lib/zeitwerk/loader/callbacks.rb:75:in `on_namespace_loaded'
+zeitwerk (2.6.0) lib/zeitwerk/loader/callbacks.rb:60:in `block in on_dir_autoloaded'
+zeitwerk (2.6.0) lib/zeitwerk/loader/callbacks.rb:46:in `synchronize'
+zeitwerk (2.6.0) lib/zeitwerk/loader/callbacks.rb:46:in `on_dir_autoloaded'
+zeitwerk (2.6.0) lib/zeitwerk/kernel.rb:31:in `require'
+activesupport (7.0.3.1) lib/active_support/inflector/methods.rb:280:in `const_get'
+activesupport (7.0.3.1) lib/active_support/inflector/methods.rb:280:in `constantize'
+activesupport (7.0.3.1) lib/active_support/core_ext/string/inflections.rb:74:in `constantize'
+actionpack (7.0.3.1) lib/action_dispatch/http/request.rb:90:in `controller_class_for'
+actionpack (7.0.3.1) lib/action_dispatch/request/utils.rb:95:in `action_encoding_template'
+actionpack (7.0.3.1) lib/action_dispatch/request/utils.rb:83:in `encode'
+actionpack (7.0.3.1) lib/action_dispatch/request/utils.rb:45:in `set_binary_encoding'
+actionpack (7.0.3.1) lib/action_dispatch/http/parameters.rb:68:in `path_parameters='
+actionpack (7.0.3.1) lib/action_dispatch/journey/router.rb:48:in `block in serve'
+actionpack (7.0.3.1) lib/action_dispatch/journey/router.rb:32:in `each'
+actionpack (7.0.3.1) lib/action_dispatch/journey/router.rb:32:in `serve'
+actionpack (7.0.3.1) lib/action_dispatch/routing/route_set.rb:852:in `call'
+rack (2.2.4) lib/rack/tempfile_reaper.rb:15:in `call'
+rack (2.2.4) lib/rack/etag.rb:27:in `call'
+rack (2.2.4) lib/rack/conditional_get.rb:27:in `call'
+rack (2.2.4) lib/rack/head.rb:12:in `call'
+actionpack (7.0.3.1) lib/action_dispatch/http/permissions_policy.rb:38:in `call'
+actionpack (7.0.3.1) lib/action_dispatch/http/content_security_policy.rb:36:in `call'
+rack (2.2.4) lib/rack/session/abstract/id.rb:266:in `context'
+rack (2.2.4) lib/rack/session/abstract/id.rb:260:in `call'
+actionpack (7.0.3.1) lib/action_dispatch/middleware/cookies.rb:697:in `call'
+activerecord (7.0.3.1) lib/active_record/migration.rb:603:in `call'
+actionpack (7.0.3.1) lib/action_dispatch/middleware/callbacks.rb:27:in `block in call'
+activesupport (7.0.3.1) lib/active_support/callbacks.rb:99:in `run_callbacks'
+actionpack (7.0.3.1) lib/action_dispatch/middleware/callbacks.rb:26:in `call'
+actionpack (7.0.3.1) lib/action_dispatch/middleware/executor.rb:14:in `call'
+actionpack (7.0.3.1) lib/action_dispatch/middleware/actionable_exceptions.rb:17:in `call'
+actionpack (7.0.3.1) lib/action_dispatch/middleware/debug_exceptions.rb:28:in `call'
+web-console (4.2.0) lib/web_console/middleware.rb:132:in `call_app'
+web-console (4.2.0) lib/web_console/middleware.rb:28:in `block in call'
+web-console (4.2.0) lib/web_console/middleware.rb:17:in `catch'
+web-console (4.2.0) lib/web_console/middleware.rb:17:in `call'
+actionpack (7.0.3.1) lib/action_dispatch/middleware/show_exceptions.rb:26:in `call'
+railties (7.0.3.1) lib/rails/rack/logger.rb:40:in `call_app'
+railties (7.0.3.1) lib/rails/rack/logger.rb:25:in `block in call'
+activesupport (7.0.3.1) lib/active_support/tagged_logging.rb:114:in `block in tagged'
+activesupport (7.0.3.1) lib/active_support/tagged_logging.rb:38:in `tagged'
+activesupport (7.0.3.1) lib/active_support/tagged_logging.rb:114:in `tagged'
+railties (7.0.3.1) lib/rails/rack/logger.rb:25:in `call'
+sprockets-rails (3.4.2) lib/sprockets/rails/quiet_assets.rb:13:in `call'
+actionpack (7.0.3.1) lib/action_dispatch/middleware/remote_ip.rb:93:in `call'
+actionpack (7.0.3.1) lib/action_dispatch/middleware/request_id.rb:26:in `call'
+rack (2.2.4) lib/rack/method_override.rb:24:in `call'
+rack (2.2.4) lib/rack/runtime.rb:22:in `call'
+activesupport (7.0.3.1) lib/active_support/cache/strategy/local_cache_middleware.rb:29:in `call'
+actionpack (7.0.3.1) lib/action_dispatch/middleware/server_timing.rb:20:in `call'
+actionpack (7.0.3.1) lib/action_dispatch/middleware/executor.rb:14:in `call'
+actionpack (7.0.3.1) lib/action_dispatch/middleware/static.rb:23:in `call'
+rack (2.2.4) lib/rack/sendfile.rb:110:in `call'
+actionpack (7.0.3.1) lib/action_dispatch/middleware/host_authorization.rb:137:in `call'
+railties (7.0.3.1) lib/rails/engine.rb:530:in `call'
+puma (5.6.4) lib/puma/configuration.rb:252:in `call'
+puma (5.6.4) lib/puma/request.rb:77:in `block in handle_request'
+puma (5.6.4) lib/puma/thread_pool.rb:340:in `with_force_shutdown'
+puma (5.6.4) lib/puma/request.rb:76:in `handle_request'
+puma (5.6.4) lib/puma/server.rb:441:in `process_client'
+puma (5.6.4) lib/puma/thread_pool.rb:147:in `block in spawn_thread'
+Started GET "/api/v1/airlines" for ::1 at 2022-08-16 18:43:10 +0530
+  
+ActionController::RoutingError (uninitialized constant Api::V1::AirlinesController
+Did you mean?  AirlineSerializer):
+  
+Started GET "/api/v1/airlines" for ::1 at 2022-08-16 18:44:13 +0530
+  
+Zeitwerk::NameError (wrong constant name Airlines.controller inferred by Module from file
+
+  /Users/tnluser/Desktop/hackathon/Hackathon-app/flights-review/app/controllers/api/v1/airlines.controller.rb
+
+Possible ways to address this:
+
+  * Tell Zeitwerk to ignore this particular file.
+  * Tell Zeitwerk to ignore one of its parent directories.
+  * Rename the file to comply with the naming conventions.
+  * Modify the inflector to handle this case.
+):
+  
+zeitwerk (2.6.0) lib/zeitwerk/loader.rb:359:in `rescue in block in set_autoloads_in_dir'
+zeitwerk (2.6.0) lib/zeitwerk/loader.rb:335:in `block in set_autoloads_in_dir'
+zeitwerk (2.6.0) lib/zeitwerk/loader/helpers.rb:41:in `block in ls'
+zeitwerk (2.6.0) lib/zeitwerk/loader/helpers.rb:27:in `each'
+zeitwerk (2.6.0) lib/zeitwerk/loader/helpers.rb:27:in `ls'
+zeitwerk (2.6.0) lib/zeitwerk/loader.rb:334:in `set_autoloads_in_dir'
+zeitwerk (2.6.0) lib/zeitwerk/loader/callbacks.rb:76:in `block in on_namespace_loaded'
+zeitwerk (2.6.0) lib/zeitwerk/loader/callbacks.rb:75:in `each'
+zeitwerk (2.6.0) lib/zeitwerk/loader/callbacks.rb:75:in `on_namespace_loaded'
+zeitwerk (2.6.0) lib/zeitwerk/loader/callbacks.rb:60:in `block in on_dir_autoloaded'
+zeitwerk (2.6.0) lib/zeitwerk/loader/callbacks.rb:46:in `synchronize'
+zeitwerk (2.6.0) lib/zeitwerk/loader/callbacks.rb:46:in `on_dir_autoloaded'
+zeitwerk (2.6.0) lib/zeitwerk/kernel.rb:31:in `require'
+activesupport (7.0.3.1) lib/active_support/inflector/methods.rb:280:in `const_get'
+activesupport (7.0.3.1) lib/active_support/inflector/methods.rb:280:in `constantize'
+activesupport (7.0.3.1) lib/active_support/core_ext/string/inflections.rb:74:in `constantize'
+actionpack (7.0.3.1) lib/action_dispatch/http/request.rb:90:in `controller_class_for'
+actionpack (7.0.3.1) lib/action_dispatch/request/utils.rb:95:in `action_encoding_template'
+actionpack (7.0.3.1) lib/action_dispatch/request/utils.rb:83:in `encode'
+actionpack (7.0.3.1) lib/action_dispatch/request/utils.rb:45:in `set_binary_encoding'
+actionpack (7.0.3.1) lib/action_dispatch/http/parameters.rb:68:in `path_parameters='
+actionpack (7.0.3.1) lib/action_dispatch/journey/router.rb:48:in `block in serve'
+actionpack (7.0.3.1) lib/action_dispatch/journey/router.rb:32:in `each'
+actionpack (7.0.3.1) lib/action_dispatch/journey/router.rb:32:in `serve'
+actionpack (7.0.3.1) lib/action_dispatch/routing/route_set.rb:852:in `call'
+rack (2.2.4) lib/rack/tempfile_reaper.rb:15:in `call'
+rack (2.2.4) lib/rack/etag.rb:27:in `call'
+rack (2.2.4) lib/rack/conditional_get.rb:27:in `call'
+rack (2.2.4) lib/rack/head.rb:12:in `call'
+actionpack (7.0.3.1) lib/action_dispatch/http/permissions_policy.rb:38:in `call'
+actionpack (7.0.3.1) lib/action_dispatch/http/content_security_policy.rb:36:in `call'
+rack (2.2.4) lib/rack/session/abstract/id.rb:266:in `context'
+rack (2.2.4) lib/rack/session/abstract/id.rb:260:in `call'
+actionpack (7.0.3.1) lib/action_dispatch/middleware/cookies.rb:697:in `call'
+activerecord (7.0.3.1) lib/active_record/migration.rb:603:in `call'
+actionpack (7.0.3.1) lib/action_dispatch/middleware/callbacks.rb:27:in `block in call'
+activesupport (7.0.3.1) lib/active_support/callbacks.rb:99:in `run_callbacks'
+actionpack (7.0.3.1) lib/action_dispatch/middleware/callbacks.rb:26:in `call'
+actionpack (7.0.3.1) lib/action_dispatch/middleware/executor.rb:14:in `call'
+actionpack (7.0.3.1) lib/action_dispatch/middleware/actionable_exceptions.rb:17:in `call'
+actionpack (7.0.3.1) lib/action_dispatch/middleware/debug_exceptions.rb:28:in `call'
+web-console (4.2.0) lib/web_console/middleware.rb:132:in `call_app'
+web-console (4.2.0) lib/web_console/middleware.rb:28:in `block in call'
+web-console (4.2.0) lib/web_console/middleware.rb:17:in `catch'
+web-console (4.2.0) lib/web_console/middleware.rb:17:in `call'
+actionpack (7.0.3.1) lib/action_dispatch/middleware/show_exceptions.rb:26:in `call'
+railties (7.0.3.1) lib/rails/rack/logger.rb:40:in `call_app'
+railties (7.0.3.1) lib/rails/rack/logger.rb:25:in `block in call'
+activesupport (7.0.3.1) lib/active_support/tagged_logging.rb:114:in `block in tagged'
+activesupport (7.0.3.1) lib/active_support/tagged_logging.rb:38:in `tagged'
+activesupport (7.0.3.1) lib/active_support/tagged_logging.rb:114:in `tagged'
+railties (7.0.3.1) lib/rails/rack/logger.rb:25:in `call'
+sprockets-rails (3.4.2) lib/sprockets/rails/quiet_assets.rb:13:in `call'
+actionpack (7.0.3.1) lib/action_dispatch/middleware/remote_ip.rb:93:in `call'
+actionpack (7.0.3.1) lib/action_dispatch/middleware/request_id.rb:26:in `call'
+rack (2.2.4) lib/rack/method_override.rb:24:in `call'
+rack (2.2.4) lib/rack/runtime.rb:22:in `call'
+activesupport (7.0.3.1) lib/active_support/cache/strategy/local_cache_middleware.rb:29:in `call'
+actionpack (7.0.3.1) lib/action_dispatch/middleware/server_timing.rb:20:in `call'
+actionpack (7.0.3.1) lib/action_dispatch/middleware/executor.rb:14:in `call'
+actionpack (7.0.3.1) lib/action_dispatch/middleware/static.rb:23:in `call'
+rack (2.2.4) lib/rack/sendfile.rb:110:in `call'
+actionpack (7.0.3.1) lib/action_dispatch/middleware/host_authorization.rb:137:in `call'
+railties (7.0.3.1) lib/rails/engine.rb:530:in `call'
+puma (5.6.4) lib/puma/configuration.rb:252:in `call'
+puma (5.6.4) lib/puma/request.rb:77:in `block in handle_request'
+puma (5.6.4) lib/puma/thread_pool.rb:340:in `with_force_shutdown'
+puma (5.6.4) lib/puma/request.rb:76:in `handle_request'
+puma (5.6.4) lib/puma/server.rb:441:in `process_client'
+puma (5.6.4) lib/puma/thread_pool.rb:147:in `block in spawn_thread'
+Started GET "/api/v1/airlines" for ::1 at 2022-08-16 18:44:56 +0530
+  
+SyntaxError (/Users/tnluser/Desktop/hackathon/Hackathon-app/flights-review/app/controllers/api/v1/airlines_controller.rb:55: syntax error, unexpected end-of-input, expecting `end'):
+  
+app/controllers/api/v1/airlines_controller.rb:55: syntax error, unexpected end-of-input, expecting `end'
+app/controllers/api/v1/airlines_controller.rb:55: syntax error, unexpected end-of-input, expecting `end'
+app/controllers/api/v1/airlines_controller.rb:55: syntax error, unexpected end-of-input, expecting `end'
+Started GET "/api/v1/airlines" for ::1 at 2022-08-16 18:45:19 +0530
+  
+NameError (uninitialized constant Api::V1::ApiController
+Did you mean?  PagesController):
+  
+app/controllers/api/v1/airlines_controller.rb:3:in `<module:V1>'
+app/controllers/api/v1/airlines_controller.rb:2:in `<module:Api>'
+app/controllers/api/v1/airlines_controller.rb:1:in `<main>'
+Started GET "/api/v1/airlines" for ::1 at 2022-08-16 18:45:59 +0530
+Processing by Api::V1::AirlinesController#index as */*
+Completed 500 Internal Server Error in 11ms (ActiveRecord: 0.0ms | Allocations: 5306)
+
+
+  
+ArgumentError (wrong number of arguments (given 2, expected 0)):
+  
+app/controllers/api/v1/airlines_controller.rb:6:in `new'
+app/controllers/api/v1/airlines_controller.rb:6:in `index'
+Started GET "/api/v1/airlines" for ::1 at 2022-08-16 18:46:57 +0530
+Processing by Api::V1::AirlinesController#index as */*
+  [1m[36mAirline Load (1.3ms)[0m  [1m[34mSELECT "airlines".* FROM "airlines"[0m
+  ↳ app/controllers/api/v1/airlines_controller.rb:6:in `index'
+  [1m[36mReview Pluck (0.9ms)[0m  [1m[34mSELECT "reviews"."id" FROM "reviews" WHERE "reviews"."airline_id" = $1[0m  [["airline_id", 1]]
+  ↳ app/controllers/api/v1/airlines_controller.rb:6:in `index'
+  [1m[36mReview Load (0.1ms)[0m  [1m[34mSELECT "reviews".* FROM "reviews" WHERE "reviews"."airline_id" = $1[0m  [["airline_id", 1]]
+  ↳ app/controllers/api/v1/airlines_controller.rb:6:in `index'
+  [1m[36mReview Pluck (0.1ms)[0m  [1m[34mSELECT "reviews"."id" FROM "reviews" WHERE "reviews"."airline_id" = $1[0m  [["airline_id", 2]]
+  ↳ app/controllers/api/v1/airlines_controller.rb:6:in `index'
+  [1m[36mReview Load (0.1ms)[0m  [1m[34mSELECT "reviews".* FROM "reviews" WHERE "reviews"."airline_id" = $1[0m  [["airline_id", 2]]
+  ↳ app/controllers/api/v1/airlines_controller.rb:6:in `index'
+  [1m[36mReview Pluck (0.1ms)[0m  [1m[34mSELECT "reviews"."id" FROM "reviews" WHERE "reviews"."airline_id" = $1[0m  [["airline_id", 3]]
+  ↳ app/controllers/api/v1/airlines_controller.rb:6:in `index'
+  [1m[36mReview Load (0.1ms)[0m  [1m[34mSELECT "reviews".* FROM "reviews" WHERE "reviews"."airline_id" = $1[0m  [["airline_id", 3]]
+  ↳ app/controllers/api/v1/airlines_controller.rb:6:in `index'
+  [1m[36mReview Pluck (0.2ms)[0m  [1m[34mSELECT "reviews"."id" FROM "reviews" WHERE "reviews"."airline_id" = $1[0m  [["airline_id", 4]]
+  ↳ app/controllers/api/v1/airlines_controller.rb:6:in `index'
+  [1m[36mReview Load (0.3ms)[0m  [1m[34mSELECT "reviews".* FROM "reviews" WHERE "reviews"."airline_id" = $1[0m  [["airline_id", 4]]
+  ↳ app/controllers/api/v1/airlines_controller.rb:6:in `index'
+  [1m[36mReview Pluck (0.1ms)[0m  [1m[34mSELECT "reviews"."id" FROM "reviews" WHERE "reviews"."airline_id" = $1[0m  [["airline_id", 5]]
+  ↳ app/controllers/api/v1/airlines_controller.rb:6:in `index'
+  [1m[36mReview Load (0.1ms)[0m  [1m[34mSELECT "reviews".* FROM "reviews" WHERE "reviews"."airline_id" = $1[0m  [["airline_id", 5]]
+  ↳ app/controllers/api/v1/airlines_controller.rb:6:in `index'
+  [1m[36mReview Pluck (0.2ms)[0m  [1m[34mSELECT "reviews"."id" FROM "reviews" WHERE "reviews"."airline_id" = $1[0m  [["airline_id", 6]]
+  ↳ app/controllers/api/v1/airlines_controller.rb:6:in `index'
+  [1m[36mReview Load (0.1ms)[0m  [1m[34mSELECT "reviews".* FROM "reviews" WHERE "reviews"."airline_id" = $1[0m  [["airline_id", 6]]
+  ↳ app/controllers/api/v1/airlines_controller.rb:6:in `index'
+  [1m[36mReview Pluck (0.1ms)[0m  [1m[34mSELECT "reviews"."id" FROM "reviews" WHERE "reviews"."airline_id" = $1[0m  [["airline_id", 7]]
+  ↳ app/controllers/api/v1/airlines_controller.rb:6:in `index'
+  [1m[36mReview Load (0.1ms)[0m  [1m[34mSELECT "reviews".* FROM "reviews" WHERE "reviews"."airline_id" = $1[0m  [["airline_id", 7]]
+  ↳ app/controllers/api/v1/airlines_controller.rb:6:in `index'
+  [1m[36mReview Pluck (0.2ms)[0m  [1m[34mSELECT "reviews"."id" FROM "reviews" WHERE "reviews"."airline_id" = $1[0m  [["airline_id", 8]]
+  ↳ app/controllers/api/v1/airlines_controller.rb:6:in `index'
+  [1m[36mReview Load (0.1ms)[0m  [1m[34mSELECT "reviews".* FROM "reviews" WHERE "reviews"."airline_id" = $1[0m  [["airline_id", 8]]
+  ↳ app/controllers/api/v1/airlines_controller.rb:6:in `index'
+  [1m[36mReview Pluck (1.5ms)[0m  [1m[34mSELECT "reviews"."id" FROM "reviews" WHERE "reviews"."airline_id" = $1[0m  [["airline_id", 9]]
+  ↳ app/controllers/api/v1/airlines_controller.rb:6:in `index'
+  [1m[36mReview Load (1.4ms)[0m  [1m[34mSELECT "reviews".* FROM "reviews" WHERE "reviews"."airline_id" = $1[0m  [["airline_id", 9]]
+  ↳ app/controllers/api/v1/airlines_controller.rb:6:in `index'
+  [1m[36mReview Pluck (0.6ms)[0m  [1m[34mSELECT "reviews"."id" FROM "reviews" WHERE "reviews"."airline_id" = $1[0m  [["airline_id", 10]]
+  ↳ app/controllers/api/v1/airlines_controller.rb:6:in `index'
+  [1m[36mReview Load (0.3ms)[0m  [1m[34mSELECT "reviews".* FROM "reviews" WHERE "reviews"."airline_id" = $1[0m  [["airline_id", 10]]
+  ↳ app/controllers/api/v1/airlines_controller.rb:6:in `index'
+  [1m[36mReview Pluck (0.2ms)[0m  [1m[34mSELECT "reviews"."id" FROM "reviews" WHERE "reviews"."airline_id" = $1[0m  [["airline_id", 11]]
+  ↳ app/controllers/api/v1/airlines_controller.rb:6:in `index'
+  [1m[36mReview Load (0.9ms)[0m  [1m[34mSELECT "reviews".* FROM "reviews" WHERE "reviews"."airline_id" = $1[0m  [["airline_id", 11]]
+  ↳ app/controllers/api/v1/airlines_controller.rb:6:in `index'
+  [1m[36mReview Pluck (0.9ms)[0m  [1m[34mSELECT "reviews"."id" FROM "reviews" WHERE "reviews"."airline_id" = $1[0m  [["airline_id", 12]]
+  ↳ app/controllers/api/v1/airlines_controller.rb:6:in `index'
+  [1m[36mReview Load (0.5ms)[0m  [1m[34mSELECT "reviews".* FROM "reviews" WHERE "reviews"."airline_id" = $1[0m  [["airline_id", 12]]
+  ↳ app/controllers/api/v1/airlines_controller.rb:6:in `index'
+  [1m[36mReview Pluck (0.4ms)[0m  [1m[34mSELECT "reviews"."id" FROM "reviews" WHERE "reviews"."airline_id" = $1[0m  [["airline_id", 13]]
+  ↳ app/controllers/api/v1/airlines_controller.rb:6:in `index'
+  [1m[36mReview Load (0.1ms)[0m  [1m[34mSELECT "reviews".* FROM "reviews" WHERE "reviews"."airline_id" = $1[0m  [["airline_id", 13]]
+  ↳ app/controllers/api/v1/airlines_controller.rb:6:in `index'
+  [1m[36mReview Pluck (0.1ms)[0m  [1m[34mSELECT "reviews"."id" FROM "reviews" WHERE "reviews"."airline_id" = $1[0m  [["airline_id", 14]]
+  ↳ app/controllers/api/v1/airlines_controller.rb:6:in `index'
+  [1m[36mReview Load (1.1ms)[0m  [1m[34mSELECT "reviews".* FROM "reviews" WHERE "reviews"."airline_id" = $1[0m  [["airline_id", 14]]
+  ↳ app/controllers/api/v1/airlines_controller.rb:6:in `index'
+  [1m[36mReview Pluck (0.2ms)[0m  [1m[34mSELECT "reviews"."id" FROM "reviews" WHERE "reviews"."airline_id" = $1[0m  [["airline_id", 15]]
+  ↳ app/controllers/api/v1/airlines_controller.rb:6:in `index'
+  [1m[36mReview Load (0.2ms)[0m  [1m[34mSELECT "reviews".* FROM "reviews" WHERE "reviews"."airline_id" = $1[0m  [["airline_id", 15]]
+  ↳ app/controllers/api/v1/airlines_controller.rb:6:in `index'
+  [1m[36mReview Pluck (0.5ms)[0m  [1m[34mSELECT "reviews"."id" FROM "reviews" WHERE "reviews"."airline_id" = $1[0m  [["airline_id", 16]]
+  ↳ app/controllers/api/v1/airlines_controller.rb:6:in `index'
+  [1m[36mReview Load (1.2ms)[0m  [1m[34mSELECT "reviews".* FROM "reviews" WHERE "reviews"."airline_id" = $1[0m  [["airline_id", 16]]
+  ↳ app/controllers/api/v1/airlines_controller.rb:6:in `index'
+  [1m[36mReview Pluck (0.4ms)[0m  [1m[34mSELECT "reviews"."id" FROM "reviews" WHERE "reviews"."airline_id" = $1[0m  [["airline_id", 17]]
+  ↳ app/controllers/api/v1/airlines_controller.rb:6:in `index'
+  [1m[36mReview Load (0.5ms)[0m  [1m[34mSELECT "reviews".* FROM "reviews" WHERE "reviews"."airline_id" = $1[0m  [["airline_id", 17]]
+  ↳ app/controllers/api/v1/airlines_controller.rb:6:in `index'
+  [1m[36mReview Pluck (0.1ms)[0m  [1m[34mSELECT "reviews"."id" FROM "reviews" WHERE "reviews"."airline_id" = $1[0m  [["airline_id", 18]]
+  ↳ app/controllers/api/v1/airlines_controller.rb:6:in `index'
+  [1m[36mReview Load (0.1ms)[0m  [1m[34mSELECT "reviews".* FROM "reviews" WHERE "reviews"."airline_id" = $1[0m  [["airline_id", 18]]
+  ↳ app/controllers/api/v1/airlines_controller.rb:6:in `index'
+  [1m[36mReview Pluck (0.1ms)[0m  [1m[34mSELECT "reviews"."id" FROM "reviews" WHERE "reviews"."airline_id" = $1[0m  [["airline_id", 19]]
+  ↳ app/controllers/api/v1/airlines_controller.rb:6:in `index'
+  [1m[36mReview Load (0.1ms)[0m  [1m[34mSELECT "reviews".* FROM "reviews" WHERE "reviews"."airline_id" = $1[0m  [["airline_id", 19]]
+  ↳ app/controllers/api/v1/airlines_controller.rb:6:in `index'
+  [1m[36mReview Pluck (0.1ms)[0m  [1m[34mSELECT "reviews"."id" FROM "reviews" WHERE "reviews"."airline_id" = $1[0m  [["airline_id", 20]]
+  ↳ app/controllers/api/v1/airlines_controller.rb:6:in `index'
+  [1m[36mReview Load (0.1ms)[0m  [1m[34mSELECT "reviews".* FROM "reviews" WHERE "reviews"."airline_id" = $1[0m  [["airline_id", 20]]
+  ↳ app/controllers/api/v1/airlines_controller.rb:6:in `index'
+  [1m[36mReview Pluck (0.1ms)[0m  [1m[34mSELECT "reviews"."id" FROM "reviews" WHERE "reviews"."airline_id" = $1[0m  [["airline_id", 21]]
+  ↳ app/controllers/api/v1/airlines_controller.rb:6:in `index'
+  [1m[36mReview Load (0.1ms)[0m  [1m[34mSELECT "reviews".* FROM "reviews" WHERE "reviews"."airline_id" = $1[0m  [["airline_id", 21]]
+  ↳ app/controllers/api/v1/airlines_controller.rb:6:in `index'
+  [1m[36mReview Pluck (0.1ms)[0m  [1m[34mSELECT "reviews"."id" FROM "reviews" WHERE "reviews"."airline_id" = $1[0m  [["airline_id", 22]]
+  ↳ app/controllers/api/v1/airlines_controller.rb:6:in `index'
+  [1m[36mReview Load (0.1ms)[0m  [1m[34mSELECT "reviews".* FROM "reviews" WHERE "reviews"."airline_id" = $1[0m  [["airline_id", 22]]
+  ↳ app/controllers/api/v1/airlines_controller.rb:6:in `index'
+  [1m[36mReview Pluck (0.1ms)[0m  [1m[34mSELECT "reviews"."id" FROM "reviews" WHERE "reviews"."airline_id" = $1[0m  [["airline_id", 23]]
+  ↳ app/controllers/api/v1/airlines_controller.rb:6:in `index'
+  [1m[36mReview Load (0.2ms)[0m  [1m[34mSELECT "reviews".* FROM "reviews" WHERE "reviews"."airline_id" = $1[0m  [["airline_id", 23]]
+  ↳ app/controllers/api/v1/airlines_controller.rb:6:in `index'
+  [1m[36mReview Pluck (0.2ms)[0m  [1m[34mSELECT "reviews"."id" FROM "reviews" WHERE "reviews"."airline_id" = $1[0m  [["airline_id", 24]]
+  ↳ app/controllers/api/v1/airlines_controller.rb:6:in `index'
+  [1m[36mReview Load (0.2ms)[0m  [1m[34mSELECT "reviews".* FROM "reviews" WHERE "reviews"."airline_id" = $1[0m  [["airline_id", 24]]
+  ↳ app/controllers/api/v1/airlines_controller.rb:6:in `index'
+  [1m[36mReview Pluck (0.2ms)[0m  [1m[34mSELECT "reviews"."id" FROM "reviews" WHERE "reviews"."airline_id" = $1[0m  [["airline_id", 25]]
+  ↳ app/controllers/api/v1/airlines_controller.rb:6:in `index'
+  [1m[36mReview Load (0.2ms)[0m  [1m[34mSELECT "reviews".* FROM "reviews" WHERE "reviews"."airline_id" = $1[0m  [["airline_id", 25]]
+  ↳ app/controllers/api/v1/airlines_controller.rb:6:in `index'
+  [1m[36mReview Pluck (0.3ms)[0m  [1m[34mSELECT "reviews"."id" FROM "reviews" WHERE "reviews"."airline_id" = $1[0m  [["airline_id", 26]]
+  ↳ app/controllers/api/v1/airlines_controller.rb:6:in `index'
+  [1m[36mReview Load (3.0ms)[0m  [1m[34mSELECT "reviews".* FROM "reviews" WHERE "reviews"."airline_id" = $1[0m  [["airline_id", 26]]
+  ↳ app/controllers/api/v1/airlines_controller.rb:6:in `index'
+  [1m[36mReview Pluck (0.2ms)[0m  [1m[34mSELECT "reviews"."id" FROM "reviews" WHERE "reviews"."airline_id" = $1[0m  [["airline_id", 27]]
+  ↳ app/controllers/api/v1/airlines_controller.rb:6:in `index'
+  [1m[36mReview Load (0.1ms)[0m  [1m[34mSELECT "reviews".* FROM "reviews" WHERE "reviews"."airline_id" = $1[0m  [["airline_id", 27]]
+  ↳ app/controllers/api/v1/airlines_controller.rb:6:in `index'
+  [1m[36mReview Pluck (0.1ms)[0m  [1m[34mSELECT "reviews"."id" FROM "reviews" WHERE "reviews"."airline_id" = $1[0m  [["airline_id", 28]]
+  ↳ app/controllers/api/v1/airlines_controller.rb:6:in `index'
+  [1m[36mReview Load (0.1ms)[0m  [1m[34mSELECT "reviews".* FROM "reviews" WHERE "reviews"."airline_id" = $1[0m  [["airline_id", 28]]
+  ↳ app/controllers/api/v1/airlines_controller.rb:6:in `index'
+  [1m[36mReview Pluck (0.1ms)[0m  [1m[34mSELECT "reviews"."id" FROM "reviews" WHERE "reviews"."airline_id" = $1[0m  [["airline_id", 29]]
+  ↳ app/controllers/api/v1/airlines_controller.rb:6:in `index'
+  [1m[36mReview Load (0.1ms)[0m  [1m[34mSELECT "reviews".* FROM "reviews" WHERE "reviews"."airline_id" = $1[0m  [["airline_id", 29]]
+  ↳ app/controllers/api/v1/airlines_controller.rb:6:in `index'
+  [1m[36mReview Pluck (0.1ms)[0m  [1m[34mSELECT "reviews"."id" FROM "reviews" WHERE "reviews"."airline_id" = $1[0m  [["airline_id", 30]]
+  ↳ app/controllers/api/v1/airlines_controller.rb:6:in `index'
+  [1m[36mReview Load (0.1ms)[0m  [1m[34mSELECT "reviews".* FROM "reviews" WHERE "reviews"."airline_id" = $1[0m  [["airline_id", 30]]
+  ↳ app/controllers/api/v1/airlines_controller.rb:6:in `index'
+  [1m[36mReview Pluck (0.1ms)[0m  [1m[34mSELECT "reviews"."id" FROM "reviews" WHERE "reviews"."airline_id" = $1[0m  [["airline_id", 31]]
+  ↳ app/controllers/api/v1/airlines_controller.rb:6:in `index'
+  [1m[36mReview Load (0.1ms)[0m  [1m[34mSELECT "reviews".* FROM "reviews" WHERE "reviews"."airline_id" = $1[0m  [["airline_id", 31]]
+  ↳ app/controllers/api/v1/airlines_controller.rb:6:in `index'
+  [1m[36mReview Pluck (0.1ms)[0m  [1m[34mSELECT "reviews"."id" FROM "reviews" WHERE "reviews"."airline_id" = $1[0m  [["airline_id", 32]]
+  ↳ app/controllers/api/v1/airlines_controller.rb:6:in `index'
+  [1m[36mReview Load (0.1ms)[0m  [1m[34mSELECT "reviews".* FROM "reviews" WHERE "reviews"."airline_id" = $1[0m  [["airline_id", 32]]
+  ↳ app/controllers/api/v1/airlines_controller.rb:6:in `index'
+  [1m[36mReview Pluck (0.1ms)[0m  [1m[34mSELECT "reviews"."id" FROM "reviews" WHERE "reviews"."airline_id" = $1[0m  [["airline_id", 33]]
+  ↳ app/controllers/api/v1/airlines_controller.rb:6:in `index'
+  [1m[36mReview Load (0.1ms)[0m  [1m[34mSELECT "reviews".* FROM "reviews" WHERE "reviews"."airline_id" = $1[0m  [["airline_id", 33]]
+  ↳ app/controllers/api/v1/airlines_controller.rb:6:in `index'
+  [1m[36mReview Pluck (0.1ms)[0m  [1m[34mSELECT "reviews"."id" FROM "reviews" WHERE "reviews"."airline_id" = $1[0m  [["airline_id", 34]]
+  ↳ app/controllers/api/v1/airlines_controller.rb:6:in `index'
+  [1m[36mReview Load (0.4ms)[0m  [1m[34mSELECT "reviews".* FROM "reviews" WHERE "reviews"."airline_id" = $1[0m  [["airline_id", 34]]
+  ↳ app/controllers/api/v1/airlines_controller.rb:6:in `index'
+  [1m[36mReview Pluck (0.1ms)[0m  [1m[34mSELECT "reviews"."id" FROM "reviews" WHERE "reviews"."airline_id" = $1[0m  [["airline_id", 35]]
+  ↳ app/controllers/api/v1/airlines_controller.rb:6:in `index'
+  [1m[36mReview Load (0.1ms)[0m  [1m[34mSELECT "reviews".* FROM "reviews" WHERE "reviews"."airline_id" = $1[0m  [["airline_id", 35]]
+  ↳ app/controllers/api/v1/airlines_controller.rb:6:in `index'
+  [1m[36mReview Pluck (0.1ms)[0m  [1m[34mSELECT "reviews"."id" FROM "reviews" WHERE "reviews"."airline_id" = $1[0m  [["airline_id", 36]]
+  ↳ app/controllers/api/v1/airlines_controller.rb:6:in `index'
+  [1m[36mReview Load (0.1ms)[0m  [1m[34mSELECT "reviews".* FROM "reviews" WHERE "reviews"."airline_id" = $1[0m  [["airline_id", 36]]
+  ↳ app/controllers/api/v1/airlines_controller.rb:6:in `index'
+  [1m[36mReview Pluck (0.1ms)[0m  [1m[34mSELECT "reviews"."id" FROM "reviews" WHERE "reviews"."airline_id" = $1[0m  [["airline_id", 37]]
+  ↳ app/controllers/api/v1/airlines_controller.rb:6:in `index'
+  [1m[36mReview Load (1.0ms)[0m  [1m[34mSELECT "reviews".* FROM "reviews" WHERE "reviews"."airline_id" = $1[0m  [["airline_id", 37]]
+  ↳ app/controllers/api/v1/airlines_controller.rb:6:in `index'
+  [1m[36mReview Pluck (0.2ms)[0m  [1m[34mSELECT "reviews"."id" FROM "reviews" WHERE "reviews"."airline_id" = $1[0m  [["airline_id", 38]]
+  ↳ app/controllers/api/v1/airlines_controller.rb:6:in `index'
+  [1m[36mReview Load (0.1ms)[0m  [1m[34mSELECT "reviews".* FROM "reviews" WHERE "reviews"."airline_id" = $1[0m  [["airline_id", 38]]
+  ↳ app/controllers/api/v1/airlines_controller.rb:6:in `index'
+  [1m[36mReview Pluck (0.1ms)[0m  [1m[34mSELECT "reviews"."id" FROM "reviews" WHERE "reviews"."airline_id" = $1[0m  [["airline_id", 39]]
+  ↳ app/controllers/api/v1/airlines_controller.rb:6:in `index'
+  [1m[36mReview Load (0.1ms)[0m  [1m[34mSELECT "reviews".* FROM "reviews" WHERE "reviews"."airline_id" = $1[0m  [["airline_id", 39]]
+  ↳ app/controllers/api/v1/airlines_controller.rb:6:in `index'
+  [1m[36mReview Pluck (0.2ms)[0m  [1m[34mSELECT "reviews"."id" FROM "reviews" WHERE "reviews"."airline_id" = $1[0m  [["airline_id", 40]]
+  ↳ app/controllers/api/v1/airlines_controller.rb:6:in `index'
+  [1m[36mReview Load (0.1ms)[0m  [1m[34mSELECT "reviews".* FROM "reviews" WHERE "reviews"."airline_id" = $1[0m  [["airline_id", 40]]
+  ↳ app/controllers/api/v1/airlines_controller.rb:6:in `index'
+  [1m[36mReview Pluck (0.1ms)[0m  [1m[34mSELECT "reviews"."id" FROM "reviews" WHERE "reviews"."airline_id" = $1[0m  [["airline_id", 41]]
+  ↳ app/controllers/api/v1/airlines_controller.rb:6:in `index'
+  [1m[36mReview Load (0.1ms)[0m  [1m[34mSELECT "reviews".* FROM "reviews" WHERE "reviews"."airline_id" = $1[0m  [["airline_id", 41]]
+  ↳ app/controllers/api/v1/airlines_controller.rb:6:in `index'
+  [1m[36mReview Pluck (0.1ms)[0m  [1m[34mSELECT "reviews"."id" FROM "reviews" WHERE "reviews"."airline_id" = $1[0m  [["airline_id", 42]]
+  ↳ app/controllers/api/v1/airlines_controller.rb:6:in `index'
+  [1m[36mReview Load (0.1ms)[0m  [1m[34mSELECT "reviews".* FROM "reviews" WHERE "reviews"."airline_id" = $1[0m  [["airline_id", 42]]
+  ↳ app/controllers/api/v1/airlines_controller.rb:6:in `index'
+Completed 200 OK in 122ms (Views: 0.1ms | ActiveRecord: 34.9ms | Allocations: 74841)
+
+
+Started GET "/api/v1/airlines.json" for ::1 at 2022-08-16 18:47:01 +0530
+Processing by Api::V1::AirlinesController#index as JSON
+  [1m[36mAirline Load (0.3ms)[0m  [1m[34mSELECT "airlines".* FROM "airlines"[0m
+  ↳ app/controllers/api/v1/airlines_controller.rb:6:in `index'
+  [1m[36mReview Pluck (0.2ms)[0m  [1m[34mSELECT "reviews"."id" FROM "reviews" WHERE "reviews"."airline_id" = $1[0m  [["airline_id", 1]]
+  ↳ app/controllers/api/v1/airlines_controller.rb:6:in `index'
+  [1m[36mReview Load (6.3ms)[0m  [1m[34mSELECT "reviews".* FROM "reviews" WHERE "reviews"."airline_id" = $1[0m  [["airline_id", 1]]
+  ↳ app/controllers/api/v1/airlines_controller.rb:6:in `index'
+  [1m[36mReview Pluck (0.3ms)[0m  [1m[34mSELECT "reviews"."id" FROM "reviews" WHERE "reviews"."airline_id" = $1[0m  [["airline_id", 2]]
+  ↳ app/controllers/api/v1/airlines_controller.rb:6:in `index'
+  [1m[36mReview Load (0.1ms)[0m  [1m[34mSELECT "reviews".* FROM "reviews" WHERE "reviews"."airline_id" = $1[0m  [["airline_id", 2]]
+  ↳ app/controllers/api/v1/airlines_controller.rb:6:in `index'
+  [1m[36mReview Pluck (0.2ms)[0m  [1m[34mSELECT "reviews"."id" FROM "reviews" WHERE "reviews"."airline_id" = $1[0m  [["airline_id", 3]]
+  ↳ app/controllers/api/v1/airlines_controller.rb:6:in `index'
+  [1m[36mReview Load (0.2ms)[0m  [1m[34mSELECT "reviews".* FROM "reviews" WHERE "reviews"."airline_id" = $1[0m  [["airline_id", 3]]
+  ↳ app/controllers/api/v1/airlines_controller.rb:6:in `index'
+  [1m[36mReview Pluck (0.1ms)[0m  [1m[34mSELECT "reviews"."id" FROM "reviews" WHERE "reviews"."airline_id" = $1[0m  [["airline_id", 4]]
+  ↳ app/controllers/api/v1/airlines_controller.rb:6:in `index'
+  [1m[36mReview Load (0.1ms)[0m  [1m[34mSELECT "reviews".* FROM "reviews" WHERE "reviews"."airline_id" = $1[0m  [["airline_id", 4]]
+  ↳ app/controllers/api/v1/airlines_controller.rb:6:in `index'
+  [1m[36mReview Pluck (0.1ms)[0m  [1m[34mSELECT "reviews"."id" FROM "reviews" WHERE "reviews"."airline_id" = $1[0m  [["airline_id", 5]]
+  ↳ app/controllers/api/v1/airlines_controller.rb:6:in `index'
+  [1m[36mReview Load (0.1ms)[0m  [1m[34mSELECT "reviews".* FROM "reviews" WHERE "reviews"."airline_id" = $1[0m  [["airline_id", 5]]
+  ↳ app/controllers/api/v1/airlines_controller.rb:6:in `index'
+  [1m[36mReview Pluck (0.1ms)[0m  [1m[34mSELECT "reviews"."id" FROM "reviews" WHERE "reviews"."airline_id" = $1[0m  [["airline_id", 6]]
+  ↳ app/controllers/api/v1/airlines_controller.rb:6:in `index'
+  [1m[36mReview Load (0.1ms)[0m  [1m[34mSELECT "reviews".* FROM "reviews" WHERE "reviews"."airline_id" = $1[0m  [["airline_id", 6]]
+  ↳ app/controllers/api/v1/airlines_controller.rb:6:in `index'
+  [1m[36mReview Pluck (0.1ms)[0m  [1m[34mSELECT "reviews"."id" FROM "reviews" WHERE "reviews"."airline_id" = $1[0m  [["airline_id", 7]]
+  ↳ app/controllers/api/v1/airlines_controller.rb:6:in `index'
+  [1m[36mReview Load (0.2ms)[0m  [1m[34mSELECT "reviews".* FROM "reviews" WHERE "reviews"."airline_id" = $1[0m  [["airline_id", 7]]
+  ↳ app/controllers/api/v1/airlines_controller.rb:6:in `index'
+  [1m[36mReview Pluck (0.1ms)[0m  [1m[34mSELECT "reviews"."id" FROM "reviews" WHERE "reviews"."airline_id" = $1[0m  [["airline_id", 8]]
+  ↳ app/controllers/api/v1/airlines_controller.rb:6:in `index'
+  [1m[36mReview Load (0.1ms)[0m  [1m[34mSELECT "reviews".* FROM "reviews" WHERE "reviews"."airline_id" = $1[0m  [["airline_id", 8]]
+  ↳ app/controllers/api/v1/airlines_controller.rb:6:in `index'
+  [1m[36mReview Pluck (0.1ms)[0m  [1m[34mSELECT "reviews"."id" FROM "reviews" WHERE "reviews"."airline_id" = $1[0m  [["airline_id", 9]]
+  ↳ app/controllers/api/v1/airlines_controller.rb:6:in `index'
+  [1m[36mReview Load (0.1ms)[0m  [1m[34mSELECT "reviews".* FROM "reviews" WHERE "reviews"."airline_id" = $1[0m  [["airline_id", 9]]
+  ↳ app/controllers/api/v1/airlines_controller.rb:6:in `index'
+  [1m[36mReview Pluck (0.1ms)[0m  [1m[34mSELECT "reviews"."id" FROM "reviews" WHERE "reviews"."airline_id" = $1[0m  [["airline_id", 10]]
+  ↳ app/controllers/api/v1/airlines_controller.rb:6:in `index'
+  [1m[36mReview Load (0.3ms)[0m  [1m[34mSELECT "reviews".* FROM "reviews" WHERE "reviews"."airline_id" = $1[0m  [["airline_id", 10]]
+  ↳ app/controllers/api/v1/airlines_controller.rb:6:in `index'
+  [1m[36mReview Pluck (0.2ms)[0m  [1m[34mSELECT "reviews"."id" FROM "reviews" WHERE "reviews"."airline_id" = $1[0m  [["airline_id", 11]]
+  ↳ app/controllers/api/v1/airlines_controller.rb:6:in `index'
+  [1m[36mReview Load (0.1ms)[0m  [1m[34mSELECT "reviews".* FROM "reviews" WHERE "reviews"."airline_id" = $1[0m  [["airline_id", 11]]
+  ↳ app/controllers/api/v1/airlines_controller.rb:6:in `index'
+  [1m[36mReview Pluck (0.1ms)[0m  [1m[34mSELECT "reviews"."id" FROM "reviews" WHERE "reviews"."airline_id" = $1[0m  [["airline_id", 12]]
+  ↳ app/controllers/api/v1/airlines_controller.rb:6:in `index'
+  [1m[36mReview Load (0.1ms)[0m  [1m[34mSELECT "reviews".* FROM "reviews" WHERE "reviews"."airline_id" = $1[0m  [["airline_id", 12]]
+  ↳ app/controllers/api/v1/airlines_controller.rb:6:in `index'
+  [1m[36mReview Pluck (0.1ms)[0m  [1m[34mSELECT "reviews"."id" FROM "reviews" WHERE "reviews"."airline_id" = $1[0m  [["airline_id", 13]]
+  ↳ app/controllers/api/v1/airlines_controller.rb:6:in `index'
+  [1m[36mReview Load (0.1ms)[0m  [1m[34mSELECT "reviews".* FROM "reviews" WHERE "reviews"."airline_id" = $1[0m  [["airline_id", 13]]
+  ↳ app/controllers/api/v1/airlines_controller.rb:6:in `index'
+  [1m[36mReview Pluck (0.1ms)[0m  [1m[34mSELECT "reviews"."id" FROM "reviews" WHERE "reviews"."airline_id" = $1[0m  [["airline_id", 14]]
+  ↳ app/controllers/api/v1/airlines_controller.rb:6:in `index'
+  [1m[36mReview Load (0.1ms)[0m  [1m[34mSELECT "reviews".* FROM "reviews" WHERE "reviews"."airline_id" = $1[0m  [["airline_id", 14]]
+  ↳ app/controllers/api/v1/airlines_controller.rb:6:in `index'
+  [1m[36mReview Pluck (0.1ms)[0m  [1m[34mSELECT "reviews"."id" FROM "reviews" WHERE "reviews"."airline_id" = $1[0m  [["airline_id", 15]]
+  ↳ app/controllers/api/v1/airlines_controller.rb:6:in `index'
+  [1m[36mReview Load (0.1ms)[0m  [1m[34mSELECT "reviews".* FROM "reviews" WHERE "reviews"."airline_id" = $1[0m  [["airline_id", 15]]
+  ↳ app/controllers/api/v1/airlines_controller.rb:6:in `index'
+  [1m[36mReview Pluck (0.1ms)[0m  [1m[34mSELECT "reviews"."id" FROM "reviews" WHERE "reviews"."airline_id" = $1[0m  [["airline_id", 16]]
+  ↳ app/controllers/api/v1/airlines_controller.rb:6:in `index'
+  [1m[36mReview Load (0.1ms)[0m  [1m[34mSELECT "reviews".* FROM "reviews" WHERE "reviews"."airline_id" = $1[0m  [["airline_id", 16]]
+  ↳ app/controllers/api/v1/airlines_controller.rb:6:in `index'
+  [1m[36mReview Pluck (0.1ms)[0m  [1m[34mSELECT "reviews"."id" FROM "reviews" WHERE "reviews"."airline_id" = $1[0m  [["airline_id", 17]]
+  ↳ app/controllers/api/v1/airlines_controller.rb:6:in `index'
+  [1m[36mReview Load (0.1ms)[0m  [1m[34mSELECT "reviews".* FROM "reviews" WHERE "reviews"."airline_id" = $1[0m  [["airline_id", 17]]
+  ↳ app/controllers/api/v1/airlines_controller.rb:6:in `index'
+  [1m[36mReview Pluck (0.1ms)[0m  [1m[34mSELECT "reviews"."id" FROM "reviews" WHERE "reviews"."airline_id" = $1[0m  [["airline_id", 18]]
+  ↳ app/controllers/api/v1/airlines_controller.rb:6:in `index'
+  [1m[36mReview Load (0.1ms)[0m  [1m[34mSELECT "reviews".* FROM "reviews" WHERE "reviews"."airline_id" = $1[0m  [["airline_id", 18]]
+  ↳ app/controllers/api/v1/airlines_controller.rb:6:in `index'
+  [1m[36mReview Pluck (0.1ms)[0m  [1m[34mSELECT "reviews"."id" FROM "reviews" WHERE "reviews"."airline_id" = $1[0m  [["airline_id", 19]]
+  ↳ app/controllers/api/v1/airlines_controller.rb:6:in `index'
+  [1m[36mReview Load (0.1ms)[0m  [1m[34mSELECT "reviews".* FROM "reviews" WHERE "reviews"."airline_id" = $1[0m  [["airline_id", 19]]
+  ↳ app/controllers/api/v1/airlines_controller.rb:6:in `index'
+  [1m[36mReview Pluck (0.1ms)[0m  [1m[34mSELECT "reviews"."id" FROM "reviews" WHERE "reviews"."airline_id" = $1[0m  [["airline_id", 20]]
+  ↳ app/controllers/api/v1/airlines_controller.rb:6:in `index'
+  [1m[36mReview Load (0.1ms)[0m  [1m[34mSELECT "reviews".* FROM "reviews" WHERE "reviews"."airline_id" = $1[0m  [["airline_id", 20]]
+  ↳ app/controllers/api/v1/airlines_controller.rb:6:in `index'
+  [1m[36mReview Pluck (0.1ms)[0m  [1m[34mSELECT "reviews"."id" FROM "reviews" WHERE "reviews"."airline_id" = $1[0m  [["airline_id", 21]]
+  ↳ app/controllers/api/v1/airlines_controller.rb:6:in `index'
+  [1m[36mReview Load (0.1ms)[0m  [1m[34mSELECT "reviews".* FROM "reviews" WHERE "reviews"."airline_id" = $1[0m  [["airline_id", 21]]
+  ↳ app/controllers/api/v1/airlines_controller.rb:6:in `index'
+  [1m[36mReview Pluck (0.1ms)[0m  [1m[34mSELECT "reviews"."id" FROM "reviews" WHERE "reviews"."airline_id" = $1[0m  [["airline_id", 22]]
+  ↳ app/controllers/api/v1/airlines_controller.rb:6:in `index'
+  [1m[36mReview Load (0.3ms)[0m  [1m[34mSELECT "reviews".* FROM "reviews" WHERE "reviews"."airline_id" = $1[0m  [["airline_id", 22]]
+  ↳ app/controllers/api/v1/airlines_controller.rb:6:in `index'
+  [1m[36mReview Pluck (0.1ms)[0m  [1m[34mSELECT "reviews"."id" FROM "reviews" WHERE "reviews"."airline_id" = $1[0m  [["airline_id", 23]]
+  ↳ app/controllers/api/v1/airlines_controller.rb:6:in `index'
+  [1m[36mReview Load (0.1ms)[0m  [1m[34mSELECT "reviews".* FROM "reviews" WHERE "reviews"."airline_id" = $1[0m  [["airline_id", 23]]
+  ↳ app/controllers/api/v1/airlines_controller.rb:6:in `index'
+  [1m[36mReview Pluck (0.1ms)[0m  [1m[34mSELECT "reviews"."id" FROM "reviews" WHERE "reviews"."airline_id" = $1[0m  [["airline_id", 24]]
+  ↳ app/controllers/api/v1/airlines_controller.rb:6:in `index'
+  [1m[36mReview Load (0.1ms)[0m  [1m[34mSELECT "reviews".* FROM "reviews" WHERE "reviews"."airline_id" = $1[0m  [["airline_id", 24]]
+  ↳ app/controllers/api/v1/airlines_controller.rb:6:in `index'
+  [1m[36mReview Pluck (0.1ms)[0m  [1m[34mSELECT "reviews"."id" FROM "reviews" WHERE "reviews"."airline_id" = $1[0m  [["airline_id", 25]]
+  ↳ app/controllers/api/v1/airlines_controller.rb:6:in `index'
+  [1m[36mReview Load (0.1ms)[0m  [1m[34mSELECT "reviews".* FROM "reviews" WHERE "reviews"."airline_id" = $1[0m  [["airline_id", 25]]
+  ↳ app/controllers/api/v1/airlines_controller.rb:6:in `index'
+  [1m[36mReview Pluck (0.1ms)[0m  [1m[34mSELECT "reviews"."id" FROM "reviews" WHERE "reviews"."airline_id" = $1[0m  [["airline_id", 26]]
+  ↳ app/controllers/api/v1/airlines_controller.rb:6:in `index'
+  [1m[36mReview Load (0.1ms)[0m  [1m[34mSELECT "reviews".* FROM "reviews" WHERE "reviews"."airline_id" = $1[0m  [["airline_id", 26]]
+  ↳ app/controllers/api/v1/airlines_controller.rb:6:in `index'
+  [1m[36mReview Pluck (0.1ms)[0m  [1m[34mSELECT "reviews"."id" FROM "reviews" WHERE "reviews"."airline_id" = $1[0m  [["airline_id", 27]]
+  ↳ app/controllers/api/v1/airlines_controller.rb:6:in `index'
+  [1m[36mReview Load (0.1ms)[0m  [1m[34mSELECT "reviews".* FROM "reviews" WHERE "reviews"."airline_id" = $1[0m  [["airline_id", 27]]
+  ↳ app/controllers/api/v1/airlines_controller.rb:6:in `index'
+  [1m[36mReview Pluck (0.1ms)[0m  [1m[34mSELECT "reviews"."id" FROM "reviews" WHERE "reviews"."airline_id" = $1[0m  [["airline_id", 28]]
+  ↳ app/controllers/api/v1/airlines_controller.rb:6:in `index'
+  [1m[36mReview Load (0.1ms)[0m  [1m[34mSELECT "reviews".* FROM "reviews" WHERE "reviews"."airline_id" = $1[0m  [["airline_id", 28]]
+  ↳ app/controllers/api/v1/airlines_controller.rb:6:in `index'
+  [1m[36mReview Pluck (0.1ms)[0m  [1m[34mSELECT "reviews"."id" FROM "reviews" WHERE "reviews"."airline_id" = $1[0m  [["airline_id", 29]]
+  ↳ app/controllers/api/v1/airlines_controller.rb:6:in `index'
+  [1m[36mReview Load (0.1ms)[0m  [1m[34mSELECT "reviews".* FROM "reviews" WHERE "reviews"."airline_id" = $1[0m  [["airline_id", 29]]
+  ↳ app/controllers/api/v1/airlines_controller.rb:6:in `index'
+  [1m[36mReview Pluck (0.1ms)[0m  [1m[34mSELECT "reviews"."id" FROM "reviews" WHERE "reviews"."airline_id" = $1[0m  [["airline_id", 30]]
+  ↳ app/controllers/api/v1/airlines_controller.rb:6:in `index'
+  [1m[36mReview Load (0.2ms)[0m  [1m[34mSELECT "reviews".* FROM "reviews" WHERE "reviews"."airline_id" = $1[0m  [["airline_id", 30]]
+  ↳ app/controllers/api/v1/airlines_controller.rb:6:in `index'
+  [1m[36mReview Pluck (0.2ms)[0m  [1m[34mSELECT "reviews"."id" FROM "reviews" WHERE "reviews"."airline_id" = $1[0m  [["airline_id", 31]]
+  ↳ app/controllers/api/v1/airlines_controller.rb:6:in `index'
+  [1m[36mReview Load (0.1ms)[0m  [1m[34mSELECT "reviews".* FROM "reviews" WHERE "reviews"."airline_id" = $1[0m  [["airline_id", 31]]
+  ↳ app/controllers/api/v1/airlines_controller.rb:6:in `index'
+  [1m[36mReview Pluck (0.1ms)[0m  [1m[34mSELECT "reviews"."id" FROM "reviews" WHERE "reviews"."airline_id" = $1[0m  [["airline_id", 32]]
+  ↳ app/controllers/api/v1/airlines_controller.rb:6:in `index'
+  [1m[36mReview Load (0.1ms)[0m  [1m[34mSELECT "reviews".* FROM "reviews" WHERE "reviews"."airline_id" = $1[0m  [["airline_id", 32]]
+  ↳ app/controllers/api/v1/airlines_controller.rb:6:in `index'
+  [1m[36mReview Pluck (0.1ms)[0m  [1m[34mSELECT "reviews"."id" FROM "reviews" WHERE "reviews"."airline_id" = $1[0m  [["airline_id", 33]]
+  ↳ app/controllers/api/v1/airlines_controller.rb:6:in `index'
+  [1m[36mReview Load (0.1ms)[0m  [1m[34mSELECT "reviews".* FROM "reviews" WHERE "reviews"."airline_id" = $1[0m  [["airline_id", 33]]
+  ↳ app/controllers/api/v1/airlines_controller.rb:6:in `index'
+  [1m[36mReview Pluck (0.5ms)[0m  [1m[34mSELECT "reviews"."id" FROM "reviews" WHERE "reviews"."airline_id" = $1[0m  [["airline_id", 34]]
+  ↳ app/controllers/api/v1/airlines_controller.rb:6:in `index'
+  [1m[36mReview Load (0.3ms)[0m  [1m[34mSELECT "reviews".* FROM "reviews" WHERE "reviews"."airline_id" = $1[0m  [["airline_id", 34]]
+  ↳ app/controllers/api/v1/airlines_controller.rb:6:in `index'
+  [1m[36mReview Pluck (0.2ms)[0m  [1m[34mSELECT "reviews"."id" FROM "reviews" WHERE "reviews"."airline_id" = $1[0m  [["airline_id", 35]]
+  ↳ app/controllers/api/v1/airlines_controller.rb:6:in `index'
+  [1m[36mReview Load (0.2ms)[0m  [1m[34mSELECT "reviews".* FROM "reviews" WHERE "reviews"."airline_id" = $1[0m  [["airline_id", 35]]
+  ↳ app/controllers/api/v1/airlines_controller.rb:6:in `index'
+  [1m[36mReview Pluck (0.3ms)[0m  [1m[34mSELECT "reviews"."id" FROM "reviews" WHERE "reviews"."airline_id" = $1[0m  [["airline_id", 36]]
+  ↳ app/controllers/api/v1/airlines_controller.rb:6:in `index'
+  [1m[36mReview Load (1.1ms)[0m  [1m[34mSELECT "reviews".* FROM "reviews" WHERE "reviews"."airline_id" = $1[0m  [["airline_id", 36]]
+  ↳ app/controllers/api/v1/airlines_controller.rb:6:in `index'
+  [1m[36mReview Pluck (0.4ms)[0m  [1m[34mSELECT "reviews"."id" FROM "reviews" WHERE "reviews"."airline_id" = $1[0m  [["airline_id", 37]]
+  ↳ app/controllers/api/v1/airlines_controller.rb:6:in `index'
+  [1m[36mReview Load (0.3ms)[0m  [1m[34mSELECT "reviews".* FROM "reviews" WHERE "reviews"."airline_id" = $1[0m  [["airline_id", 37]]
+  ↳ app/controllers/api/v1/airlines_controller.rb:6:in `index'
+  [1m[36mReview Pluck (0.8ms)[0m  [1m[34mSELECT "reviews"."id" FROM "reviews" WHERE "reviews"."airline_id" = $1[0m  [["airline_id", 38]]
+  ↳ app/controllers/api/v1/airlines_controller.rb:6:in `index'
+  [1m[36mReview Load (0.4ms)[0m  [1m[34mSELECT "reviews".* FROM "reviews" WHERE "reviews"."airline_id" = $1[0m  [["airline_id", 38]]
+  ↳ app/controllers/api/v1/airlines_controller.rb:6:in `index'
+  [1m[36mReview Pluck (0.3ms)[0m  [1m[34mSELECT "reviews"."id" FROM "reviews" WHERE "reviews"."airline_id" = $1[0m  [["airline_id", 39]]
+  ↳ app/controllers/api/v1/airlines_controller.rb:6:in `index'
+  [1m[36mReview Load (0.4ms)[0m  [1m[34mSELECT "reviews".* FROM "reviews" WHERE "reviews"."airline_id" = $1[0m  [["airline_id", 39]]
+  ↳ app/controllers/api/v1/airlines_controller.rb:6:in `index'
+  [1m[36mReview Pluck (0.2ms)[0m  [1m[34mSELECT "reviews"."id" FROM "reviews" WHERE "reviews"."airline_id" = $1[0m  [["airline_id", 40]]
+  ↳ app/controllers/api/v1/airlines_controller.rb:6:in `index'
+  [1m[36mReview Load (0.7ms)[0m  [1m[34mSELECT "reviews".* FROM "reviews" WHERE "reviews"."airline_id" = $1[0m  [["airline_id", 40]]
+  ↳ app/controllers/api/v1/airlines_controller.rb:6:in `index'
+  [1m[36mReview Pluck (0.3ms)[0m  [1m[34mSELECT "reviews"."id" FROM "reviews" WHERE "reviews"."airline_id" = $1[0m  [["airline_id", 41]]
+  ↳ app/controllers/api/v1/airlines_controller.rb:6:in `index'
+  [1m[36mReview Load (0.6ms)[0m  [1m[34mSELECT "reviews".* FROM "reviews" WHERE "reviews"."airline_id" = $1[0m  [["airline_id", 41]]
+  ↳ app/controllers/api/v1/airlines_controller.rb:6:in `index'
+  [1m[36mReview Pluck (0.2ms)[0m  [1m[34mSELECT "reviews"."id" FROM "reviews" WHERE "reviews"."airline_id" = $1[0m  [["airline_id", 42]]
+  ↳ app/controllers/api/v1/airlines_controller.rb:6:in `index'
+  [1m[36mReview Load (0.4ms)[0m  [1m[34mSELECT "reviews".* FROM "reviews" WHERE "reviews"."airline_id" = $1[0m  [["airline_id", 42]]
+  ↳ app/controllers/api/v1/airlines_controller.rb:6:in `index'
+Completed 200 OK in 88ms (Views: 0.1ms | ActiveRecord: 21.2ms | Allocations: 57874)
+
+
+Started GET "/api/v1/airlines.json" for ::1 at 2022-08-16 18:47:03 +0530
+Processing by Api::V1::AirlinesController#index as JSON
+  [1m[36mAirline Load (3.8ms)[0m  [1m[34mSELECT "airlines".* FROM "airlines"[0m
+  ↳ app/controllers/api/v1/airlines_controller.rb:6:in `index'
+  [1m[36mReview Pluck (0.2ms)[0m  [1m[34mSELECT "reviews"."id" FROM "reviews" WHERE "reviews"."airline_id" = $1[0m  [["airline_id", 1]]
+  ↳ app/controllers/api/v1/airlines_controller.rb:6:in `index'
+  [1m[36mReview Load (0.2ms)[0m  [1m[34mSELECT "reviews".* FROM "reviews" WHERE "reviews"."airline_id" = $1[0m  [["airline_id", 1]]
+  ↳ app/controllers/api/v1/airlines_controller.rb:6:in `index'
+  [1m[36mReview Pluck (1.4ms)[0m  [1m[34mSELECT "reviews"."id" FROM "reviews" WHERE "reviews"."airline_id" = $1[0m  [["airline_id", 2]]
+  ↳ app/controllers/api/v1/airlines_controller.rb:6:in `index'
+  [1m[36mReview Load (0.4ms)[0m  [1m[34mSELECT "reviews".* FROM "reviews" WHERE "reviews"."airline_id" = $1[0m  [["airline_id", 2]]
+  ↳ app/controllers/api/v1/airlines_controller.rb:6:in `index'
+  [1m[36mReview Pluck (0.4ms)[0m  [1m[34mSELECT "reviews"."id" FROM "reviews" WHERE "reviews"."airline_id" = $1[0m  [["airline_id", 3]]
+  ↳ app/controllers/api/v1/airlines_controller.rb:6:in `index'
+  [1m[36mReview Load (0.2ms)[0m  [1m[34mSELECT "reviews".* FROM "reviews" WHERE "reviews"."airline_id" = $1[0m  [["airline_id", 3]]
+  ↳ app/controllers/api/v1/airlines_controller.rb:6:in `index'
+  [1m[36mReview Pluck (0.2ms)[0m  [1m[34mSELECT "reviews"."id" FROM "reviews" WHERE "reviews"."airline_id" = $1[0m  [["airline_id", 4]]
+  ↳ app/controllers/api/v1/airlines_controller.rb:6:in `index'
+  [1m[36mReview Load (0.1ms)[0m  [1m[34mSELECT "reviews".* FROM "reviews" WHERE "reviews"."airline_id" = $1[0m  [["airline_id", 4]]
+  ↳ app/controllers/api/v1/airlines_controller.rb:6:in `index'
+  [1m[36mReview Pluck (0.1ms)[0m  [1m[34mSELECT "reviews"."id" FROM "reviews" WHERE "reviews"."airline_id" = $1[0m  [["airline_id", 5]]
+  ↳ app/controllers/api/v1/airlines_controller.rb:6:in `index'
+  [1m[36mReview Load (0.1ms)[0m  [1m[34mSELECT "reviews".* FROM "reviews" WHERE "reviews"."airline_id" = $1[0m  [["airline_id", 5]]
+  ↳ app/controllers/api/v1/airlines_controller.rb:6:in `index'
+  [1m[36mReview Pluck (0.1ms)[0m  [1m[34mSELECT "reviews"."id" FROM "reviews" WHERE "reviews"."airline_id" = $1[0m  [["airline_id", 6]]
+  ↳ app/controllers/api/v1/airlines_controller.rb:6:in `index'
+  [1m[36mReview Load (0.1ms)[0m  [1m[34mSELECT "reviews".* FROM "reviews" WHERE "reviews"."airline_id" = $1[0m  [["airline_id", 6]]
+  ↳ app/controllers/api/v1/airlines_controller.rb:6:in `index'
+  [1m[36mReview Pluck (0.1ms)[0m  [1m[34mSELECT "reviews"."id" FROM "reviews" WHERE "reviews"."airline_id" = $1[0m  [["airline_id", 7]]
+  ↳ app/controllers/api/v1/airlines_controller.rb:6:in `index'
+  [1m[36mReview Load (0.1ms)[0m  [1m[34mSELECT "reviews".* FROM "reviews" WHERE "reviews"."airline_id" = $1[0m  [["airline_id", 7]]
+  ↳ app/controllers/api/v1/airlines_controller.rb:6:in `index'
+  [1m[36mReview Pluck (0.2ms)[0m  [1m[34mSELECT "reviews"."id" FROM "reviews" WHERE "reviews"."airline_id" = $1[0m  [["airline_id", 8]]
+  ↳ app/controllers/api/v1/airlines_controller.rb:6:in `index'
+  [1m[36mReview Load (0.2ms)[0m  [1m[34mSELECT "reviews".* FROM "reviews" WHERE "reviews"."airline_id" = $1[0m  [["airline_id", 8]]
+  ↳ app/controllers/api/v1/airlines_controller.rb:6:in `index'
+  [1m[36mReview Pluck (0.1ms)[0m  [1m[34mSELECT "reviews"."id" FROM "reviews" WHERE "reviews"."airline_id" = $1[0m  [["airline_id", 9]]
+  ↳ app/controllers/api/v1/airlines_controller.rb:6:in `index'
+  [1m[36mReview Load (0.1ms)[0m  [1m[34mSELECT "reviews".* FROM "reviews" WHERE "reviews"."airline_id" = $1[0m  [["airline_id", 9]]
+  ↳ app/controllers/api/v1/airlines_controller.rb:6:in `index'
+  [1m[36mReview Pluck (0.1ms)[0m  [1m[34mSELECT "reviews"."id" FROM "reviews" WHERE "reviews"."airline_id" = $1[0m  [["airline_id", 10]]
+  ↳ app/controllers/api/v1/airlines_controller.rb:6:in `index'
+  [1m[36mReview Load (0.1ms)[0m  [1m[34mSELECT "reviews".* FROM "reviews" WHERE "reviews"."airline_id" = $1[0m  [["airline_id", 10]]
+  ↳ app/controllers/api/v1/airlines_controller.rb:6:in `index'
+  [1m[36mReview Pluck (0.1ms)[0m  [1m[34mSELECT "reviews"."id" FROM "reviews" WHERE "reviews"."airline_id" = $1[0m  [["airline_id", 11]]
+  ↳ app/controllers/api/v1/airlines_controller.rb:6:in `index'
+  [1m[36mReview Load (0.1ms)[0m  [1m[34mSELECT "reviews".* FROM "reviews" WHERE "reviews"."airline_id" = $1[0m  [["airline_id", 11]]
+  ↳ app/controllers/api/v1/airlines_controller.rb:6:in `index'
+  [1m[36mReview Pluck (0.1ms)[0m  [1m[34mSELECT "reviews"."id" FROM "reviews" WHERE "reviews"."airline_id" = $1[0m  [["airline_id", 12]]
+  ↳ app/controllers/api/v1/airlines_controller.rb:6:in `index'
+  [1m[36mReview Load (0.2ms)[0m  [1m[34mSELECT "reviews".* FROM "reviews" WHERE "reviews"."airline_id" = $1[0m  [["airline_id", 12]]
+  ↳ app/controllers/api/v1/airlines_controller.rb:6:in `index'
+  [1m[36mReview Pluck (0.2ms)[0m  [1m[34mSELECT "reviews"."id" FROM "reviews" WHERE "reviews"."airline_id" = $1[0m  [["airline_id", 13]]
+  ↳ app/controllers/api/v1/airlines_controller.rb:6:in `index'
+  [1m[36mReview Load (0.1ms)[0m  [1m[34mSELECT "reviews".* FROM "reviews" WHERE "reviews"."airline_id" = $1[0m  [["airline_id", 13]]
+  ↳ app/controllers/api/v1/airlines_controller.rb:6:in `index'
+  [1m[36mReview Pluck (0.1ms)[0m  [1m[34mSELECT "reviews"."id" FROM "reviews" WHERE "reviews"."airline_id" = $1[0m  [["airline_id", 14]]
+  ↳ app/controllers/api/v1/airlines_controller.rb:6:in `index'
+  [1m[36mReview Load (0.1ms)[0m  [1m[34mSELECT "reviews".* FROM "reviews" WHERE "reviews"."airline_id" = $1[0m  [["airline_id", 14]]
+  ↳ app/controllers/api/v1/airlines_controller.rb:6:in `index'
+  [1m[36mReview Pluck (0.1ms)[0m  [1m[34mSELECT "reviews"."id" FROM "reviews" WHERE "reviews"."airline_id" = $1[0m  [["airline_id", 15]]
+  ↳ app/controllers/api/v1/airlines_controller.rb:6:in `index'
+  [1m[36mReview Load (0.2ms)[0m  [1m[34mSELECT "reviews".* FROM "reviews" WHERE "reviews"."airline_id" = $1[0m  [["airline_id", 15]]
+  ↳ app/controllers/api/v1/airlines_controller.rb:6:in `index'
+  [1m[36mReview Pluck (0.2ms)[0m  [1m[34mSELECT "reviews"."id" FROM "reviews" WHERE "reviews"."airline_id" = $1[0m  [["airline_id", 16]]
+  ↳ app/controllers/api/v1/airlines_controller.rb:6:in `index'
+  [1m[36mReview Load (0.1ms)[0m  [1m[34mSELECT "reviews".* FROM "reviews" WHERE "reviews"."airline_id" = $1[0m  [["airline_id", 16]]
+  ↳ app/controllers/api/v1/airlines_controller.rb:6:in `index'
+  [1m[36mReview Pluck (0.1ms)[0m  [1m[34mSELECT "reviews"."id" FROM "reviews" WHERE "reviews"."airline_id" = $1[0m  [["airline_id", 17]]
+  ↳ app/controllers/api/v1/airlines_controller.rb:6:in `index'
+  [1m[36mReview Load (0.1ms)[0m  [1m[34mSELECT "reviews".* FROM "reviews" WHERE "reviews"."airline_id" = $1[0m  [["airline_id", 17]]
+  ↳ app/controllers/api/v1/airlines_controller.rb:6:in `index'
+  [1m[36mReview Pluck (0.1ms)[0m  [1m[34mSELECT "reviews"."id" FROM "reviews" WHERE "reviews"."airline_id" = $1[0m  [["airline_id", 18]]
+  ↳ app/controllers/api/v1/airlines_controller.rb:6:in `index'
+  [1m[36mReview Load (0.1ms)[0m  [1m[34mSELECT "reviews".* FROM "reviews" WHERE "reviews"."airline_id" = $1[0m  [["airline_id", 18]]
+  ↳ app/controllers/api/v1/airlines_controller.rb:6:in `index'
+  [1m[36mReview Pluck (0.1ms)[0m  [1m[34mSELECT "reviews"."id" FROM "reviews" WHERE "reviews"."airline_id" = $1[0m  [["airline_id", 19]]
+  ↳ app/controllers/api/v1/airlines_controller.rb:6:in `index'
+  [1m[36mReview Load (0.1ms)[0m  [1m[34mSELECT "reviews".* FROM "reviews" WHERE "reviews"."airline_id" = $1[0m  [["airline_id", 19]]
+  ↳ app/controllers/api/v1/airlines_controller.rb:6:in `index'
+  [1m[36mReview Pluck (0.1ms)[0m  [1m[34mSELECT "reviews"."id" FROM "reviews" WHERE "reviews"."airline_id" = $1[0m  [["airline_id", 20]]
+  ↳ app/controllers/api/v1/airlines_controller.rb:6:in `index'
+  [1m[36mReview Load (0.1ms)[0m  [1m[34mSELECT "reviews".* FROM "reviews" WHERE "reviews"."airline_id" = $1[0m  [["airline_id", 20]]
+  ↳ app/controllers/api/v1/airlines_controller.rb:6:in `index'
+  [1m[36mReview Pluck (0.1ms)[0m  [1m[34mSELECT "reviews"."id" FROM "reviews" WHERE "reviews"."airline_id" = $1[0m  [["airline_id", 21]]
+  ↳ app/controllers/api/v1/airlines_controller.rb:6:in `index'
+  [1m[36mReview Load (0.1ms)[0m  [1m[34mSELECT "reviews".* FROM "reviews" WHERE "reviews"."airline_id" = $1[0m  [["airline_id", 21]]
+  ↳ app/controllers/api/v1/airlines_controller.rb:6:in `index'
+  [1m[36mReview Pluck (0.1ms)[0m  [1m[34mSELECT "reviews"."id" FROM "reviews" WHERE "reviews"."airline_id" = $1[0m  [["airline_id", 22]]
+  ↳ app/controllers/api/v1/airlines_controller.rb:6:in `index'
+  [1m[36mReview Load (0.1ms)[0m  [1m[34mSELECT "reviews".* FROM "reviews" WHERE "reviews"."airline_id" = $1[0m  [["airline_id", 22]]
+  ↳ app/controllers/api/v1/airlines_controller.rb:6:in `index'
+  [1m[36mReview Pluck (0.1ms)[0m  [1m[34mSELECT "reviews"."id" FROM "reviews" WHERE "reviews"."airline_id" = $1[0m  [["airline_id", 23]]
+  ↳ app/controllers/api/v1/airlines_controller.rb:6:in `index'
+  [1m[36mReview Load (0.1ms)[0m  [1m[34mSELECT "reviews".* FROM "reviews" WHERE "reviews"."airline_id" = $1[0m  [["airline_id", 23]]
+  ↳ app/controllers/api/v1/airlines_controller.rb:6:in `index'
+  [1m[36mReview Pluck (0.1ms)[0m  [1m[34mSELECT "reviews"."id" FROM "reviews" WHERE "reviews"."airline_id" = $1[0m  [["airline_id", 24]]
+  ↳ app/controllers/api/v1/airlines_controller.rb:6:in `index'
+  [1m[36mReview Load (0.1ms)[0m  [1m[34mSELECT "reviews".* FROM "reviews" WHERE "reviews"."airline_id" = $1[0m  [["airline_id", 24]]
+  ↳ app/controllers/api/v1/airlines_controller.rb:6:in `index'
+  [1m[36mReview Pluck (0.2ms)[0m  [1m[34mSELECT "reviews"."id" FROM "reviews" WHERE "reviews"."airline_id" = $1[0m  [["airline_id", 25]]
+  ↳ app/controllers/api/v1/airlines_controller.rb:6:in `index'
+  [1m[36mReview Load (0.2ms)[0m  [1m[34mSELECT "reviews".* FROM "reviews" WHERE "reviews"."airline_id" = $1[0m  [["airline_id", 25]]
+  ↳ app/controllers/api/v1/airlines_controller.rb:6:in `index'
+  [1m[36mReview Pluck (0.2ms)[0m  [1m[34mSELECT "reviews"."id" FROM "reviews" WHERE "reviews"."airline_id" = $1[0m  [["airline_id", 26]]
+  ↳ app/controllers/api/v1/airlines_controller.rb:6:in `index'
+  [1m[36mReview Load (0.1ms)[0m  [1m[34mSELECT "reviews".* FROM "reviews" WHERE "reviews"."airline_id" = $1[0m  [["airline_id", 26]]
+  ↳ app/controllers/api/v1/airlines_controller.rb:6:in `index'
+  [1m[36mReview Pluck (0.1ms)[0m  [1m[34mSELECT "reviews"."id" FROM "reviews" WHERE "reviews"."airline_id" = $1[0m  [["airline_id", 27]]
+  ↳ app/controllers/api/v1/airlines_controller.rb:6:in `index'
+  [1m[36mReview Load (0.1ms)[0m  [1m[34mSELECT "reviews".* FROM "reviews" WHERE "reviews"."airline_id" = $1[0m  [["airline_id", 27]]
+  ↳ app/controllers/api/v1/airlines_controller.rb:6:in `index'
+  [1m[36mReview Pluck (0.1ms)[0m  [1m[34mSELECT "reviews"."id" FROM "reviews" WHERE "reviews"."airline_id" = $1[0m  [["airline_id", 28]]
+  ↳ app/controllers/api/v1/airlines_controller.rb:6:in `index'
+  [1m[36mReview Load (0.4ms)[0m  [1m[34mSELECT "reviews".* FROM "reviews" WHERE "reviews"."airline_id" = $1[0m  [["airline_id", 28]]
+  ↳ app/controllers/api/v1/airlines_controller.rb:6:in `index'
+  [1m[36mReview Pluck (0.2ms)[0m  [1m[34mSELECT "reviews"."id" FROM "reviews" WHERE "reviews"."airline_id" = $1[0m  [["airline_id", 29]]
+  ↳ app/controllers/api/v1/airlines_controller.rb:6:in `index'
+  [1m[36mReview Load (0.1ms)[0m  [1m[34mSELECT "reviews".* FROM "reviews" WHERE "reviews"."airline_id" = $1[0m  [["airline_id", 29]]
+  ↳ app/controllers/api/v1/airlines_controller.rb:6:in `index'
+  [1m[36mReview Pluck (0.1ms)[0m  [1m[34mSELECT "reviews"."id" FROM "reviews" WHERE "reviews"."airline_id" = $1[0m  [["airline_id", 30]]
+  ↳ app/controllers/api/v1/airlines_controller.rb:6:in `index'
+  [1m[36mReview Load (0.1ms)[0m  [1m[34mSELECT "reviews".* FROM "reviews" WHERE "reviews"."airline_id" = $1[0m  [["airline_id", 30]]
+  ↳ app/controllers/api/v1/airlines_controller.rb:6:in `index'
+  [1m[36mReview Pluck (0.1ms)[0m  [1m[34mSELECT "reviews"."id" FROM "reviews" WHERE "reviews"."airline_id" = $1[0m  [["airline_id", 31]]
+  ↳ app/controllers/api/v1/airlines_controller.rb:6:in `index'
+  [1m[36mReview Load (0.1ms)[0m  [1m[34mSELECT "reviews".* FROM "reviews" WHERE "reviews"."airline_id" = $1[0m  [["airline_id", 31]]
+  ↳ app/controllers/api/v1/airlines_controller.rb:6:in `index'
+  [1m[36mReview Pluck (0.1ms)[0m  [1m[34mSELECT "reviews"."id" FROM "reviews" WHERE "reviews"."airline_id" = $1[0m  [["airline_id", 32]]
+  ↳ app/controllers/api/v1/airlines_controller.rb:6:in `index'
+  [1m[36mReview Load (0.1ms)[0m  [1m[34mSELECT "reviews".* FROM "reviews" WHERE "reviews"."airline_id" = $1[0m  [["airline_id", 32]]
+  ↳ app/controllers/api/v1/airlines_controller.rb:6:in `index'
+  [1m[36mReview Pluck (0.1ms)[0m  [1m[34mSELECT "reviews"."id" FROM "reviews" WHERE "reviews"."airline_id" = $1[0m  [["airline_id", 33]]
+  ↳ app/controllers/api/v1/airlines_controller.rb:6:in `index'
+  [1m[36mReview Load (0.1ms)[0m  [1m[34mSELECT "reviews".* FROM "reviews" WHERE "reviews"."airline_id" = $1[0m  [["airline_id", 33]]
+  ↳ app/controllers/api/v1/airlines_controller.rb:6:in `index'
+  [1m[36mReview Pluck (0.1ms)[0m  [1m[34mSELECT "reviews"."id" FROM "reviews" WHERE "reviews"."airline_id" = $1[0m  [["airline_id", 34]]
+  ↳ app/controllers/api/v1/airlines_controller.rb:6:in `index'
+  [1m[36mReview Load (0.1ms)[0m  [1m[34mSELECT "reviews".* FROM "reviews" WHERE "reviews"."airline_id" = $1[0m  [["airline_id", 34]]
+  ↳ app/controllers/api/v1/airlines_controller.rb:6:in `index'
+  [1m[36mReview Pluck (0.1ms)[0m  [1m[34mSELECT "reviews"."id" FROM "reviews" WHERE "reviews"."airline_id" = $1[0m  [["airline_id", 35]]
+  ↳ app/controllers/api/v1/airlines_controller.rb:6:in `index'
+  [1m[36mReview Load (0.1ms)[0m  [1m[34mSELECT "reviews".* FROM "reviews" WHERE "reviews"."airline_id" = $1[0m  [["airline_id", 35]]
+  ↳ app/controllers/api/v1/airlines_controller.rb:6:in `index'
+  [1m[36mReview Pluck (0.1ms)[0m  [1m[34mSELECT "reviews"."id" FROM "reviews" WHERE "reviews"."airline_id" = $1[0m  [["airline_id", 36]]
+  ↳ app/controllers/api/v1/airlines_controller.rb:6:in `index'
+  [1m[36mReview Load (0.1ms)[0m  [1m[34mSELECT "reviews".* FROM "reviews" WHERE "reviews"."airline_id" = $1[0m  [["airline_id", 36]]
+  ↳ app/controllers/api/v1/airlines_controller.rb:6:in `index'
+  [1m[36mReview Pluck (0.1ms)[0m  [1m[34mSELECT "reviews"."id" FROM "reviews" WHERE "reviews"."airline_id" = $1[0m  [["airline_id", 37]]
+  ↳ app/controllers/api/v1/airlines_controller.rb:6:in `index'
+  [1m[36mReview Load (0.2ms)[0m  [1m[34mSELECT "reviews".* FROM "reviews" WHERE "reviews"."airline_id" = $1[0m  [["airline_id", 37]]
+  ↳ app/controllers/api/v1/airlines_controller.rb:6:in `index'
+  [1m[36mReview Pluck (0.3ms)[0m  [1m[34mSELECT "reviews"."id" FROM "reviews" WHERE "reviews"."airline_id" = $1[0m  [["airline_id", 38]]
+  ↳ app/controllers/api/v1/airlines_controller.rb:6:in `index'
+  [1m[36mReview Load (0.2ms)[0m  [1m[34mSELECT "reviews".* FROM "reviews" WHERE "reviews"."airline_id" = $1[0m  [["airline_id", 38]]
+  ↳ app/controllers/api/v1/airlines_controller.rb:6:in `index'
+  [1m[36mReview Pluck (0.1ms)[0m  [1m[34mSELECT "reviews"."id" FROM "reviews" WHERE "reviews"."airline_id" = $1[0m  [["airline_id", 39]]
+  ↳ app/controllers/api/v1/airlines_controller.rb:6:in `index'
+  [1m[36mReview Load (0.2ms)[0m  [1m[34mSELECT "reviews".* FROM "reviews" WHERE "reviews"."airline_id" = $1[0m  [["airline_id", 39]]
+  ↳ app/controllers/api/v1/airlines_controller.rb:6:in `index'
+  [1m[36mReview Pluck (0.1ms)[0m  [1m[34mSELECT "reviews"."id" FROM "reviews" WHERE "reviews"."airline_id" = $1[0m  [["airline_id", 40]]
+  ↳ app/controllers/api/v1/airlines_controller.rb:6:in `index'
+  [1m[36mReview Load (0.1ms)[0m  [1m[34mSELECT "reviews".* FROM "reviews" WHERE "reviews"."airline_id" = $1[0m  [["airline_id", 40]]
+  ↳ app/controllers/api/v1/airlines_controller.rb:6:in `index'
+  [1m[36mReview Pluck (0.2ms)[0m  [1m[34mSELECT "reviews"."id" FROM "reviews" WHERE "reviews"."airline_id" = $1[0m  [["airline_id", 41]]
+  ↳ app/controllers/api/v1/airlines_controller.rb:6:in `index'
+  [1m[36mReview Load (0.2ms)[0m  [1m[34mSELECT "reviews".* FROM "reviews" WHERE "reviews"."airline_id" = $1[0m  [["airline_id", 41]]
+  ↳ app/controllers/api/v1/airlines_controller.rb:6:in `index'
+  [1m[36mReview Pluck (0.1ms)[0m  [1m[34mSELECT "reviews"."id" FROM "reviews" WHERE "reviews"."airline_id" = $1[0m  [["airline_id", 42]]
+  ↳ app/controllers/api/v1/airlines_controller.rb:6:in `index'
+  [1m[36mReview Load (0.1ms)[0m  [1m[34mSELECT "reviews".* FROM "reviews" WHERE "reviews"."airline_id" = $1[0m  [["airline_id", 42]]
+  ↳ app/controllers/api/v1/airlines_controller.rb:6:in `index'
+Completed 200 OK in 77ms (Views: 0.1ms | ActiveRecord: 15.1ms | Allocations: 57862)
+
+
+Started GET "/api/v1/airlines/united_airlines" for ::1 at 2022-08-16 18:48:09 +0530
+Processing by Api::V1::AirlinesController#show as */*
+  Parameters: {"slug"=>"united_airlines"}
+Completed 404 Not Found in 2ms (ActiveRecord: 0.0ms | Allocations: 513)
+
+
+  
+ActiveRecord::RecordNotFound (Couldn't find Airline without an ID):
+  
+app/controllers/api/v1/airlines_controller.rb:10:in `show'
+Started GET "/api/v1/airlines/united-airlines" for ::1 at 2022-08-16 18:48:20 +0530
+Processing by Api::V1::AirlinesController#show as */*
+  Parameters: {"slug"=>"united-airlines"}
+Completed 404 Not Found in 1ms (ActiveRecord: 0.0ms | Allocations: 487)
+
+
+  
+ActiveRecord::RecordNotFound (Couldn't find Airline without an ID):
+  
+app/controllers/api/v1/airlines_controller.rb:10:in `show'
+Started GET "/api/v1/airlines/united-airlines" for ::1 at 2022-08-16 18:49:10 +0530
+Processing by Api::V1::AirlinesController#show as */*
+  Parameters: {"slug"=>"united-airlines"}
+Completed 404 Not Found in 1ms (ActiveRecord: 0.0ms | Allocations: 491)
+
+
+  
+ActiveRecord::RecordNotFound (Couldn't find Airline without an ID):
+  
+app/controllers/api/v1/airlines_controller.rb:10:in `show'
+Started GET "/api/v1/airlines/unitedairlines" for ::1 at 2022-08-16 18:49:14 +0530
+Processing by Api::V1::AirlinesController#show as */*
+  Parameters: {"slug"=>"unitedairlines"}
+Completed 404 Not Found in 2ms (ActiveRecord: 0.0ms | Allocations: 487)
+
+
+  
+ActiveRecord::RecordNotFound (Couldn't find Airline without an ID):
+  
+app/controllers/api/v1/airlines_controller.rb:10:in `show'
+Started GET "/api/v1/airlines/" for ::1 at 2022-08-16 18:49:19 +0530
+Processing by Api::V1::AirlinesController#index as */*
+  [1m[36mAirline Load (0.3ms)[0m  [1m[34mSELECT "airlines".* FROM "airlines"[0m
+  ↳ app/controllers/api/v1/airlines_controller.rb:6:in `index'
+  [1m[36mReview Pluck (0.2ms)[0m  [1m[34mSELECT "reviews"."id" FROM "reviews" WHERE "reviews"."airline_id" = $1[0m  [["airline_id", 1]]
+  ↳ app/controllers/api/v1/airlines_controller.rb:6:in `index'
+  [1m[36mReview Load (0.1ms)[0m  [1m[34mSELECT "reviews".* FROM "reviews" WHERE "reviews"."airline_id" = $1[0m  [["airline_id", 1]]
+  ↳ app/controllers/api/v1/airlines_controller.rb:6:in `index'
+  [1m[36mReview Pluck (0.1ms)[0m  [1m[34mSELECT "reviews"."id" FROM "reviews" WHERE "reviews"."airline_id" = $1[0m  [["airline_id", 2]]
+  ↳ app/controllers/api/v1/airlines_controller.rb:6:in `index'
+  [1m[36mReview Load (0.5ms)[0m  [1m[34mSELECT "reviews".* FROM "reviews" WHERE "reviews"."airline_id" = $1[0m  [["airline_id", 2]]
+  ↳ app/controllers/api/v1/airlines_controller.rb:6:in `index'
+  [1m[36mReview Pluck (0.2ms)[0m  [1m[34mSELECT "reviews"."id" FROM "reviews" WHERE "reviews"."airline_id" = $1[0m  [["airline_id", 3]]
+  ↳ app/controllers/api/v1/airlines_controller.rb:6:in `index'
+  [1m[36mReview Load (0.2ms)[0m  [1m[34mSELECT "reviews".* FROM "reviews" WHERE "reviews"."airline_id" = $1[0m  [["airline_id", 3]]
+  ↳ app/controllers/api/v1/airlines_controller.rb:6:in `index'
+  [1m[36mReview Pluck (0.1ms)[0m  [1m[34mSELECT "reviews"."id" FROM "reviews" WHERE "reviews"."airline_id" = $1[0m  [["airline_id", 4]]
+  ↳ app/controllers/api/v1/airlines_controller.rb:6:in `index'
+  [1m[36mReview Load (0.1ms)[0m  [1m[34mSELECT "reviews".* FROM "reviews" WHERE "reviews"."airline_id" = $1[0m  [["airline_id", 4]]
+  ↳ app/controllers/api/v1/airlines_controller.rb:6:in `index'
+  [1m[36mReview Pluck (0.1ms)[0m  [1m[34mSELECT "reviews"."id" FROM "reviews" WHERE "reviews"."airline_id" = $1[0m  [["airline_id", 5]]
+  ↳ app/controllers/api/v1/airlines_controller.rb:6:in `index'
+  [1m[36mReview Load (0.2ms)[0m  [1m[34mSELECT "reviews".* FROM "reviews" WHERE "reviews"."airline_id" = $1[0m  [["airline_id", 5]]
+  ↳ app/controllers/api/v1/airlines_controller.rb:6:in `index'
+  [1m[36mReview Pluck (0.2ms)[0m  [1m[34mSELECT "reviews"."id" FROM "reviews" WHERE "reviews"."airline_id" = $1[0m  [["airline_id", 6]]
+  ↳ app/controllers/api/v1/airlines_controller.rb:6:in `index'
+  [1m[36mReview Load (0.2ms)[0m  [1m[34mSELECT "reviews".* FROM "reviews" WHERE "reviews"."airline_id" = $1[0m  [["airline_id", 6]]
+  ↳ app/controllers/api/v1/airlines_controller.rb:6:in `index'
+  [1m[36mReview Pluck (0.1ms)[0m  [1m[34mSELECT "reviews"."id" FROM "reviews" WHERE "reviews"."airline_id" = $1[0m  [["airline_id", 7]]
+  ↳ app/controllers/api/v1/airlines_controller.rb:6:in `index'
+  [1m[36mReview Load (0.1ms)[0m  [1m[34mSELECT "reviews".* FROM "reviews" WHERE "reviews"."airline_id" = $1[0m  [["airline_id", 7]]
+  ↳ app/controllers/api/v1/airlines_controller.rb:6:in `index'
+  [1m[36mReview Pluck (0.1ms)[0m  [1m[34mSELECT "reviews"."id" FROM "reviews" WHERE "reviews"."airline_id" = $1[0m  [["airline_id", 8]]
+  ↳ app/controllers/api/v1/airlines_controller.rb:6:in `index'
+  [1m[36mReview Load (0.1ms)[0m  [1m[34mSELECT "reviews".* FROM "reviews" WHERE "reviews"."airline_id" = $1[0m  [["airline_id", 8]]
+  ↳ app/controllers/api/v1/airlines_controller.rb:6:in `index'
+  [1m[36mReview Pluck (0.1ms)[0m  [1m[34mSELECT "reviews"."id" FROM "reviews" WHERE "reviews"."airline_id" = $1[0m  [["airline_id", 9]]
+  ↳ app/controllers/api/v1/airlines_controller.rb:6:in `index'
+  [1m[36mReview Load (0.1ms)[0m  [1m[34mSELECT "reviews".* FROM "reviews" WHERE "reviews"."airline_id" = $1[0m  [["airline_id", 9]]
+  ↳ app/controllers/api/v1/airlines_controller.rb:6:in `index'
+  [1m[36mReview Pluck (0.1ms)[0m  [1m[34mSELECT "reviews"."id" FROM "reviews" WHERE "reviews"."airline_id" = $1[0m  [["airline_id", 10]]
+  ↳ app/controllers/api/v1/airlines_controller.rb:6:in `index'
+  [1m[36mReview Load (0.1ms)[0m  [1m[34mSELECT "reviews".* FROM "reviews" WHERE "reviews"."airline_id" = $1[0m  [["airline_id", 10]]
+  ↳ app/controllers/api/v1/airlines_controller.rb:6:in `index'
+  [1m[36mReview Pluck (0.1ms)[0m  [1m[34mSELECT "reviews"."id" FROM "reviews" WHERE "reviews"."airline_id" = $1[0m  [["airline_id", 11]]
+  ↳ app/controllers/api/v1/airlines_controller.rb:6:in `index'
+  [1m[36mReview Load (0.1ms)[0m  [1m[34mSELECT "reviews".* FROM "reviews" WHERE "reviews"."airline_id" = $1[0m  [["airline_id", 11]]
+  ↳ app/controllers/api/v1/airlines_controller.rb:6:in `index'
+  [1m[36mReview Pluck (0.1ms)[0m  [1m[34mSELECT "reviews"."id" FROM "reviews" WHERE "reviews"."airline_id" = $1[0m  [["airline_id", 12]]
+  ↳ app/controllers/api/v1/airlines_controller.rb:6:in `index'
+  [1m[36mReview Load (0.1ms)[0m  [1m[34mSELECT "reviews".* FROM "reviews" WHERE "reviews"."airline_id" = $1[0m  [["airline_id", 12]]
+  ↳ app/controllers/api/v1/airlines_controller.rb:6:in `index'
+  [1m[36mReview Pluck (0.1ms)[0m  [1m[34mSELECT "reviews"."id" FROM "reviews" WHERE "reviews"."airline_id" = $1[0m  [["airline_id", 13]]
+  ↳ app/controllers/api/v1/airlines_controller.rb:6:in `index'
+  [1m[36mReview Load (0.1ms)[0m  [1m[34mSELECT "reviews".* FROM "reviews" WHERE "reviews"."airline_id" = $1[0m  [["airline_id", 13]]
+  ↳ app/controllers/api/v1/airlines_controller.rb:6:in `index'
+  [1m[36mReview Pluck (0.1ms)[0m  [1m[34mSELECT "reviews"."id" FROM "reviews" WHERE "reviews"."airline_id" = $1[0m  [["airline_id", 14]]
+  ↳ app/controllers/api/v1/airlines_controller.rb:6:in `index'
+  [1m[36mReview Load (0.1ms)[0m  [1m[34mSELECT "reviews".* FROM "reviews" WHERE "reviews"."airline_id" = $1[0m  [["airline_id", 14]]
+  ↳ app/controllers/api/v1/airlines_controller.rb:6:in `index'
+  [1m[36mReview Pluck (0.1ms)[0m  [1m[34mSELECT "reviews"."id" FROM "reviews" WHERE "reviews"."airline_id" = $1[0m  [["airline_id", 15]]
+  ↳ app/controllers/api/v1/airlines_controller.rb:6:in `index'
+  [1m[36mReview Load (0.1ms)[0m  [1m[34mSELECT "reviews".* FROM "reviews" WHERE "reviews"."airline_id" = $1[0m  [["airline_id", 15]]
+  ↳ app/controllers/api/v1/airlines_controller.rb:6:in `index'
+  [1m[36mReview Pluck (0.1ms)[0m  [1m[34mSELECT "reviews"."id" FROM "reviews" WHERE "reviews"."airline_id" = $1[0m  [["airline_id", 16]]
+  ↳ app/controllers/api/v1/airlines_controller.rb:6:in `index'
+  [1m[36mReview Load (0.1ms)[0m  [1m[34mSELECT "reviews".* FROM "reviews" WHERE "reviews"."airline_id" = $1[0m  [["airline_id", 16]]
+  ↳ app/controllers/api/v1/airlines_controller.rb:6:in `index'
+  [1m[36mReview Pluck (0.1ms)[0m  [1m[34mSELECT "reviews"."id" FROM "reviews" WHERE "reviews"."airline_id" = $1[0m  [["airline_id", 17]]
+  ↳ app/controllers/api/v1/airlines_controller.rb:6:in `index'
+  [1m[36mReview Load (0.1ms)[0m  [1m[34mSELECT "reviews".* FROM "reviews" WHERE "reviews"."airline_id" = $1[0m  [["airline_id", 17]]
+  ↳ app/controllers/api/v1/airlines_controller.rb:6:in `index'
+  [1m[36mReview Pluck (0.1ms)[0m  [1m[34mSELECT "reviews"."id" FROM "reviews" WHERE "reviews"."airline_id" = $1[0m  [["airline_id", 18]]
+  ↳ app/controllers/api/v1/airlines_controller.rb:6:in `index'
+  [1m[36mReview Load (0.1ms)[0m  [1m[34mSELECT "reviews".* FROM "reviews" WHERE "reviews"."airline_id" = $1[0m  [["airline_id", 18]]
+  ↳ app/controllers/api/v1/airlines_controller.rb:6:in `index'
+  [1m[36mReview Pluck (0.1ms)[0m  [1m[34mSELECT "reviews"."id" FROM "reviews" WHERE "reviews"."airline_id" = $1[0m  [["airline_id", 19]]
+  ↳ app/controllers/api/v1/airlines_controller.rb:6:in `index'
+  [1m[36mReview Load (0.1ms)[0m  [1m[34mSELECT "reviews".* FROM "reviews" WHERE "reviews"."airline_id" = $1[0m  [["airline_id", 19]]
+  ↳ app/controllers/api/v1/airlines_controller.rb:6:in `index'
+  [1m[36mReview Pluck (0.1ms)[0m  [1m[34mSELECT "reviews"."id" FROM "reviews" WHERE "reviews"."airline_id" = $1[0m  [["airline_id", 20]]
+  ↳ app/controllers/api/v1/airlines_controller.rb:6:in `index'
+  [1m[36mReview Load (0.1ms)[0m  [1m[34mSELECT "reviews".* FROM "reviews" WHERE "reviews"."airline_id" = $1[0m  [["airline_id", 20]]
+  ↳ app/controllers/api/v1/airlines_controller.rb:6:in `index'
+  [1m[36mReview Pluck (0.1ms)[0m  [1m[34mSELECT "reviews"."id" FROM "reviews" WHERE "reviews"."airline_id" = $1[0m  [["airline_id", 21]]
+  ↳ app/controllers/api/v1/airlines_controller.rb:6:in `index'
+  [1m[36mReview Load (0.1ms)[0m  [1m[34mSELECT "reviews".* FROM "reviews" WHERE "reviews"."airline_id" = $1[0m  [["airline_id", 21]]
+  ↳ app/controllers/api/v1/airlines_controller.rb:6:in `index'
+  [1m[36mReview Pluck (0.1ms)[0m  [1m[34mSELECT "reviews"."id" FROM "reviews" WHERE "reviews"."airline_id" = $1[0m  [["airline_id", 22]]
+  ↳ app/controllers/api/v1/airlines_controller.rb:6:in `index'
+  [1m[36mReview Load (0.1ms)[0m  [1m[34mSELECT "reviews".* FROM "reviews" WHERE "reviews"."airline_id" = $1[0m  [["airline_id", 22]]
+  ↳ app/controllers/api/v1/airlines_controller.rb:6:in `index'
+  [1m[36mReview Pluck (0.1ms)[0m  [1m[34mSELECT "reviews"."id" FROM "reviews" WHERE "reviews"."airline_id" = $1[0m  [["airline_id", 23]]
+  ↳ app/controllers/api/v1/airlines_controller.rb:6:in `index'
+  [1m[36mReview Load (0.1ms)[0m  [1m[34mSELECT "reviews".* FROM "reviews" WHERE "reviews"."airline_id" = $1[0m  [["airline_id", 23]]
+  ↳ app/controllers/api/v1/airlines_controller.rb:6:in `index'
+  [1m[36mReview Pluck (0.8ms)[0m  [1m[34mSELECT "reviews"."id" FROM "reviews" WHERE "reviews"."airline_id" = $1[0m  [["airline_id", 24]]
+  ↳ app/controllers/api/v1/airlines_controller.rb:6:in `index'
+  [1m[36mReview Load (0.1ms)[0m  [1m[34mSELECT "reviews".* FROM "reviews" WHERE "reviews"."airline_id" = $1[0m  [["airline_id", 24]]
+  ↳ app/controllers/api/v1/airlines_controller.rb:6:in `index'
+  [1m[36mReview Pluck (0.1ms)[0m  [1m[34mSELECT "reviews"."id" FROM "reviews" WHERE "reviews"."airline_id" = $1[0m  [["airline_id", 25]]
+  ↳ app/controllers/api/v1/airlines_controller.rb:6:in `index'
+  [1m[36mReview Load (0.2ms)[0m  [1m[34mSELECT "reviews".* FROM "reviews" WHERE "reviews"."airline_id" = $1[0m  [["airline_id", 25]]
+  ↳ app/controllers/api/v1/airlines_controller.rb:6:in `index'
+  [1m[36mReview Pluck (0.2ms)[0m  [1m[34mSELECT "reviews"."id" FROM "reviews" WHERE "reviews"."airline_id" = $1[0m  [["airline_id", 26]]
+  ↳ app/controllers/api/v1/airlines_controller.rb:6:in `index'
+  [1m[36mReview Load (0.1ms)[0m  [1m[34mSELECT "reviews".* FROM "reviews" WHERE "reviews"."airline_id" = $1[0m  [["airline_id", 26]]
+  ↳ app/controllers/api/v1/airlines_controller.rb:6:in `index'
+  [1m[36mReview Pluck (0.1ms)[0m  [1m[34mSELECT "reviews"."id" FROM "reviews" WHERE "reviews"."airline_id" = $1[0m  [["airline_id", 27]]
+  ↳ app/controllers/api/v1/airlines_controller.rb:6:in `index'
+  [1m[36mReview Load (0.1ms)[0m  [1m[34mSELECT "reviews".* FROM "reviews" WHERE "reviews"."airline_id" = $1[0m  [["airline_id", 27]]
+  ↳ app/controllers/api/v1/airlines_controller.rb:6:in `index'
+  [1m[36mReview Pluck (0.1ms)[0m  [1m[34mSELECT "reviews"."id" FROM "reviews" WHERE "reviews"."airline_id" = $1[0m  [["airline_id", 28]]
+  ↳ app/controllers/api/v1/airlines_controller.rb:6:in `index'
+  [1m[36mReview Load (0.1ms)[0m  [1m[34mSELECT "reviews".* FROM "reviews" WHERE "reviews"."airline_id" = $1[0m  [["airline_id", 28]]
+  ↳ app/controllers/api/v1/airlines_controller.rb:6:in `index'
+  [1m[36mReview Pluck (0.1ms)[0m  [1m[34mSELECT "reviews"."id" FROM "reviews" WHERE "reviews"."airline_id" = $1[0m  [["airline_id", 29]]
+  ↳ app/controllers/api/v1/airlines_controller.rb:6:in `index'
+  [1m[36mReview Load (0.1ms)[0m  [1m[34mSELECT "reviews".* FROM "reviews" WHERE "reviews"."airline_id" = $1[0m  [["airline_id", 29]]
+  ↳ app/controllers/api/v1/airlines_controller.rb:6:in `index'
+  [1m[36mReview Pluck (0.1ms)[0m  [1m[34mSELECT "reviews"."id" FROM "reviews" WHERE "reviews"."airline_id" = $1[0m  [["airline_id", 30]]
+  ↳ app/controllers/api/v1/airlines_controller.rb:6:in `index'
+  [1m[36mReview Load (0.1ms)[0m  [1m[34mSELECT "reviews".* FROM "reviews" WHERE "reviews"."airline_id" = $1[0m  [["airline_id", 30]]
+  ↳ app/controllers/api/v1/airlines_controller.rb:6:in `index'
+  [1m[36mReview Pluck (0.1ms)[0m  [1m[34mSELECT "reviews"."id" FROM "reviews" WHERE "reviews"."airline_id" = $1[0m  [["airline_id", 31]]
+  ↳ app/controllers/api/v1/airlines_controller.rb:6:in `index'
+  [1m[36mReview Load (0.1ms)[0m  [1m[34mSELECT "reviews".* FROM "reviews" WHERE "reviews"."airline_id" = $1[0m  [["airline_id", 31]]
+  ↳ app/controllers/api/v1/airlines_controller.rb:6:in `index'
+  [1m[36mReview Pluck (0.1ms)[0m  [1m[34mSELECT "reviews"."id" FROM "reviews" WHERE "reviews"."airline_id" = $1[0m  [["airline_id", 32]]
+  ↳ app/controllers/api/v1/airlines_controller.rb:6:in `index'
+  [1m[36mReview Load (0.1ms)[0m  [1m[34mSELECT "reviews".* FROM "reviews" WHERE "reviews"."airline_id" = $1[0m  [["airline_id", 32]]
+  ↳ app/controllers/api/v1/airlines_controller.rb:6:in `index'
+  [1m[36mReview Pluck (0.1ms)[0m  [1m[34mSELECT "reviews"."id" FROM "reviews" WHERE "reviews"."airline_id" = $1[0m  [["airline_id", 33]]
+  ↳ app/controllers/api/v1/airlines_controller.rb:6:in `index'
+  [1m[36mReview Load (0.1ms)[0m  [1m[34mSELECT "reviews".* FROM "reviews" WHERE "reviews"."airline_id" = $1[0m  [["airline_id", 33]]
+  ↳ app/controllers/api/v1/airlines_controller.rb:6:in `index'
+  [1m[36mReview Pluck (0.1ms)[0m  [1m[34mSELECT "reviews"."id" FROM "reviews" WHERE "reviews"."airline_id" = $1[0m  [["airline_id", 34]]
+  ↳ app/controllers/api/v1/airlines_controller.rb:6:in `index'
+  [1m[36mReview Load (0.1ms)[0m  [1m[34mSELECT "reviews".* FROM "reviews" WHERE "reviews"."airline_id" = $1[0m  [["airline_id", 34]]
+  ↳ app/controllers/api/v1/airlines_controller.rb:6:in `index'
+  [1m[36mReview Pluck (0.2ms)[0m  [1m[34mSELECT "reviews"."id" FROM "reviews" WHERE "reviews"."airline_id" = $1[0m  [["airline_id", 35]]
+  ↳ app/controllers/api/v1/airlines_controller.rb:6:in `index'
+  [1m[36mReview Load (0.1ms)[0m  [1m[34mSELECT "reviews".* FROM "reviews" WHERE "reviews"."airline_id" = $1[0m  [["airline_id", 35]]
+  ↳ app/controllers/api/v1/airlines_controller.rb:6:in `index'
+  [1m[36mReview Pluck (0.1ms)[0m  [1m[34mSELECT "reviews"."id" FROM "reviews" WHERE "reviews"."airline_id" = $1[0m  [["airline_id", 36]]
+  ↳ app/controllers/api/v1/airlines_controller.rb:6:in `index'
+  [1m[36mReview Load (0.1ms)[0m  [1m[34mSELECT "reviews".* FROM "reviews" WHERE "reviews"."airline_id" = $1[0m  [["airline_id", 36]]
+  ↳ app/controllers/api/v1/airlines_controller.rb:6:in `index'
+  [1m[36mReview Pluck (0.1ms)[0m  [1m[34mSELECT "reviews"."id" FROM "reviews" WHERE "reviews"."airline_id" = $1[0m  [["airline_id", 37]]
+  ↳ app/controllers/api/v1/airlines_controller.rb:6:in `index'
+  [1m[36mReview Load (0.1ms)[0m  [1m[34mSELECT "reviews".* FROM "reviews" WHERE "reviews"."airline_id" = $1[0m  [["airline_id", 37]]
+  ↳ app/controllers/api/v1/airlines_controller.rb:6:in `index'
+  [1m[36mReview Pluck (0.1ms)[0m  [1m[34mSELECT "reviews"."id" FROM "reviews" WHERE "reviews"."airline_id" = $1[0m  [["airline_id", 38]]
+  ↳ app/controllers/api/v1/airlines_controller.rb:6:in `index'
+  [1m[36mReview Load (0.1ms)[0m  [1m[34mSELECT "reviews".* FROM "reviews" WHERE "reviews"."airline_id" = $1[0m  [["airline_id", 38]]
+  ↳ app/controllers/api/v1/airlines_controller.rb:6:in `index'
+  [1m[36mReview Pluck (0.1ms)[0m  [1m[34mSELECT "reviews"."id" FROM "reviews" WHERE "reviews"."airline_id" = $1[0m  [["airline_id", 39]]
+  ↳ app/controllers/api/v1/airlines_controller.rb:6:in `index'
+  [1m[36mReview Load (0.1ms)[0m  [1m[34mSELECT "reviews".* FROM "reviews" WHERE "reviews"."airline_id" = $1[0m  [["airline_id", 39]]
+  ↳ app/controllers/api/v1/airlines_controller.rb:6:in `index'
+  [1m[36mReview Pluck (0.1ms)[0m  [1m[34mSELECT "reviews"."id" FROM "reviews" WHERE "reviews"."airline_id" = $1[0m  [["airline_id", 40]]
+  ↳ app/controllers/api/v1/airlines_controller.rb:6:in `index'
+  [1m[36mReview Load (0.1ms)[0m  [1m[34mSELECT "reviews".* FROM "reviews" WHERE "reviews"."airline_id" = $1[0m  [["airline_id", 40]]
+  ↳ app/controllers/api/v1/airlines_controller.rb:6:in `index'
+  [1m[36mReview Pluck (0.1ms)[0m  [1m[34mSELECT "reviews"."id" FROM "reviews" WHERE "reviews"."airline_id" = $1[0m  [["airline_id", 41]]
+  ↳ app/controllers/api/v1/airlines_controller.rb:6:in `index'
+  [1m[36mReview Load (0.1ms)[0m  [1m[34mSELECT "reviews".* FROM "reviews" WHERE "reviews"."airline_id" = $1[0m  [["airline_id", 41]]
+  ↳ app/controllers/api/v1/airlines_controller.rb:6:in `index'
+  [1m[36mReview Pluck (0.1ms)[0m  [1m[34mSELECT "reviews"."id" FROM "reviews" WHERE "reviews"."airline_id" = $1[0m  [["airline_id", 42]]
+  ↳ app/controllers/api/v1/airlines_controller.rb:6:in `index'
+  [1m[36mReview Load (0.1ms)[0m  [1m[34mSELECT "reviews".* FROM "reviews" WHERE "reviews"."airline_id" = $1[0m  [["airline_id", 42]]
+  ↳ app/controllers/api/v1/airlines_controller.rb:6:in `index'
+Completed 200 OK in 71ms (Views: 0.1ms | ActiveRecord: 9.7ms | Allocations: 57865)
+
+
+Started GET "/api/v1/airlines/united-airlines" for ::1 at 2022-08-16 18:49:32 +0530
+Processing by Api::V1::AirlinesController#show as */*
+  Parameters: {"slug"=>"united-airlines"}
+Completed 404 Not Found in 1ms (ActiveRecord: 0.0ms | Allocations: 487)
+
+
+  
+ActiveRecord::RecordNotFound (Couldn't find Airline without an ID):
+  
+app/controllers/api/v1/airlines_controller.rb:10:in `show'
+Started GET "/api/v1/airlines/united-airlines" for ::1 at 2022-08-16 18:50:04 +0530
+Processing by Api::V1::AirlinesController#show as */*
+  Parameters: {"slug"=>"united-airlines"}
+Completed 404 Not Found in 2ms (ActiveRecord: 0.0ms | Allocations: 487)
+
+
+  
+ActiveRecord::RecordNotFound (Couldn't find Airline without an ID):
+  
+app/controllers/api/v1/airlines_controller.rb:10:in `show'
+Started GET "/api/v1/airlines/united-airlines" for ::1 at 2022-08-16 18:50:36 +0530
+Processing by Api::V1::AirlinesController#show as */*
+  Parameters: {"slug"=>"united-airlines"}
+Completed 404 Not Found in 2ms (ActiveRecord: 0.0ms | Allocations: 487)
+
+
+  
+ActiveRecord::RecordNotFound (Couldn't find Airline without an ID):
+  
+app/controllers/api/v1/airlines_controller.rb:10:in `show'
+Started POST "/api/v1/airlines" for ::1 at 2022-08-16 18:51:33 +0530
+Processing by Api::V1::AirlinesController#create as */*
+Can't verify CSRF token authenticity.
+Completed 422 Unprocessable Entity in 0ms (ActiveRecord: 0.0ms | Allocations: 464)
+
+
+  
+ActionController::InvalidAuthenticityToken (Can't verify CSRF token authenticity.):
+  
+actionpack (7.0.3.1) lib/action_controller/metal/request_forgery_protection.rb:251:in `handle_unverified_request'
+actionpack (7.0.3.1) lib/action_controller/metal/request_forgery_protection.rb:284:in `handle_unverified_request'
+actionpack (7.0.3.1) lib/action_controller/metal/request_forgery_protection.rb:273:in `verify_authenticity_token'
+activesupport (7.0.3.1) lib/active_support/callbacks.rb:400:in `block in make_lambda'
+activesupport (7.0.3.1) lib/active_support/callbacks.rb:199:in `block (2 levels) in halting'
+actionpack (7.0.3.1) lib/abstract_controller/callbacks.rb:34:in `block (2 levels) in <module:Callbacks>'
+activesupport (7.0.3.1) lib/active_support/callbacks.rb:200:in `block in halting'
+activesupport (7.0.3.1) lib/active_support/callbacks.rb:595:in `block in invoke_before'
+activesupport (7.0.3.1) lib/active_support/callbacks.rb:595:in `each'
+activesupport (7.0.3.1) lib/active_support/callbacks.rb:595:in `invoke_before'
+activesupport (7.0.3.1) lib/active_support/callbacks.rb:116:in `block in run_callbacks'
+activesupport (7.0.3.1) lib/active_support/callbacks.rb:138:in `run_callbacks'
+actionpack (7.0.3.1) lib/abstract_controller/callbacks.rb:233:in `process_action'
+actionpack (7.0.3.1) lib/action_controller/metal/rescue.rb:22:in `process_action'
+actionpack (7.0.3.1) lib/action_controller/metal/instrumentation.rb:67:in `block in process_action'
+activesupport (7.0.3.1) lib/active_support/notifications.rb:206:in `block in instrument'
+activesupport (7.0.3.1) lib/active_support/notifications/instrumenter.rb:24:in `instrument'
+activesupport (7.0.3.1) lib/active_support/notifications.rb:206:in `instrument'
+actionpack (7.0.3.1) lib/action_controller/metal/instrumentation.rb:66:in `process_action'
+actionpack (7.0.3.1) lib/action_controller/metal/params_wrapper.rb:259:in `process_action'
+activerecord (7.0.3.1) lib/active_record/railties/controller_runtime.rb:27:in `process_action'
+actionpack (7.0.3.1) lib/abstract_controller/base.rb:151:in `process'
+actionview (7.0.3.1) lib/action_view/rendering.rb:39:in `process'
+actionpack (7.0.3.1) lib/action_controller/metal.rb:188:in `dispatch'
+actionpack (7.0.3.1) lib/action_controller/metal.rb:251:in `dispatch'
+actionpack (7.0.3.1) lib/action_dispatch/routing/route_set.rb:49:in `dispatch'
+actionpack (7.0.3.1) lib/action_dispatch/routing/route_set.rb:32:in `serve'
+actionpack (7.0.3.1) lib/action_dispatch/journey/router.rb:50:in `block in serve'
+actionpack (7.0.3.1) lib/action_dispatch/journey/router.rb:32:in `each'
+actionpack (7.0.3.1) lib/action_dispatch/journey/router.rb:32:in `serve'
+actionpack (7.0.3.1) lib/action_dispatch/routing/route_set.rb:852:in `call'
+rack (2.2.4) lib/rack/tempfile_reaper.rb:15:in `call'
+rack (2.2.4) lib/rack/etag.rb:27:in `call'
+rack (2.2.4) lib/rack/conditional_get.rb:40:in `call'
+rack (2.2.4) lib/rack/head.rb:12:in `call'
+actionpack (7.0.3.1) lib/action_dispatch/http/permissions_policy.rb:38:in `call'
+actionpack (7.0.3.1) lib/action_dispatch/http/content_security_policy.rb:36:in `call'
+rack (2.2.4) lib/rack/session/abstract/id.rb:266:in `context'
+rack (2.2.4) lib/rack/session/abstract/id.rb:260:in `call'
+actionpack (7.0.3.1) lib/action_dispatch/middleware/cookies.rb:697:in `call'
+activerecord (7.0.3.1) lib/active_record/migration.rb:603:in `call'
+actionpack (7.0.3.1) lib/action_dispatch/middleware/callbacks.rb:27:in `block in call'
+activesupport (7.0.3.1) lib/active_support/callbacks.rb:99:in `run_callbacks'
+actionpack (7.0.3.1) lib/action_dispatch/middleware/callbacks.rb:26:in `call'
+actionpack (7.0.3.1) lib/action_dispatch/middleware/executor.rb:14:in `call'
+actionpack (7.0.3.1) lib/action_dispatch/middleware/actionable_exceptions.rb:17:in `call'
+actionpack (7.0.3.1) lib/action_dispatch/middleware/debug_exceptions.rb:28:in `call'
+web-console (4.2.0) lib/web_console/middleware.rb:132:in `call_app'
+web-console (4.2.0) lib/web_console/middleware.rb:28:in `block in call'
+web-console (4.2.0) lib/web_console/middleware.rb:17:in `catch'
+web-console (4.2.0) lib/web_console/middleware.rb:17:in `call'
+actionpack (7.0.3.1) lib/action_dispatch/middleware/show_exceptions.rb:26:in `call'
+railties (7.0.3.1) lib/rails/rack/logger.rb:40:in `call_app'
+railties (7.0.3.1) lib/rails/rack/logger.rb:25:in `block in call'
+activesupport (7.0.3.1) lib/active_support/tagged_logging.rb:114:in `block in tagged'
+activesupport (7.0.3.1) lib/active_support/tagged_logging.rb:38:in `tagged'
+activesupport (7.0.3.1) lib/active_support/tagged_logging.rb:114:in `tagged'
+railties (7.0.3.1) lib/rails/rack/logger.rb:25:in `call'
+sprockets-rails (3.4.2) lib/sprockets/rails/quiet_assets.rb:13:in `call'
+actionpack (7.0.3.1) lib/action_dispatch/middleware/remote_ip.rb:93:in `call'
+actionpack (7.0.3.1) lib/action_dispatch/middleware/request_id.rb:26:in `call'
+rack (2.2.4) lib/rack/method_override.rb:24:in `call'
+rack (2.2.4) lib/rack/runtime.rb:22:in `call'
+activesupport (7.0.3.1) lib/active_support/cache/strategy/local_cache_middleware.rb:29:in `call'
+actionpack (7.0.3.1) lib/action_dispatch/middleware/server_timing.rb:20:in `call'
+actionpack (7.0.3.1) lib/action_dispatch/middleware/executor.rb:14:in `call'
+actionpack (7.0.3.1) lib/action_dispatch/middleware/static.rb:23:in `call'
+rack (2.2.4) lib/rack/sendfile.rb:110:in `call'
+actionpack (7.0.3.1) lib/action_dispatch/middleware/host_authorization.rb:137:in `call'
+railties (7.0.3.1) lib/rails/engine.rb:530:in `call'
+puma (5.6.4) lib/puma/configuration.rb:252:in `call'
+puma (5.6.4) lib/puma/request.rb:77:in `block in handle_request'
+puma (5.6.4) lib/puma/thread_pool.rb:340:in `with_force_shutdown'
+puma (5.6.4) lib/puma/request.rb:76:in `handle_request'
+puma (5.6.4) lib/puma/server.rb:441:in `process_client'
+puma (5.6.4) lib/puma/thread_pool.rb:147:in `block in spawn_thread'
+Started POST "/api/v1/airlines" for ::1 at 2022-08-16 18:53:27 +0530
+Processing by Api::V1::AirlinesController#create as */*
+Can't verify CSRF token authenticity.
+Completed 400 Bad Request in 3ms (ActiveRecord: 0.0ms | Allocations: 1932)
+
+
+  
+ActionController::ParameterMissing (param is missing or the value is empty: airline):
+  
+app/controllers/api/v1/airlines_controller.rb:54:in `airline_params'
+app/controllers/api/v1/airlines_controller.rb:17:in `create'
+Started POST "/api/v1/airlines" for ::1 at 2022-08-16 18:53:51 +0530
+Processing by Api::V1::AirlinesController#create as */*
+  Parameters: {"name"=>"Fake airlines ", "airline"=>{"name"=>"Fake airlines "}}
+Can't verify CSRF token authenticity.
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mBEGIN[0m
+  ↳ app/controllers/api/v1/airlines_controller.rb:19:in `create'
+  [1m[36mAirline Create (0.5ms)[0m  [1m[32mINSERT INTO "airlines" ("name", "image_url", "slug", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["name", "Fake airlines "], ["image_url", nil], ["slug", "fake-airlines"], ["created_at", "2022-08-16 13:23:51.183471"], ["updated_at", "2022-08-16 13:23:51.183471"]]
+  ↳ app/controllers/api/v1/airlines_controller.rb:19:in `create'
+  [1m[36mTRANSACTION (2.6ms)[0m  [1m[35mCOMMIT[0m
+  ↳ app/controllers/api/v1/airlines_controller.rb:19:in `create'
+  [1m[36mReview Pluck (0.1ms)[0m  [1m[34mSELECT "reviews"."id" FROM "reviews" WHERE "reviews"."airline_id" = $1[0m  [["airline_id", 43]]
+  ↳ app/controllers/api/v1/airlines_controller.rb:20:in `create'
+Completed 200 OK in 42ms (Views: 0.2ms | ActiveRecord: 9.5ms | Allocations: 39144)
+
+
+Started GET "/api/v1/airlines/fake-airlines" for ::1 at 2022-08-16 18:54:19 +0530
+Processing by Api::V1::AirlinesController#show as */*
+  Parameters: {"name"=>"Fake airlines ", "slug"=>"fake-airlines", "airline"=>{"name"=>"Fake airlines "}}
+Completed 404 Not Found in 2ms (ActiveRecord: 0.0ms | Allocations: 537)
+
+
+  
+ActiveRecord::RecordNotFound (Couldn't find Airline without an ID):
+  
+app/controllers/api/v1/airlines_controller.rb:12:in `show'
+Started GET "/api/v1/airlines/fake-airlines" for ::1 at 2022-08-16 18:55:33 +0530
+Processing by Api::V1::AirlinesController#show as */*
+  Parameters: {"name"=>"Fake airlines ", "slug"=>"fake-airlines", "airline"=>{"name"=>"Fake airlines "}}
+Completed 404 Not Found in 2ms (ActiveRecord: 3.0ms | Allocations: 582)
+
+
+  
+ActiveRecord::RecordNotFound (Couldn't find Airline without an ID):
+  
+app/controllers/api/v1/airlines_controller.rb:12:in `show'
+Started GET "/api/v1/airlines/fake-airlines" for ::1 at 2022-08-16 18:56:04 +0530
+Processing by Api::V1::AirlinesController#show as */*
+  Parameters: {"name"=>"Fake airlines ", "slug"=>"fake-airlines", "airline"=>{"name"=>"Fake airlines "}}
+Completed 500 Internal Server Error in 8ms (ActiveRecord: 1.3ms | Allocations: 1597)
+
+
+  
+ActiveRecord::StatementInvalid (PG::UndefinedColumn: ERROR:  column airlines.slugs does not exist
+LINE 1: SELECT "airlines".* FROM "airlines" WHERE "airlines"."slugs"...
+                                                  ^
+HINT:  Perhaps you meant to reference the column "airlines.slug".
+):
+  
+app/controllers/api/v1/airlines_controller.rb:12:in `show'
+Started GET "/api/v1/airlines/fake-airlines" for ::1 at 2022-08-16 18:56:36 +0530
+Processing by Api::V1::AirlinesController#show as */*
+  Parameters: {"name"=>"Fake airlines ", "slug"=>"fake-airlines", "airline"=>{"name"=>"Fake airlines "}}
+  [1m[36mAirline Load (0.2ms)[0m  [1m[34mSELECT "airlines".* FROM "airlines" WHERE "airlines"."slug" = $1 LIMIT $2[0m  [["slug", "fake-airlines"], ["LIMIT", 1]]
+  ↳ app/controllers/api/v1/airlines_controller.rb:12:in `show'
+  [1m[36mReview Pluck (0.1ms)[0m  [1m[34mSELECT "reviews"."id" FROM "reviews" WHERE "reviews"."airline_id" = $1[0m  [["airline_id", 43]]
+  ↳ app/controllers/api/v1/airlines_controller.rb:13:in `show'
+  [1m[36mReview Load (0.1ms)[0m  [1m[34mSELECT "reviews".* FROM "reviews" WHERE "reviews"."airline_id" = $1[0m  [["airline_id", 43]]
+  ↳ app/controllers/api/v1/airlines_controller.rb:13:in `show'
+Completed 200 OK in 14ms (Views: 0.1ms | ActiveRecord: 7.1ms | Allocations: 6736)
+
+
+Started GET "/api/v1/airlines" for ::1 at 2022-08-16 18:57:49 +0530
+Processing by Api::V1::AirlinesController#index as */*
+  Parameters: {"name"=>"Fake airlines ", "airline"=>{"name"=>"Fake airlines "}}
+  [1m[36mAirline Load (0.3ms)[0m  [1m[34mSELECT "airlines".* FROM "airlines"[0m
+  ↳ app/controllers/api/v1/airlines_controller.rb:8:in `index'
+  [1m[36mReview Pluck (0.2ms)[0m  [1m[34mSELECT "reviews"."id" FROM "reviews" WHERE "reviews"."airline_id" = $1[0m  [["airline_id", 1]]
+  ↳ app/controllers/api/v1/airlines_controller.rb:8:in `index'
+  [1m[36mReview Load (0.1ms)[0m  [1m[34mSELECT "reviews".* FROM "reviews" WHERE "reviews"."airline_id" = $1[0m  [["airline_id", 1]]
+  ↳ app/controllers/api/v1/airlines_controller.rb:8:in `index'
+  [1m[36mReview Pluck (0.1ms)[0m  [1m[34mSELECT "reviews"."id" FROM "reviews" WHERE "reviews"."airline_id" = $1[0m  [["airline_id", 2]]
+  ↳ app/controllers/api/v1/airlines_controller.rb:8:in `index'
+  [1m[36mReview Load (0.1ms)[0m  [1m[34mSELECT "reviews".* FROM "reviews" WHERE "reviews"."airline_id" = $1[0m  [["airline_id", 2]]
+  ↳ app/controllers/api/v1/airlines_controller.rb:8:in `index'
+  [1m[36mReview Pluck (0.1ms)[0m  [1m[34mSELECT "reviews"."id" FROM "reviews" WHERE "reviews"."airline_id" = $1[0m  [["airline_id", 3]]
+  ↳ app/controllers/api/v1/airlines_controller.rb:8:in `index'
+  [1m[36mReview Load (0.1ms)[0m  [1m[34mSELECT "reviews".* FROM "reviews" WHERE "reviews"."airline_id" = $1[0m  [["airline_id", 3]]
+  ↳ app/controllers/api/v1/airlines_controller.rb:8:in `index'
+  [1m[36mReview Pluck (0.1ms)[0m  [1m[34mSELECT "reviews"."id" FROM "reviews" WHERE "reviews"."airline_id" = $1[0m  [["airline_id", 4]]
+  ↳ app/controllers/api/v1/airlines_controller.rb:8:in `index'
+  [1m[36mReview Load (0.1ms)[0m  [1m[34mSELECT "reviews".* FROM "reviews" WHERE "reviews"."airline_id" = $1[0m  [["airline_id", 4]]
+  ↳ app/controllers/api/v1/airlines_controller.rb:8:in `index'
+  [1m[36mReview Pluck (0.1ms)[0m  [1m[34mSELECT "reviews"."id" FROM "reviews" WHERE "reviews"."airline_id" = $1[0m  [["airline_id", 5]]
+  ↳ app/controllers/api/v1/airlines_controller.rb:8:in `index'
+  [1m[36mReview Load (0.1ms)[0m  [1m[34mSELECT "reviews".* FROM "reviews" WHERE "reviews"."airline_id" = $1[0m  [["airline_id", 5]]
+  ↳ app/controllers/api/v1/airlines_controller.rb:8:in `index'
+  [1m[36mReview Pluck (0.1ms)[0m  [1m[34mSELECT "reviews"."id" FROM "reviews" WHERE "reviews"."airline_id" = $1[0m  [["airline_id", 6]]
+  ↳ app/controllers/api/v1/airlines_controller.rb:8:in `index'
+  [1m[36mReview Load (0.1ms)[0m  [1m[34mSELECT "reviews".* FROM "reviews" WHERE "reviews"."airline_id" = $1[0m  [["airline_id", 6]]
+  ↳ app/controllers/api/v1/airlines_controller.rb:8:in `index'
+  [1m[36mReview Pluck (0.1ms)[0m  [1m[34mSELECT "reviews"."id" FROM "reviews" WHERE "reviews"."airline_id" = $1[0m  [["airline_id", 7]]
+  ↳ app/controllers/api/v1/airlines_controller.rb:8:in `index'
+  [1m[36mReview Load (0.1ms)[0m  [1m[34mSELECT "reviews".* FROM "reviews" WHERE "reviews"."airline_id" = $1[0m  [["airline_id", 7]]
+  ↳ app/controllers/api/v1/airlines_controller.rb:8:in `index'
+  [1m[36mReview Pluck (0.0ms)[0m  [1m[34mSELECT "reviews"."id" FROM "reviews" WHERE "reviews"."airline_id" = $1[0m  [["airline_id", 8]]
+  ↳ app/controllers/api/v1/airlines_controller.rb:8:in `index'
+  [1m[36mReview Load (0.1ms)[0m  [1m[34mSELECT "reviews".* FROM "reviews" WHERE "reviews"."airline_id" = $1[0m  [["airline_id", 8]]
+  ↳ app/controllers/api/v1/airlines_controller.rb:8:in `index'
+  [1m[36mReview Pluck (0.1ms)[0m  [1m[34mSELECT "reviews"."id" FROM "reviews" WHERE "reviews"."airline_id" = $1[0m  [["airline_id", 9]]
+  ↳ app/controllers/api/v1/airlines_controller.rb:8:in `index'
+  [1m[36mReview Load (0.1ms)[0m  [1m[34mSELECT "reviews".* FROM "reviews" WHERE "reviews"."airline_id" = $1[0m  [["airline_id", 9]]
+  ↳ app/controllers/api/v1/airlines_controller.rb:8:in `index'
+  [1m[36mReview Pluck (0.1ms)[0m  [1m[34mSELECT "reviews"."id" FROM "reviews" WHERE "reviews"."airline_id" = $1[0m  [["airline_id", 10]]
+  ↳ app/controllers/api/v1/airlines_controller.rb:8:in `index'
+  [1m[36mReview Load (0.1ms)[0m  [1m[34mSELECT "reviews".* FROM "reviews" WHERE "reviews"."airline_id" = $1[0m  [["airline_id", 10]]
+  ↳ app/controllers/api/v1/airlines_controller.rb:8:in `index'
+  [1m[36mReview Pluck (0.1ms)[0m  [1m[34mSELECT "reviews"."id" FROM "reviews" WHERE "reviews"."airline_id" = $1[0m  [["airline_id", 11]]
+  ↳ app/controllers/api/v1/airlines_controller.rb:8:in `index'
+  [1m[36mReview Load (0.1ms)[0m  [1m[34mSELECT "reviews".* FROM "reviews" WHERE "reviews"."airline_id" = $1[0m  [["airline_id", 11]]
+  ↳ app/controllers/api/v1/airlines_controller.rb:8:in `index'
+  [1m[36mReview Pluck (0.1ms)[0m  [1m[34mSELECT "reviews"."id" FROM "reviews" WHERE "reviews"."airline_id" = $1[0m  [["airline_id", 12]]
+  ↳ app/controllers/api/v1/airlines_controller.rb:8:in `index'
+  [1m[36mReview Load (0.1ms)[0m  [1m[34mSELECT "reviews".* FROM "reviews" WHERE "reviews"."airline_id" = $1[0m  [["airline_id", 12]]
+  ↳ app/controllers/api/v1/airlines_controller.rb:8:in `index'
+  [1m[36mReview Pluck (0.1ms)[0m  [1m[34mSELECT "reviews"."id" FROM "reviews" WHERE "reviews"."airline_id" = $1[0m  [["airline_id", 13]]
+  ↳ app/controllers/api/v1/airlines_controller.rb:8:in `index'
+  [1m[36mReview Load (0.1ms)[0m  [1m[34mSELECT "reviews".* FROM "reviews" WHERE "reviews"."airline_id" = $1[0m  [["airline_id", 13]]
+  ↳ app/controllers/api/v1/airlines_controller.rb:8:in `index'
+  [1m[36mReview Pluck (0.1ms)[0m  [1m[34mSELECT "reviews"."id" FROM "reviews" WHERE "reviews"."airline_id" = $1[0m  [["airline_id", 14]]
+  ↳ app/controllers/api/v1/airlines_controller.rb:8:in `index'
+  [1m[36mReview Load (0.1ms)[0m  [1m[34mSELECT "reviews".* FROM "reviews" WHERE "reviews"."airline_id" = $1[0m  [["airline_id", 14]]
+  ↳ app/controllers/api/v1/airlines_controller.rb:8:in `index'
+  [1m[36mReview Pluck (0.1ms)[0m  [1m[34mSELECT "reviews"."id" FROM "reviews" WHERE "reviews"."airline_id" = $1[0m  [["airline_id", 15]]
+  ↳ app/controllers/api/v1/airlines_controller.rb:8:in `index'
+  [1m[36mReview Load (0.1ms)[0m  [1m[34mSELECT "reviews".* FROM "reviews" WHERE "reviews"."airline_id" = $1[0m  [["airline_id", 15]]
+  ↳ app/controllers/api/v1/airlines_controller.rb:8:in `index'
+  [1m[36mReview Pluck (0.1ms)[0m  [1m[34mSELECT "reviews"."id" FROM "reviews" WHERE "reviews"."airline_id" = $1[0m  [["airline_id", 16]]
+  ↳ app/controllers/api/v1/airlines_controller.rb:8:in `index'
+  [1m[36mReview Load (0.1ms)[0m  [1m[34mSELECT "reviews".* FROM "reviews" WHERE "reviews"."airline_id" = $1[0m  [["airline_id", 16]]
+  ↳ app/controllers/api/v1/airlines_controller.rb:8:in `index'
+  [1m[36mReview Pluck (0.1ms)[0m  [1m[34mSELECT "reviews"."id" FROM "reviews" WHERE "reviews"."airline_id" = $1[0m  [["airline_id", 17]]
+  ↳ app/controllers/api/v1/airlines_controller.rb:8:in `index'
+  [1m[36mReview Load (0.1ms)[0m  [1m[34mSELECT "reviews".* FROM "reviews" WHERE "reviews"."airline_id" = $1[0m  [["airline_id", 17]]
+  ↳ app/controllers/api/v1/airlines_controller.rb:8:in `index'
+  [1m[36mReview Pluck (0.1ms)[0m  [1m[34mSELECT "reviews"."id" FROM "reviews" WHERE "reviews"."airline_id" = $1[0m  [["airline_id", 18]]
+  ↳ app/controllers/api/v1/airlines_controller.rb:8:in `index'
+  [1m[36mReview Load (0.1ms)[0m  [1m[34mSELECT "reviews".* FROM "reviews" WHERE "reviews"."airline_id" = $1[0m  [["airline_id", 18]]
+  ↳ app/controllers/api/v1/airlines_controller.rb:8:in `index'
+  [1m[36mReview Pluck (0.1ms)[0m  [1m[34mSELECT "reviews"."id" FROM "reviews" WHERE "reviews"."airline_id" = $1[0m  [["airline_id", 19]]
+  ↳ app/controllers/api/v1/airlines_controller.rb:8:in `index'
+  [1m[36mReview Load (0.1ms)[0m  [1m[34mSELECT "reviews".* FROM "reviews" WHERE "reviews"."airline_id" = $1[0m  [["airline_id", 19]]
+  ↳ app/controllers/api/v1/airlines_controller.rb:8:in `index'
+  [1m[36mReview Pluck (0.1ms)[0m  [1m[34mSELECT "reviews"."id" FROM "reviews" WHERE "reviews"."airline_id" = $1[0m  [["airline_id", 20]]
+  ↳ app/controllers/api/v1/airlines_controller.rb:8:in `index'
+  [1m[36mReview Load (0.1ms)[0m  [1m[34mSELECT "reviews".* FROM "reviews" WHERE "reviews"."airline_id" = $1[0m  [["airline_id", 20]]
+  ↳ app/controllers/api/v1/airlines_controller.rb:8:in `index'
+  [1m[36mReview Pluck (0.1ms)[0m  [1m[34mSELECT "reviews"."id" FROM "reviews" WHERE "reviews"."airline_id" = $1[0m  [["airline_id", 21]]
+  ↳ app/controllers/api/v1/airlines_controller.rb:8:in `index'
+  [1m[36mReview Load (0.1ms)[0m  [1m[34mSELECT "reviews".* FROM "reviews" WHERE "reviews"."airline_id" = $1[0m  [["airline_id", 21]]
+  ↳ app/controllers/api/v1/airlines_controller.rb:8:in `index'
+  [1m[36mReview Pluck (0.1ms)[0m  [1m[34mSELECT "reviews"."id" FROM "reviews" WHERE "reviews"."airline_id" = $1[0m  [["airline_id", 22]]
+  ↳ app/controllers/api/v1/airlines_controller.rb:8:in `index'
+  [1m[36mReview Load (0.1ms)[0m  [1m[34mSELECT "reviews".* FROM "reviews" WHERE "reviews"."airline_id" = $1[0m  [["airline_id", 22]]
+  ↳ app/controllers/api/v1/airlines_controller.rb:8:in `index'
+  [1m[36mReview Pluck (0.1ms)[0m  [1m[34mSELECT "reviews"."id" FROM "reviews" WHERE "reviews"."airline_id" = $1[0m  [["airline_id", 23]]
+  ↳ app/controllers/api/v1/airlines_controller.rb:8:in `index'
+  [1m[36mReview Load (0.1ms)[0m  [1m[34mSELECT "reviews".* FROM "reviews" WHERE "reviews"."airline_id" = $1[0m  [["airline_id", 23]]
+  ↳ app/controllers/api/v1/airlines_controller.rb:8:in `index'
+  [1m[36mReview Pluck (0.1ms)[0m  [1m[34mSELECT "reviews"."id" FROM "reviews" WHERE "reviews"."airline_id" = $1[0m  [["airline_id", 24]]
+  ↳ app/controllers/api/v1/airlines_controller.rb:8:in `index'
+  [1m[36mReview Load (0.1ms)[0m  [1m[34mSELECT "reviews".* FROM "reviews" WHERE "reviews"."airline_id" = $1[0m  [["airline_id", 24]]
+  ↳ app/controllers/api/v1/airlines_controller.rb:8:in `index'
+  [1m[36mReview Pluck (0.1ms)[0m  [1m[34mSELECT "reviews"."id" FROM "reviews" WHERE "reviews"."airline_id" = $1[0m  [["airline_id", 25]]
+  ↳ app/controllers/api/v1/airlines_controller.rb:8:in `index'
+  [1m[36mReview Load (0.1ms)[0m  [1m[34mSELECT "reviews".* FROM "reviews" WHERE "reviews"."airline_id" = $1[0m  [["airline_id", 25]]
+  ↳ app/controllers/api/v1/airlines_controller.rb:8:in `index'
+  [1m[36mReview Pluck (0.1ms)[0m  [1m[34mSELECT "reviews"."id" FROM "reviews" WHERE "reviews"."airline_id" = $1[0m  [["airline_id", 26]]
+  ↳ app/controllers/api/v1/airlines_controller.rb:8:in `index'
+  [1m[36mReview Load (0.1ms)[0m  [1m[34mSELECT "reviews".* FROM "reviews" WHERE "reviews"."airline_id" = $1[0m  [["airline_id", 26]]
+  ↳ app/controllers/api/v1/airlines_controller.rb:8:in `index'
+  [1m[36mReview Pluck (0.1ms)[0m  [1m[34mSELECT "reviews"."id" FROM "reviews" WHERE "reviews"."airline_id" = $1[0m  [["airline_id", 27]]
+  ↳ app/controllers/api/v1/airlines_controller.rb:8:in `index'
+  [1m[36mReview Load (0.1ms)[0m  [1m[34mSELECT "reviews".* FROM "reviews" WHERE "reviews"."airline_id" = $1[0m  [["airline_id", 27]]
+  ↳ app/controllers/api/v1/airlines_controller.rb:8:in `index'
+  [1m[36mReview Pluck (0.1ms)[0m  [1m[34mSELECT "reviews"."id" FROM "reviews" WHERE "reviews"."airline_id" = $1[0m  [["airline_id", 28]]
+  ↳ app/controllers/api/v1/airlines_controller.rb:8:in `index'
+  [1m[36mReview Load (0.1ms)[0m  [1m[34mSELECT "reviews".* FROM "reviews" WHERE "reviews"."airline_id" = $1[0m  [["airline_id", 28]]
+  ↳ app/controllers/api/v1/airlines_controller.rb:8:in `index'
+  [1m[36mReview Pluck (0.1ms)[0m  [1m[34mSELECT "reviews"."id" FROM "reviews" WHERE "reviews"."airline_id" = $1[0m  [["airline_id", 29]]
+  ↳ app/controllers/api/v1/airlines_controller.rb:8:in `index'
+  [1m[36mReview Load (0.1ms)[0m  [1m[34mSELECT "reviews".* FROM "reviews" WHERE "reviews"."airline_id" = $1[0m  [["airline_id", 29]]
+  ↳ app/controllers/api/v1/airlines_controller.rb:8:in `index'
+  [1m[36mReview Pluck (0.1ms)[0m  [1m[34mSELECT "reviews"."id" FROM "reviews" WHERE "reviews"."airline_id" = $1[0m  [["airline_id", 30]]
+  ↳ app/controllers/api/v1/airlines_controller.rb:8:in `index'
+  [1m[36mReview Load (0.1ms)[0m  [1m[34mSELECT "reviews".* FROM "reviews" WHERE "reviews"."airline_id" = $1[0m  [["airline_id", 30]]
+  ↳ app/controllers/api/v1/airlines_controller.rb:8:in `index'
+  [1m[36mReview Pluck (0.1ms)[0m  [1m[34mSELECT "reviews"."id" FROM "reviews" WHERE "reviews"."airline_id" = $1[0m  [["airline_id", 31]]
+  ↳ app/controllers/api/v1/airlines_controller.rb:8:in `index'
+  [1m[36mReview Load (0.1ms)[0m  [1m[34mSELECT "reviews".* FROM "reviews" WHERE "reviews"."airline_id" = $1[0m  [["airline_id", 31]]
+  ↳ app/controllers/api/v1/airlines_controller.rb:8:in `index'
+  [1m[36mReview Pluck (0.1ms)[0m  [1m[34mSELECT "reviews"."id" FROM "reviews" WHERE "reviews"."airline_id" = $1[0m  [["airline_id", 32]]
+  ↳ app/controllers/api/v1/airlines_controller.rb:8:in `index'
+  [1m[36mReview Load (0.1ms)[0m  [1m[34mSELECT "reviews".* FROM "reviews" WHERE "reviews"."airline_id" = $1[0m  [["airline_id", 32]]
+  ↳ app/controllers/api/v1/airlines_controller.rb:8:in `index'
+  [1m[36mReview Pluck (0.1ms)[0m  [1m[34mSELECT "reviews"."id" FROM "reviews" WHERE "reviews"."airline_id" = $1[0m  [["airline_id", 33]]
+  ↳ app/controllers/api/v1/airlines_controller.rb:8:in `index'
+  [1m[36mReview Load (0.1ms)[0m  [1m[34mSELECT "reviews".* FROM "reviews" WHERE "reviews"."airline_id" = $1[0m  [["airline_id", 33]]
+  ↳ app/controllers/api/v1/airlines_controller.rb:8:in `index'
+  [1m[36mReview Pluck (0.1ms)[0m  [1m[34mSELECT "reviews"."id" FROM "reviews" WHERE "reviews"."airline_id" = $1[0m  [["airline_id", 34]]
+  ↳ app/controllers/api/v1/airlines_controller.rb:8:in `index'
+  [1m[36mReview Load (0.1ms)[0m  [1m[34mSELECT "reviews".* FROM "reviews" WHERE "reviews"."airline_id" = $1[0m  [["airline_id", 34]]
+  ↳ app/controllers/api/v1/airlines_controller.rb:8:in `index'
+  [1m[36mReview Pluck (0.1ms)[0m  [1m[34mSELECT "reviews"."id" FROM "reviews" WHERE "reviews"."airline_id" = $1[0m  [["airline_id", 35]]
+  ↳ app/controllers/api/v1/airlines_controller.rb:8:in `index'
+  [1m[36mReview Load (0.1ms)[0m  [1m[34mSELECT "reviews".* FROM "reviews" WHERE "reviews"."airline_id" = $1[0m  [["airline_id", 35]]
+  ↳ app/controllers/api/v1/airlines_controller.rb:8:in `index'
+  [1m[36mReview Pluck (0.1ms)[0m  [1m[34mSELECT "reviews"."id" FROM "reviews" WHERE "reviews"."airline_id" = $1[0m  [["airline_id", 36]]
+  ↳ app/controllers/api/v1/airlines_controller.rb:8:in `index'
+  [1m[36mReview Load (0.1ms)[0m  [1m[34mSELECT "reviews".* FROM "reviews" WHERE "reviews"."airline_id" = $1[0m  [["airline_id", 36]]
+  ↳ app/controllers/api/v1/airlines_controller.rb:8:in `index'
+  [1m[36mReview Pluck (0.1ms)[0m  [1m[34mSELECT "reviews"."id" FROM "reviews" WHERE "reviews"."airline_id" = $1[0m  [["airline_id", 37]]
+  ↳ app/controllers/api/v1/airlines_controller.rb:8:in `index'
+  [1m[36mReview Load (0.1ms)[0m  [1m[34mSELECT "reviews".* FROM "reviews" WHERE "reviews"."airline_id" = $1[0m  [["airline_id", 37]]
+  ↳ app/controllers/api/v1/airlines_controller.rb:8:in `index'
+  [1m[36mReview Pluck (0.1ms)[0m  [1m[34mSELECT "reviews"."id" FROM "reviews" WHERE "reviews"."airline_id" = $1[0m  [["airline_id", 38]]
+  ↳ app/controllers/api/v1/airlines_controller.rb:8:in `index'
+  [1m[36mReview Load (0.1ms)[0m  [1m[34mSELECT "reviews".* FROM "reviews" WHERE "reviews"."airline_id" = $1[0m  [["airline_id", 38]]
+  ↳ app/controllers/api/v1/airlines_controller.rb:8:in `index'
+  [1m[36mReview Pluck (0.1ms)[0m  [1m[34mSELECT "reviews"."id" FROM "reviews" WHERE "reviews"."airline_id" = $1[0m  [["airline_id", 39]]
+  ↳ app/controllers/api/v1/airlines_controller.rb:8:in `index'
+  [1m[36mReview Load (0.1ms)[0m  [1m[34mSELECT "reviews".* FROM "reviews" WHERE "reviews"."airline_id" = $1[0m  [["airline_id", 39]]
+  ↳ app/controllers/api/v1/airlines_controller.rb:8:in `index'
+  [1m[36mReview Pluck (0.1ms)[0m  [1m[34mSELECT "reviews"."id" FROM "reviews" WHERE "reviews"."airline_id" = $1[0m  [["airline_id", 40]]
+  ↳ app/controllers/api/v1/airlines_controller.rb:8:in `index'
+  [1m[36mReview Load (0.1ms)[0m  [1m[34mSELECT "reviews".* FROM "reviews" WHERE "reviews"."airline_id" = $1[0m  [["airline_id", 40]]
+  ↳ app/controllers/api/v1/airlines_controller.rb:8:in `index'
+  [1m[36mReview Pluck (0.1ms)[0m  [1m[34mSELECT "reviews"."id" FROM "reviews" WHERE "reviews"."airline_id" = $1[0m  [["airline_id", 41]]
+  ↳ app/controllers/api/v1/airlines_controller.rb:8:in `index'
+  [1m[36mReview Load (0.1ms)[0m  [1m[34mSELECT "reviews".* FROM "reviews" WHERE "reviews"."airline_id" = $1[0m  [["airline_id", 41]]
+  ↳ app/controllers/api/v1/airlines_controller.rb:8:in `index'
+  [1m[36mReview Pluck (0.1ms)[0m  [1m[34mSELECT "reviews"."id" FROM "reviews" WHERE "reviews"."airline_id" = $1[0m  [["airline_id", 42]]
+  ↳ app/controllers/api/v1/airlines_controller.rb:8:in `index'
+  [1m[36mReview Load (0.2ms)[0m  [1m[34mSELECT "reviews".* FROM "reviews" WHERE "reviews"."airline_id" = $1[0m  [["airline_id", 42]]
+  ↳ app/controllers/api/v1/airlines_controller.rb:8:in `index'
+  [1m[36mReview Pluck (0.9ms)[0m  [1m[34mSELECT "reviews"."id" FROM "reviews" WHERE "reviews"."airline_id" = $1[0m  [["airline_id", 43]]
+  ↳ app/controllers/api/v1/airlines_controller.rb:8:in `index'
+  [1m[36mReview Load (0.7ms)[0m  [1m[34mSELECT "reviews".* FROM "reviews" WHERE "reviews"."airline_id" = $1[0m  [["airline_id", 43]]
+  ↳ app/controllers/api/v1/airlines_controller.rb:8:in `index'
+Completed 200 OK in 58ms (Views: 0.1ms | ActiveRecord: 8.6ms | Allocations: 59262)
+
+
+Started GET "/api/v1/airlines/united-airlines" for ::1 at 2022-08-16 18:58:40 +0530
+Processing by Api::V1::AirlinesController#show as */*
+  Parameters: {"name"=>"Fake airlines ", "slug"=>"united-airlines", "airline"=>{"name"=>"Fake airlines "}}
+  [1m[36mAirline Load (0.2ms)[0m  [1m[34mSELECT "airlines".* FROM "airlines" WHERE "airlines"."slug" = $1 LIMIT $2[0m  [["slug", "united-airlines"], ["LIMIT", 1]]
+  ↳ app/controllers/api/v1/airlines_controller.rb:12:in `show'
+  [1m[36mReview Pluck (0.2ms)[0m  [1m[34mSELECT "reviews"."id" FROM "reviews" WHERE "reviews"."airline_id" = $1[0m  [["airline_id", 1]]
+  ↳ app/controllers/api/v1/airlines_controller.rb:13:in `show'
+  [1m[36mReview Load (0.2ms)[0m  [1m[34mSELECT "reviews".* FROM "reviews" WHERE "reviews"."airline_id" = $1[0m  [["airline_id", 1]]
+  ↳ app/controllers/api/v1/airlines_controller.rb:13:in `show'
+Completed 200 OK in 5ms (Views: 0.2ms | ActiveRecord: 0.6ms | Allocations: 1996)
+
+
+Started GET "/api/v1/airlines" for ::1 at 2022-08-16 18:58:52 +0530
+Processing by Api::V1::AirlinesController#index as */*
+  Parameters: {"name"=>"Fake airlines ", "airline"=>{"name"=>"Fake airlines "}}
+  [1m[36mAirline Load (0.3ms)[0m  [1m[34mSELECT "airlines".* FROM "airlines"[0m
+  ↳ app/controllers/api/v1/airlines_controller.rb:8:in `index'
+  [1m[36mReview Pluck (0.1ms)[0m  [1m[34mSELECT "reviews"."id" FROM "reviews" WHERE "reviews"."airline_id" = $1[0m  [["airline_id", 1]]
+  ↳ app/controllers/api/v1/airlines_controller.rb:8:in `index'
+  [1m[36mReview Load (0.2ms)[0m  [1m[34mSELECT "reviews".* FROM "reviews" WHERE "reviews"."airline_id" = $1[0m  [["airline_id", 1]]
+  ↳ app/controllers/api/v1/airlines_controller.rb:8:in `index'
+  [1m[36mReview Pluck (0.2ms)[0m  [1m[34mSELECT "reviews"."id" FROM "reviews" WHERE "reviews"."airline_id" = $1[0m  [["airline_id", 2]]
+  ↳ app/controllers/api/v1/airlines_controller.rb:8:in `index'
+  [1m[36mReview Load (0.1ms)[0m  [1m[34mSELECT "reviews".* FROM "reviews" WHERE "reviews"."airline_id" = $1[0m  [["airline_id", 2]]
+  ↳ app/controllers/api/v1/airlines_controller.rb:8:in `index'
+  [1m[36mReview Pluck (0.2ms)[0m  [1m[34mSELECT "reviews"."id" FROM "reviews" WHERE "reviews"."airline_id" = $1[0m  [["airline_id", 3]]
+  ↳ app/controllers/api/v1/airlines_controller.rb:8:in `index'
+  [1m[36mReview Load (0.5ms)[0m  [1m[34mSELECT "reviews".* FROM "reviews" WHERE "reviews"."airline_id" = $1[0m  [["airline_id", 3]]
+  ↳ app/controllers/api/v1/airlines_controller.rb:8:in `index'
+  [1m[36mReview Pluck (0.2ms)[0m  [1m[34mSELECT "reviews"."id" FROM "reviews" WHERE "reviews"."airline_id" = $1[0m  [["airline_id", 4]]
+  ↳ app/controllers/api/v1/airlines_controller.rb:8:in `index'
+  [1m[36mReview Load (0.2ms)[0m  [1m[34mSELECT "reviews".* FROM "reviews" WHERE "reviews"."airline_id" = $1[0m  [["airline_id", 4]]
+  ↳ app/controllers/api/v1/airlines_controller.rb:8:in `index'
+  [1m[36mReview Pluck (0.2ms)[0m  [1m[34mSELECT "reviews"."id" FROM "reviews" WHERE "reviews"."airline_id" = $1[0m  [["airline_id", 5]]
+  ↳ app/controllers/api/v1/airlines_controller.rb:8:in `index'
+  [1m[36mReview Load (0.1ms)[0m  [1m[34mSELECT "reviews".* FROM "reviews" WHERE "reviews"."airline_id" = $1[0m  [["airline_id", 5]]
+  ↳ app/controllers/api/v1/airlines_controller.rb:8:in `index'
+  [1m[36mReview Pluck (0.1ms)[0m  [1m[34mSELECT "reviews"."id" FROM "reviews" WHERE "reviews"."airline_id" = $1[0m  [["airline_id", 6]]
+  ↳ app/controllers/api/v1/airlines_controller.rb:8:in `index'
+  [1m[36mReview Load (0.2ms)[0m  [1m[34mSELECT "reviews".* FROM "reviews" WHERE "reviews"."airline_id" = $1[0m  [["airline_id", 6]]
+  ↳ app/controllers/api/v1/airlines_controller.rb:8:in `index'
+  [1m[36mReview Pluck (0.2ms)[0m  [1m[34mSELECT "reviews"."id" FROM "reviews" WHERE "reviews"."airline_id" = $1[0m  [["airline_id", 7]]
+  ↳ app/controllers/api/v1/airlines_controller.rb:8:in `index'
+  [1m[36mReview Load (0.1ms)[0m  [1m[34mSELECT "reviews".* FROM "reviews" WHERE "reviews"."airline_id" = $1[0m  [["airline_id", 7]]
+  ↳ app/controllers/api/v1/airlines_controller.rb:8:in `index'
+  [1m[36mReview Pluck (0.1ms)[0m  [1m[34mSELECT "reviews"."id" FROM "reviews" WHERE "reviews"."airline_id" = $1[0m  [["airline_id", 8]]
+  ↳ app/controllers/api/v1/airlines_controller.rb:8:in `index'
+  [1m[36mReview Load (0.1ms)[0m  [1m[34mSELECT "reviews".* FROM "reviews" WHERE "reviews"."airline_id" = $1[0m  [["airline_id", 8]]
+  ↳ app/controllers/api/v1/airlines_controller.rb:8:in `index'
+  [1m[36mReview Pluck (0.1ms)[0m  [1m[34mSELECT "reviews"."id" FROM "reviews" WHERE "reviews"."airline_id" = $1[0m  [["airline_id", 9]]
+  ↳ app/controllers/api/v1/airlines_controller.rb:8:in `index'
+  [1m[36mReview Load (0.1ms)[0m  [1m[34mSELECT "reviews".* FROM "reviews" WHERE "reviews"."airline_id" = $1[0m  [["airline_id", 9]]
+  ↳ app/controllers/api/v1/airlines_controller.rb:8:in `index'
+  [1m[36mReview Pluck (0.1ms)[0m  [1m[34mSELECT "reviews"."id" FROM "reviews" WHERE "reviews"."airline_id" = $1[0m  [["airline_id", 10]]
+  ↳ app/controllers/api/v1/airlines_controller.rb:8:in `index'
+  [1m[36mReview Load (0.1ms)[0m  [1m[34mSELECT "reviews".* FROM "reviews" WHERE "reviews"."airline_id" = $1[0m  [["airline_id", 10]]
+  ↳ app/controllers/api/v1/airlines_controller.rb:8:in `index'
+  [1m[36mReview Pluck (0.1ms)[0m  [1m[34mSELECT "reviews"."id" FROM "reviews" WHERE "reviews"."airline_id" = $1[0m  [["airline_id", 11]]
+  ↳ app/controllers/api/v1/airlines_controller.rb:8:in `index'
+  [1m[36mReview Load (0.1ms)[0m  [1m[34mSELECT "reviews".* FROM "reviews" WHERE "reviews"."airline_id" = $1[0m  [["airline_id", 11]]
+  ↳ app/controllers/api/v1/airlines_controller.rb:8:in `index'
+  [1m[36mReview Pluck (0.1ms)[0m  [1m[34mSELECT "reviews"."id" FROM "reviews" WHERE "reviews"."airline_id" = $1[0m  [["airline_id", 12]]
+  ↳ app/controllers/api/v1/airlines_controller.rb:8:in `index'
+  [1m[36mReview Load (0.1ms)[0m  [1m[34mSELECT "reviews".* FROM "reviews" WHERE "reviews"."airline_id" = $1[0m  [["airline_id", 12]]
+  ↳ app/controllers/api/v1/airlines_controller.rb:8:in `index'
+  [1m[36mReview Pluck (0.1ms)[0m  [1m[34mSELECT "reviews"."id" FROM "reviews" WHERE "reviews"."airline_id" = $1[0m  [["airline_id", 13]]
+  ↳ app/controllers/api/v1/airlines_controller.rb:8:in `index'
+  [1m[36mReview Load (0.1ms)[0m  [1m[34mSELECT "reviews".* FROM "reviews" WHERE "reviews"."airline_id" = $1[0m  [["airline_id", 13]]
+  ↳ app/controllers/api/v1/airlines_controller.rb:8:in `index'
+  [1m[36mReview Pluck (0.1ms)[0m  [1m[34mSELECT "reviews"."id" FROM "reviews" WHERE "reviews"."airline_id" = $1[0m  [["airline_id", 14]]
+  ↳ app/controllers/api/v1/airlines_controller.rb:8:in `index'
+  [1m[36mReview Load (0.1ms)[0m  [1m[34mSELECT "reviews".* FROM "reviews" WHERE "reviews"."airline_id" = $1[0m  [["airline_id", 14]]
+  ↳ app/controllers/api/v1/airlines_controller.rb:8:in `index'
+  [1m[36mReview Pluck (0.1ms)[0m  [1m[34mSELECT "reviews"."id" FROM "reviews" WHERE "reviews"."airline_id" = $1[0m  [["airline_id", 15]]
+  ↳ app/controllers/api/v1/airlines_controller.rb:8:in `index'
+  [1m[36mReview Load (0.1ms)[0m  [1m[34mSELECT "reviews".* FROM "reviews" WHERE "reviews"."airline_id" = $1[0m  [["airline_id", 15]]
+  ↳ app/controllers/api/v1/airlines_controller.rb:8:in `index'
+  [1m[36mReview Pluck (0.1ms)[0m  [1m[34mSELECT "reviews"."id" FROM "reviews" WHERE "reviews"."airline_id" = $1[0m  [["airline_id", 16]]
+  ↳ app/controllers/api/v1/airlines_controller.rb:8:in `index'
+  [1m[36mReview Load (0.1ms)[0m  [1m[34mSELECT "reviews".* FROM "reviews" WHERE "reviews"."airline_id" = $1[0m  [["airline_id", 16]]
+  ↳ app/controllers/api/v1/airlines_controller.rb:8:in `index'
+  [1m[36mReview Pluck (0.1ms)[0m  [1m[34mSELECT "reviews"."id" FROM "reviews" WHERE "reviews"."airline_id" = $1[0m  [["airline_id", 17]]
+  ↳ app/controllers/api/v1/airlines_controller.rb:8:in `index'
+  [1m[36mReview Load (0.1ms)[0m  [1m[34mSELECT "reviews".* FROM "reviews" WHERE "reviews"."airline_id" = $1[0m  [["airline_id", 17]]
+  ↳ app/controllers/api/v1/airlines_controller.rb:8:in `index'
+  [1m[36mReview Pluck (0.1ms)[0m  [1m[34mSELECT "reviews"."id" FROM "reviews" WHERE "reviews"."airline_id" = $1[0m  [["airline_id", 18]]
+  ↳ app/controllers/api/v1/airlines_controller.rb:8:in `index'
+  [1m[36mReview Load (0.1ms)[0m  [1m[34mSELECT "reviews".* FROM "reviews" WHERE "reviews"."airline_id" = $1[0m  [["airline_id", 18]]
+  ↳ app/controllers/api/v1/airlines_controller.rb:8:in `index'
+  [1m[36mReview Pluck (0.1ms)[0m  [1m[34mSELECT "reviews"."id" FROM "reviews" WHERE "reviews"."airline_id" = $1[0m  [["airline_id", 19]]
+  ↳ app/controllers/api/v1/airlines_controller.rb:8:in `index'
+  [1m[36mReview Load (0.1ms)[0m  [1m[34mSELECT "reviews".* FROM "reviews" WHERE "reviews"."airline_id" = $1[0m  [["airline_id", 19]]
+  ↳ app/controllers/api/v1/airlines_controller.rb:8:in `index'
+  [1m[36mReview Pluck (0.1ms)[0m  [1m[34mSELECT "reviews"."id" FROM "reviews" WHERE "reviews"."airline_id" = $1[0m  [["airline_id", 20]]
+  ↳ app/controllers/api/v1/airlines_controller.rb:8:in `index'
+  [1m[36mReview Load (0.1ms)[0m  [1m[34mSELECT "reviews".* FROM "reviews" WHERE "reviews"."airline_id" = $1[0m  [["airline_id", 20]]
+  ↳ app/controllers/api/v1/airlines_controller.rb:8:in `index'
+  [1m[36mReview Pluck (0.1ms)[0m  [1m[34mSELECT "reviews"."id" FROM "reviews" WHERE "reviews"."airline_id" = $1[0m  [["airline_id", 21]]
+  ↳ app/controllers/api/v1/airlines_controller.rb:8:in `index'
+  [1m[36mReview Load (0.1ms)[0m  [1m[34mSELECT "reviews".* FROM "reviews" WHERE "reviews"."airline_id" = $1[0m  [["airline_id", 21]]
+  ↳ app/controllers/api/v1/airlines_controller.rb:8:in `index'
+  [1m[36mReview Pluck (0.1ms)[0m  [1m[34mSELECT "reviews"."id" FROM "reviews" WHERE "reviews"."airline_id" = $1[0m  [["airline_id", 22]]
+  ↳ app/controllers/api/v1/airlines_controller.rb:8:in `index'
+  [1m[36mReview Load (0.1ms)[0m  [1m[34mSELECT "reviews".* FROM "reviews" WHERE "reviews"."airline_id" = $1[0m  [["airline_id", 22]]
+  ↳ app/controllers/api/v1/airlines_controller.rb:8:in `index'
+  [1m[36mReview Pluck (0.1ms)[0m  [1m[34mSELECT "reviews"."id" FROM "reviews" WHERE "reviews"."airline_id" = $1[0m  [["airline_id", 23]]
+  ↳ app/controllers/api/v1/airlines_controller.rb:8:in `index'
+  [1m[36mReview Load (0.1ms)[0m  [1m[34mSELECT "reviews".* FROM "reviews" WHERE "reviews"."airline_id" = $1[0m  [["airline_id", 23]]
+  ↳ app/controllers/api/v1/airlines_controller.rb:8:in `index'
+  [1m[36mReview Pluck (0.1ms)[0m  [1m[34mSELECT "reviews"."id" FROM "reviews" WHERE "reviews"."airline_id" = $1[0m  [["airline_id", 24]]
+  ↳ app/controllers/api/v1/airlines_controller.rb:8:in `index'
+  [1m[36mReview Load (0.1ms)[0m  [1m[34mSELECT "reviews".* FROM "reviews" WHERE "reviews"."airline_id" = $1[0m  [["airline_id", 24]]
+  ↳ app/controllers/api/v1/airlines_controller.rb:8:in `index'
+  [1m[36mReview Pluck (0.1ms)[0m  [1m[34mSELECT "reviews"."id" FROM "reviews" WHERE "reviews"."airline_id" = $1[0m  [["airline_id", 25]]
+  ↳ app/controllers/api/v1/airlines_controller.rb:8:in `index'
+  [1m[36mReview Load (0.1ms)[0m  [1m[34mSELECT "reviews".* FROM "reviews" WHERE "reviews"."airline_id" = $1[0m  [["airline_id", 25]]
+  ↳ app/controllers/api/v1/airlines_controller.rb:8:in `index'
+  [1m[36mReview Pluck (0.1ms)[0m  [1m[34mSELECT "reviews"."id" FROM "reviews" WHERE "reviews"."airline_id" = $1[0m  [["airline_id", 26]]
+  ↳ app/controllers/api/v1/airlines_controller.rb:8:in `index'
+  [1m[36mReview Load (0.1ms)[0m  [1m[34mSELECT "reviews".* FROM "reviews" WHERE "reviews"."airline_id" = $1[0m  [["airline_id", 26]]
+  ↳ app/controllers/api/v1/airlines_controller.rb:8:in `index'
+  [1m[36mReview Pluck (0.1ms)[0m  [1m[34mSELECT "reviews"."id" FROM "reviews" WHERE "reviews"."airline_id" = $1[0m  [["airline_id", 27]]
+  ↳ app/controllers/api/v1/airlines_controller.rb:8:in `index'
+  [1m[36mReview Load (0.1ms)[0m  [1m[34mSELECT "reviews".* FROM "reviews" WHERE "reviews"."airline_id" = $1[0m  [["airline_id", 27]]
+  ↳ app/controllers/api/v1/airlines_controller.rb:8:in `index'
+  [1m[36mReview Pluck (0.1ms)[0m  [1m[34mSELECT "reviews"."id" FROM "reviews" WHERE "reviews"."airline_id" = $1[0m  [["airline_id", 28]]
+  ↳ app/controllers/api/v1/airlines_controller.rb:8:in `index'
+  [1m[36mReview Load (0.1ms)[0m  [1m[34mSELECT "reviews".* FROM "reviews" WHERE "reviews"."airline_id" = $1[0m  [["airline_id", 28]]
+  ↳ app/controllers/api/v1/airlines_controller.rb:8:in `index'
+  [1m[36mReview Pluck (0.1ms)[0m  [1m[34mSELECT "reviews"."id" FROM "reviews" WHERE "reviews"."airline_id" = $1[0m  [["airline_id", 29]]
+  ↳ app/controllers/api/v1/airlines_controller.rb:8:in `index'
+  [1m[36mReview Load (0.1ms)[0m  [1m[34mSELECT "reviews".* FROM "reviews" WHERE "reviews"."airline_id" = $1[0m  [["airline_id", 29]]
+  ↳ app/controllers/api/v1/airlines_controller.rb:8:in `index'
+  [1m[36mReview Pluck (0.1ms)[0m  [1m[34mSELECT "reviews"."id" FROM "reviews" WHERE "reviews"."airline_id" = $1[0m  [["airline_id", 30]]
+  ↳ app/controllers/api/v1/airlines_controller.rb:8:in `index'
+  [1m[36mReview Load (0.1ms)[0m  [1m[34mSELECT "reviews".* FROM "reviews" WHERE "reviews"."airline_id" = $1[0m  [["airline_id", 30]]
+  ↳ app/controllers/api/v1/airlines_controller.rb:8:in `index'
+  [1m[36mReview Pluck (0.1ms)[0m  [1m[34mSELECT "reviews"."id" FROM "reviews" WHERE "reviews"."airline_id" = $1[0m  [["airline_id", 31]]
+  ↳ app/controllers/api/v1/airlines_controller.rb:8:in `index'
+  [1m[36mReview Load (0.1ms)[0m  [1m[34mSELECT "reviews".* FROM "reviews" WHERE "reviews"."airline_id" = $1[0m  [["airline_id", 31]]
+  ↳ app/controllers/api/v1/airlines_controller.rb:8:in `index'
+  [1m[36mReview Pluck (0.1ms)[0m  [1m[34mSELECT "reviews"."id" FROM "reviews" WHERE "reviews"."airline_id" = $1[0m  [["airline_id", 32]]
+  ↳ app/controllers/api/v1/airlines_controller.rb:8:in `index'
+  [1m[36mReview Load (0.1ms)[0m  [1m[34mSELECT "reviews".* FROM "reviews" WHERE "reviews"."airline_id" = $1[0m  [["airline_id", 32]]
+  ↳ app/controllers/api/v1/airlines_controller.rb:8:in `index'
+  [1m[36mReview Pluck (0.1ms)[0m  [1m[34mSELECT "reviews"."id" FROM "reviews" WHERE "reviews"."airline_id" = $1[0m  [["airline_id", 33]]
+  ↳ app/controllers/api/v1/airlines_controller.rb:8:in `index'
+  [1m[36mReview Load (0.1ms)[0m  [1m[34mSELECT "reviews".* FROM "reviews" WHERE "reviews"."airline_id" = $1[0m  [["airline_id", 33]]
+  ↳ app/controllers/api/v1/airlines_controller.rb:8:in `index'
+  [1m[36mReview Pluck (0.1ms)[0m  [1m[34mSELECT "reviews"."id" FROM "reviews" WHERE "reviews"."airline_id" = $1[0m  [["airline_id", 34]]
+  ↳ app/controllers/api/v1/airlines_controller.rb:8:in `index'
+  [1m[36mReview Load (0.1ms)[0m  [1m[34mSELECT "reviews".* FROM "reviews" WHERE "reviews"."airline_id" = $1[0m  [["airline_id", 34]]
+  ↳ app/controllers/api/v1/airlines_controller.rb:8:in `index'
+  [1m[36mReview Pluck (0.1ms)[0m  [1m[34mSELECT "reviews"."id" FROM "reviews" WHERE "reviews"."airline_id" = $1[0m  [["airline_id", 35]]
+  ↳ app/controllers/api/v1/airlines_controller.rb:8:in `index'
+  [1m[36mReview Load (0.1ms)[0m  [1m[34mSELECT "reviews".* FROM "reviews" WHERE "reviews"."airline_id" = $1[0m  [["airline_id", 35]]
+  ↳ app/controllers/api/v1/airlines_controller.rb:8:in `index'
+  [1m[36mReview Pluck (0.1ms)[0m  [1m[34mSELECT "reviews"."id" FROM "reviews" WHERE "reviews"."airline_id" = $1[0m  [["airline_id", 36]]
+  ↳ app/controllers/api/v1/airlines_controller.rb:8:in `index'
+  [1m[36mReview Load (0.1ms)[0m  [1m[34mSELECT "reviews".* FROM "reviews" WHERE "reviews"."airline_id" = $1[0m  [["airline_id", 36]]
+  ↳ app/controllers/api/v1/airlines_controller.rb:8:in `index'
+  [1m[36mReview Pluck (0.1ms)[0m  [1m[34mSELECT "reviews"."id" FROM "reviews" WHERE "reviews"."airline_id" = $1[0m  [["airline_id", 37]]
+  ↳ app/controllers/api/v1/airlines_controller.rb:8:in `index'
+  [1m[36mReview Load (0.1ms)[0m  [1m[34mSELECT "reviews".* FROM "reviews" WHERE "reviews"."airline_id" = $1[0m  [["airline_id", 37]]
+  ↳ app/controllers/api/v1/airlines_controller.rb:8:in `index'
+  [1m[36mReview Pluck (0.1ms)[0m  [1m[34mSELECT "reviews"."id" FROM "reviews" WHERE "reviews"."airline_id" = $1[0m  [["airline_id", 38]]
+  ↳ app/controllers/api/v1/airlines_controller.rb:8:in `index'
+  [1m[36mReview Load (0.1ms)[0m  [1m[34mSELECT "reviews".* FROM "reviews" WHERE "reviews"."airline_id" = $1[0m  [["airline_id", 38]]
+  ↳ app/controllers/api/v1/airlines_controller.rb:8:in `index'
+  [1m[36mReview Pluck (0.1ms)[0m  [1m[34mSELECT "reviews"."id" FROM "reviews" WHERE "reviews"."airline_id" = $1[0m  [["airline_id", 39]]
+  ↳ app/controllers/api/v1/airlines_controller.rb:8:in `index'
+  [1m[36mReview Load (0.2ms)[0m  [1m[34mSELECT "reviews".* FROM "reviews" WHERE "reviews"."airline_id" = $1[0m  [["airline_id", 39]]
+  ↳ app/controllers/api/v1/airlines_controller.rb:8:in `index'
+  [1m[36mReview Pluck (0.1ms)[0m  [1m[34mSELECT "reviews"."id" FROM "reviews" WHERE "reviews"."airline_id" = $1[0m  [["airline_id", 40]]
+  ↳ app/controllers/api/v1/airlines_controller.rb:8:in `index'
+  [1m[36mReview Load (0.1ms)[0m  [1m[34mSELECT "reviews".* FROM "reviews" WHERE "reviews"."airline_id" = $1[0m  [["airline_id", 40]]
+  ↳ app/controllers/api/v1/airlines_controller.rb:8:in `index'
+  [1m[36mReview Pluck (0.1ms)[0m  [1m[34mSELECT "reviews"."id" FROM "reviews" WHERE "reviews"."airline_id" = $1[0m  [["airline_id", 41]]
+  ↳ app/controllers/api/v1/airlines_controller.rb:8:in `index'
+  [1m[36mReview Load (0.1ms)[0m  [1m[34mSELECT "reviews".* FROM "reviews" WHERE "reviews"."airline_id" = $1[0m  [["airline_id", 41]]
+  ↳ app/controllers/api/v1/airlines_controller.rb:8:in `index'
+  [1m[36mReview Pluck (0.1ms)[0m  [1m[34mSELECT "reviews"."id" FROM "reviews" WHERE "reviews"."airline_id" = $1[0m  [["airline_id", 42]]
+  ↳ app/controllers/api/v1/airlines_controller.rb:8:in `index'
+  [1m[36mReview Load (0.1ms)[0m  [1m[34mSELECT "reviews".* FROM "reviews" WHERE "reviews"."airline_id" = $1[0m  [["airline_id", 42]]
+  ↳ app/controllers/api/v1/airlines_controller.rb:8:in `index'
+  [1m[36mReview Pluck (0.1ms)[0m  [1m[34mSELECT "reviews"."id" FROM "reviews" WHERE "reviews"."airline_id" = $1[0m  [["airline_id", 43]]
+  ↳ app/controllers/api/v1/airlines_controller.rb:8:in `index'
+  [1m[36mReview Load (0.1ms)[0m  [1m[34mSELECT "reviews".* FROM "reviews" WHERE "reviews"."airline_id" = $1[0m  [["airline_id", 43]]
+  ↳ app/controllers/api/v1/airlines_controller.rb:8:in `index'
+Completed 200 OK in 72ms (Views: 0.1ms | ActiveRecord: 9.0ms | Allocations: 59227)
+
+
+Started GET "/api/v1/airlines/united-airlines" for ::1 at 2022-08-16 18:59:06 +0530
+Processing by Api::V1::AirlinesController#show as */*
+  Parameters: {"slug"=>"united-airlines"}
+  [1m[36mAirline Load (0.2ms)[0m  [1m[34mSELECT "airlines".* FROM "airlines" WHERE "airlines"."slug" = $1 LIMIT $2[0m  [["slug", "united-airlines"], ["LIMIT", 1]]
+  ↳ app/controllers/api/v1/airlines_controller.rb:12:in `show'
+  [1m[36mReview Pluck (0.2ms)[0m  [1m[34mSELECT "reviews"."id" FROM "reviews" WHERE "reviews"."airline_id" = $1[0m  [["airline_id", 1]]
+  ↳ app/controllers/api/v1/airlines_controller.rb:13:in `show'
+  [1m[36mReview Load (0.2ms)[0m  [1m[34mSELECT "reviews".* FROM "reviews" WHERE "reviews"."airline_id" = $1[0m  [["airline_id", 1]]
+  ↳ app/controllers/api/v1/airlines_controller.rb:13:in `show'
+Completed 200 OK in 6ms (Views: 0.2ms | ActiveRecord: 0.6ms | Allocations: 1996)
+
+
+Started POST "/api/v1/airlines" for ::1 at 2022-08-16 19:01:01 +0530
+Processing by Api::V1::AirlinesController#create as */*
+  Parameters: {"name"=>"Fake airlines", "airline"=>{"name"=>"Fake airlines"}}
+Can't verify CSRF token authenticity.
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN[0m
+  ↳ app/controllers/api/v1/airlines_controller.rb:19:in `create'
+  [1m[36mAirline Create (0.4ms)[0m  [1m[32mINSERT INTO "airlines" ("name", "image_url", "slug", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["name", "Fake airlines"], ["image_url", nil], ["slug", "fake-airlines"], ["created_at", "2022-08-16 13:31:01.185496"], ["updated_at", "2022-08-16 13:31:01.185496"]]
+  ↳ app/controllers/api/v1/airlines_controller.rb:19:in `create'
+  [1m[36mTRANSACTION (0.7ms)[0m  [1m[35mCOMMIT[0m
+  ↳ app/controllers/api/v1/airlines_controller.rb:19:in `create'
+  [1m[36mReview Pluck (0.2ms)[0m  [1m[34mSELECT "reviews"."id" FROM "reviews" WHERE "reviews"."airline_id" = $1[0m  [["airline_id", 44]]
+  ↳ app/controllers/api/v1/airlines_controller.rb:20:in `create'
+Completed 200 OK in 9ms (Views: 0.2ms | ActiveRecord: 1.4ms | Allocations: 2869)
+
+
+Started GET "/api/v1/airlines/fake-airlines" for ::1 at 2022-08-16 19:01:39 +0530
+Processing by Api::V1::AirlinesController#show as */*
+  Parameters: {"name"=>"Fake airlines", "slug"=>"fake-airlines", "airline"=>{"name"=>"Fake airlines"}}
+  [1m[36mAirline Load (0.3ms)[0m  [1m[34mSELECT "airlines".* FROM "airlines" WHERE "airlines"."slug" = $1 LIMIT $2[0m  [["slug", "fake-airlines"], ["LIMIT", 1]]
+  ↳ app/controllers/api/v1/airlines_controller.rb:12:in `show'
+  [1m[36mReview Pluck (0.2ms)[0m  [1m[34mSELECT "reviews"."id" FROM "reviews" WHERE "reviews"."airline_id" = $1[0m  [["airline_id", 43]]
+  ↳ app/controllers/api/v1/airlines_controller.rb:13:in `show'
+  [1m[36mReview Load (0.2ms)[0m  [1m[34mSELECT "reviews".* FROM "reviews" WHERE "reviews"."airline_id" = $1[0m  [["airline_id", 43]]
+  ↳ app/controllers/api/v1/airlines_controller.rb:13:in `show'
+Completed 200 OK in 7ms (Views: 0.2ms | ActiveRecord: 0.7ms | Allocations: 1990)
+
+
+Started PATCH "/api/v1/airlines/fake-airlines" for ::1 at 2022-08-16 19:02:15 +0530
+Processing by Api::V1::AirlinesController#update as */*
+  Parameters: {"name"=>"NEW FAKE AIRLINES", "slug"=>"fake-airlines", "airline"=>{"name"=>"NEW FAKE AIRLINES"}}
+Can't verify CSRF token authenticity.
+  [1m[36mAirline Load (0.3ms)[0m  [1m[34mSELECT "airlines".* FROM "airlines" WHERE "airlines"."slug" = $1 LIMIT $2[0m  [["slug", "fake-airlines"], ["LIMIT", 1]]
+  ↳ app/controllers/api/v1/airlines_controller.rb:28:in `update'
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN[0m
+  ↳ app/controllers/api/v1/airlines_controller.rb:30:in `update'
+  [1m[36mAirline Update (1.6ms)[0m  [1m[33mUPDATE "airlines" SET "name" = $1, "updated_at" = $2 WHERE "airlines"."id" = $3[0m  [["name", "NEW FAKE AIRLINES"], ["updated_at", "2022-08-16 13:32:15.174269"], ["id", 43]]
+  ↳ app/controllers/api/v1/airlines_controller.rb:30:in `update'
+  [1m[36mTRANSACTION (0.5ms)[0m  [1m[35mCOMMIT[0m
+  ↳ app/controllers/api/v1/airlines_controller.rb:30:in `update'
+  [1m[36mReview Pluck (0.2ms)[0m  [1m[34mSELECT "reviews"."id" FROM "reviews" WHERE "reviews"."airline_id" = $1[0m  [["airline_id", 43]]
+  ↳ app/controllers/api/v1/airlines_controller.rb:31:in `update'
+  [1m[36mReview Load (0.3ms)[0m  [1m[34mSELECT "reviews".* FROM "reviews" WHERE "reviews"."airline_id" = $1[0m  [["airline_id", 43]]
+  ↳ app/controllers/api/v1/airlines_controller.rb:31:in `update'
+Completed 200 OK in 15ms (Views: 0.2ms | ActiveRecord: 3.1ms | Allocations: 3925)
+
+
+Started POST "/api/v1/airlines/fake-airlines" for ::1 at 2022-08-16 19:02:52 +0530
+  
+ActionController::RoutingError (No route matches [POST] "/api/v1/airlines/fake-airlines"):
+  
+Started PATCH "/api/v1/airlines/fake-airlines" for ::1 at 2022-08-16 19:03:18 +0530
+Processing by Api::V1::AirlinesController#update as */*
+  Parameters: {"slug"=>"fake-airlines"}
+Can't verify CSRF token authenticity.
+  [1m[36mAirline Load (0.3ms)[0m  [1m[34mSELECT "airlines".* FROM "airlines" WHERE "airlines"."slug" = $1 LIMIT $2[0m  [["slug", "fake-airlines"], ["LIMIT", 1]]
+  ↳ app/controllers/api/v1/airlines_controller.rb:28:in `update'
+Completed 400 Bad Request in 3ms (ActiveRecord: 0.3ms | Allocations: 1019)
+
+
+  
+ActionController::ParameterMissing (param is missing or the value is empty: airline):
+  
+app/controllers/api/v1/airlines_controller.rb:54:in `airline_params'
+app/controllers/api/v1/airlines_controller.rb:30:in `update'
+Started PATCH "/api/v1/airlines/fake-airlines" for ::1 at 2022-08-16 19:03:26 +0530
+Processing by Api::V1::AirlinesController#update as */*
+  Parameters: {"slug"=>"fake-airlines"}
+Can't verify CSRF token authenticity.
+  [1m[36mAirline Load (0.2ms)[0m  [1m[34mSELECT "airlines".* FROM "airlines" WHERE "airlines"."slug" = $1 LIMIT $2[0m  [["slug", "fake-airlines"], ["LIMIT", 1]]
+  ↳ app/controllers/api/v1/airlines_controller.rb:28:in `update'
+Completed 400 Bad Request in 3ms (ActiveRecord: 0.2ms | Allocations: 1013)
+
+
+  
+ActionController::ParameterMissing (param is missing or the value is empty: airline):
+  
+app/controllers/api/v1/airlines_controller.rb:54:in `airline_params'
+app/controllers/api/v1/airlines_controller.rb:30:in `update'
+Started PATCH "/api/v1/airlines/fake-airlines" for ::1 at 2022-08-16 19:03:58 +0530
+Processing by Api::V1::AirlinesController#update as */*
+  Parameters: {"name"=>"New fake Airlines", "slug"=>"fake-airlines", "airline"=>{"name"=>"New fake Airlines"}}
+Can't verify CSRF token authenticity.
+  [1m[36mAirline Load (0.2ms)[0m  [1m[34mSELECT "airlines".* FROM "airlines" WHERE "airlines"."slug" = $1 LIMIT $2[0m  [["slug", "fake-airlines"], ["LIMIT", 1]]
+  ↳ app/controllers/api/v1/airlines_controller.rb:28:in `update'
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN[0m
+  ↳ app/controllers/api/v1/airlines_controller.rb:30:in `update'
+  [1m[36mAirline Update (0.3ms)[0m  [1m[33mUPDATE "airlines" SET "name" = $1, "updated_at" = $2 WHERE "airlines"."id" = $3[0m  [["name", "New fake Airlines"], ["updated_at", "2022-08-16 13:33:58.404413"], ["id", 44]]
+  ↳ app/controllers/api/v1/airlines_controller.rb:30:in `update'
+  [1m[36mTRANSACTION (0.4ms)[0m  [1m[35mCOMMIT[0m
+  ↳ app/controllers/api/v1/airlines_controller.rb:30:in `update'
+  [1m[36mReview Pluck (0.1ms)[0m  [1m[34mSELECT "reviews"."id" FROM "reviews" WHERE "reviews"."airline_id" = $1[0m  [["airline_id", 44]]
+  ↳ app/controllers/api/v1/airlines_controller.rb:31:in `update'
+  [1m[36mReview Load (0.1ms)[0m  [1m[34mSELECT "reviews".* FROM "reviews" WHERE "reviews"."airline_id" = $1[0m  [["airline_id", 44]]
+  ↳ app/controllers/api/v1/airlines_controller.rb:31:in `update'
+Completed 200 OK in 12ms (Views: 0.2ms | ActiveRecord: 1.3ms | Allocations: 3792)
+
+
+Started DELETE "/api/v1/airlines/fake-airlines" for ::1 at 2022-08-16 19:04:40 +0530
+Processing by Api::V1::AirlinesController#destroy as */*
+  Parameters: {"slug"=>"fake-airlines"}
+Can't verify CSRF token authenticity.
+  [1m[36mAirline Load (0.2ms)[0m  [1m[34mSELECT "airlines".* FROM "airlines" WHERE "airlines"."slug" = $1 LIMIT $2[0m  [["slug", "fake-airlines"], ["LIMIT", 1]]
+  ↳ app/controllers/api/v1/airlines_controller.rb:38:in `destroy'
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN[0m
+  ↳ app/controllers/api/v1/airlines_controller.rb:40:in `destroy'
+  [1m[36mAirline Destroy (0.5ms)[0m  [1m[31mDELETE FROM "airlines" WHERE "airlines"."id" = $1[0m  [["id", 43]]
+  ↳ app/controllers/api/v1/airlines_controller.rb:40:in `destroy'
+  [1m[36mTRANSACTION (0.4ms)[0m  [1m[35mCOMMIT[0m
+  ↳ app/controllers/api/v1/airlines_controller.rb:40:in `destroy'
+Completed 204 No Content in 6ms (ActiveRecord: 1.2ms | Allocations: 2025)
+
+
+Started DELETE "/api/v1/airlines/new-fake-airline" for ::1 at 2022-08-16 19:04:56 +0530
+Processing by Api::V1::AirlinesController#destroy as */*
+  Parameters: {"slug"=>"new-fake-airline"}
+Can't verify CSRF token authenticity.
+  [1m[36mAirline Load (0.2ms)[0m  [1m[34mSELECT "airlines".* FROM "airlines" WHERE "airlines"."slug" = $1 LIMIT $2[0m  [["slug", "new-fake-airline"], ["LIMIT", 1]]
+  ↳ app/controllers/api/v1/airlines_controller.rb:38:in `destroy'
+Completed 500 Internal Server Error in 4ms (ActiveRecord: 0.2ms | Allocations: 1419)
+
+
+  
+NoMethodError (undefined method `destroy' for nil:NilClass):
+  
+app/controllers/api/v1/airlines_controller.rb:40:in `destroy'
+Started DELETE "/api/v1/airlines/united-airlines" for ::1 at 2022-08-16 19:05:03 +0530
+Processing by Api::V1::AirlinesController#destroy as */*
+  Parameters: {"slug"=>"united-airlines"}
+Can't verify CSRF token authenticity.
+  [1m[36mAirline Load (0.2ms)[0m  [1m[34mSELECT "airlines".* FROM "airlines" WHERE "airlines"."slug" = $1 LIMIT $2[0m  [["slug", "united-airlines"], ["LIMIT", 1]]
+  ↳ app/controllers/api/v1/airlines_controller.rb:38:in `destroy'
+  [1m[36mTRANSACTION (0.4ms)[0m  [1m[35mBEGIN[0m
+  ↳ app/controllers/api/v1/airlines_controller.rb:40:in `destroy'
+  [1m[36mAirline Destroy (0.5ms)[0m  [1m[31mDELETE FROM "airlines" WHERE "airlines"."id" = $1[0m  [["id", 1]]
+  ↳ app/controllers/api/v1/airlines_controller.rb:40:in `destroy'
+  [1m[36mTRANSACTION (0.5ms)[0m  [1m[35mCOMMIT[0m
+  ↳ app/controllers/api/v1/airlines_controller.rb:40:in `destroy'
+Completed 204 No Content in 7ms (ActiveRecord: 1.6ms | Allocations: 1949)
+
+
+Started GET "/api/v1/airlines/united-airlines" for ::1 at 2022-08-16 19:05:10 +0530
+Processing by Api::V1::AirlinesController#show as */*
+  Parameters: {"slug"=>"united-airlines"}
+  [1m[36mAirline Load (0.4ms)[0m  [1m[34mSELECT "airlines".* FROM "airlines" WHERE "airlines"."slug" = $1 LIMIT $2[0m  [["slug", "united-airlines"], ["LIMIT", 1]]
+  ↳ app/controllers/api/v1/airlines_controller.rb:12:in `show'
+  [1m[36mReview Pluck (1.5ms)[0m  [1m[34mSELECT "reviews"."id" FROM "reviews" WHERE "reviews"."airline_id" = $1[0m  [["airline_id", 7]]
+  ↳ app/controllers/api/v1/airlines_controller.rb:13:in `show'
+  [1m[36mReview Load (0.7ms)[0m  [1m[34mSELECT "reviews".* FROM "reviews" WHERE "reviews"."airline_id" = $1[0m  [["airline_id", 7]]
+  ↳ app/controllers/api/v1/airlines_controller.rb:13:in `show'
+Completed 200 OK in 15ms (Views: 0.2ms | ActiveRecord: 2.6ms | Allocations: 1996)
+
+
+Started POST "/api/v1/reviews" for ::1 at 2022-08-16 19:07:40 +0530
+  
+NameError (uninitialized constant Api::V1::ApiController
+Did you mean?  PagesController):
+  
+app/controllers/api/v1/reviews_controller.rb:3:in `<module:V1>'
+app/controllers/api/v1/reviews_controller.rb:2:in `<module:Api>'
+app/controllers/api/v1/reviews_controller.rb:1:in `<main>'
+Started POST "/api/v1/reviews" for ::1 at 2022-08-16 19:08:18 +0530
+Processing by Api::V1::ReviewsController#create as */*
+  Parameters: {"title"=>"A great Airline", "description"=>"had a great time", "score"=>5, "airline_id"=>1, "review"=>{"description"=>"had a great time", "score"=>5, "airline_id"=>1}}
+Can't verify CSRF token authenticity.
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN[0m
+  ↳ app/controllers/api/v1/reviews_controller.rb:9:in `create'
+  [1m[36mAirline Load (0.2ms)[0m  [1m[34mSELECT "airlines".* FROM "airlines" WHERE "airlines"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/api/v1/reviews_controller.rb:9:in `create'
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[31mROLLBACK[0m
+  ↳ app/controllers/api/v1/reviews_controller.rb:9:in `create'
+Completed 422 Unprocessable Entity in 19ms (Views: 0.2ms | ActiveRecord: 10.2ms | Allocations: 10432)
+
+
+Started POST "/api/v1/reviews" for ::1 at 2022-08-16 19:08:51 +0530
+Processing by Api::V1::ReviewsController#create as */*
+  Parameters: {"title"=>"A great Airline", "description"=>"had a great time", "score"=>5, "airline_id"=>1, "review"=>{"description"=>"had a great time", "score"=>5, "airline_id"=>1}}
+Can't verify CSRF token authenticity.
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN[0m
+  ↳ app/controllers/api/v1/reviews_controller.rb:9:in `create'
+  [1m[36mAirline Load (0.1ms)[0m  [1m[34mSELECT "airlines".* FROM "airlines" WHERE "airlines"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/api/v1/reviews_controller.rb:9:in `create'
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[31mROLLBACK[0m
+  ↳ app/controllers/api/v1/reviews_controller.rb:9:in `create'
+Completed 422 Unprocessable Entity in 12ms (Views: 0.1ms | ActiveRecord: 6.1ms | Allocations: 7092)
+
+
